@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Flink CEP Logback Configuration -->
+<configuration debug="false">
+    
+    <!-- Property definitions -->
+    <property name="APP_NAME" value="flink-cep"/>
+    <property name="LOG_FILE" value="logs/flink-cep"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    
+    <!-- Console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- File appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- Application loggers -->
+    <logger name="com.example" level="INFO" appender-ref="CONSOLE"/>
+    <logger name="com.example.flinkcep" level="INFO" appender-ref="CONSOLE"/>
+    
+    <!-- Flink logging -->
+    <logger name="org.apache.flink" level="INFO" appender-ref="CONSOLE"/>
+    
+    <!-- Flink CEP logging [semantic-anchor: technology.flink-cep] -->
+    <logger name="org.apache.flink.cep" level="DEBUG" appender-ref="CONSOLE"/>
+    
+    <!-- Kafka client logging -->
+    <logger name="org.apache.kafka" level="WARN" appender-ref="CONSOLE"/>
+    
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    
+    <!-- Scenario-specific logging with semantic anchors -->
+    
+    <!-- Order Creation [semantic-anchor: scenario.order-creation] -->
+    <logger name="com.example.flinkcep.FlinkCepProcessor$OrderCreationPattern" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Payment Processing [semantic-anchor: scenario.payment-processing] -->
+    <logger name="com.example.flinkcep.FlinkCepProcessor$PaymentProcessingPattern" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Payment Timeout [semantic-anchor: scenario.payment-timeout] -->
+    <logger name="com.example.flinkcep.FlinkCepProcessor$PaymentTimeoutPattern" 
+            level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Order Cancellation [semantic-anchor: scenario.order-cancellation] -->
+    <logger name="com.example.flinkcep.FlinkCepProcessor$OrderCancellationPattern" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Shipment Start [semantic-anchor: scenario.shipment-start] -->
+    <logger name="com.example.flinkcep.FlinkCepProcessor$ShipmentStartPattern" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Complete Order Flow -->
+    <logger name="com.example.flinkcep.FlinkCepProcessor$CompleteOrderFlowPattern" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Payment Failure Pattern -->
+    <logger name="com.example.flinkcep.FlinkCepProcessor$PaymentFailurePattern" 
+            level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Technology-specific logging -->
+    <logger name="org.apache.flink.cep.pattern" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <logger name="org.apache.flink.cep.functions" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+</configuration>

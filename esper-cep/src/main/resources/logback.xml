@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Esper CEP Logback Configuration -->
+<configuration debug="false">
+    
+    <!-- Property definitions -->
+    <property name="APP_NAME" value="esper-cep"/>
+    <property name="LOG_FILE" value="logs/esper-cep"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    
+    <!-- Console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- File appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- Application loggers -->
+    <logger name="com.example" level="INFO" appender-ref="CONSOLE"/>
+    <logger name="com.example.espercep" level="INFO" appender-ref="CONSOLE"/>
+    
+    <!-- Esper engine logging -->
+    <logger name="com.espertech.esper" level="WARN" appender-ref="CONSOLE"/>
+    
+    <!-- Kafka client logging -->
+    <logger name="org.apache.kafka" level="WARN" appender-ref="CONSOLE"/>
+    <logger name="org.apache.kafka.clients" level="INFO" appender-ref="CONSOLE"/>
+    
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    
+    <!-- Scenario-specific logging with semantic anchors -->
+    
+    <!-- Order Creation [semantic-anchor: scenario.order-creation] -->
+    <logger name="com.example.espercep.EsperCepEngine.processOrderCreationDetection" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Payment Processing [semantic-anchor: scenario.payment-processing] -->
+    <logger name="com.example.espercep.EsperCepEngine.processPaymentProcessingDetection" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <logger name="com.example.espercep.EsperCepEngine.processPaymentFailurePattern" 
+            level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Payment Timeout [semantic-anchor: scenario.payment-timeout] -->
+    <logger name="com.example.espercep.EsperCepEngine.processPaymentTimeoutDetection" 
+            level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Order Cancellation [semantic-anchor: scenario.order-cancellation] -->
+    <logger name="com.example.espercep.EsperCepEngine.processOrderCancellationDetection" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Shipment Start [semantic-anchor: scenario.shipment-start] -->
+    <logger name="com.example.espercep.EsperCepEngine.processShipmentStartDetection" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Complete Order Flow -->
+    <logger name="com.example.espercep.EsperCepEngine.processCompleteOrderFlow" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Technology-specific logging -->
+    <logger name="com.espertech.esper.client" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+</configuration>

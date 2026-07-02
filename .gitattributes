@@ -1,0 +1,57 @@
+# Event Processing Lab - Git Attributes
+# [semantic-anchor: event-processing-lab]
+
+# Line ending normalization
+* text=auto
+
+# Java files
+*.java text eol=lf
+
+# Gradle files
+*.gradle text eol=lf
+gradle.properties text eol=lf
+settings.gradle text eol=lf
+
+# Documentation files
+*.adoc text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# XML files
+*.xml text eol=lf
+
+# JSON files
+*.json text eol=lf
+
+# YAML files
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Properties files
+*.properties text eol=lf
+
+# Binary files
+*.jar binary
+*.class binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+
+# Log files
+*.log text eol=lf
+
+# Docker files
+docker-compose*.yml text eol=lf
+Dockerfile text eol=lf
+
+# IDE files
+.idea/** text eol=lf
+.vscode/** text eol=lf
+
+# Git merge strategy
+*.md merge=union
+*.adoc merge=union

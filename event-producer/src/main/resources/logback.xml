@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Event Producer Logback Configuration -->
+<configuration debug="false">
+    
+    <!-- Property definitions -->
+    <property name="APP_NAME" value="event-producer"/>
+    <property name="LOG_FILE" value="logs/event-producer"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="LOG_FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    
+    <!-- Console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- File appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_FILE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- Kafka appender for Kafka-related logging -->
+    <appender name="KAFKA" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- Application loggers -->
+    <logger name="com.example" level="DEBUG" appender-ref="CONSOLE"/>
+    <logger name="com.example.eventproducer" level="INFO" appender-ref="CONSOLE"/>
+    
+    <!-- Kafka client logging -->
+    <logger name="org.apache.kafka" level="INFO" appender-ref="CONSOLE"/>
+    <logger name="org.apache.kafka.clients" level="DEBUG" appender-ref="CONSOLE"/>
+    
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    
+    <!-- Event-specific logging for different scenarios -->
+    <!-- Order Creation [semantic-anchor: scenario.order-creation] -->
+    <logger name="com.example.eventproducer.OrderEventProducer" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Payment Processing [semantic-anchor: scenario.payment-processing] -->
+    <logger name="com.example.eventmodel.PaymentReceived" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <logger name="com.example.eventmodel.PaymentFailed" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Order Cancellation [semantic-anchor: scenario.order-cancellation] -->
+    <logger name="com.example.eventmodel.OrderCancelled" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Shipment Start [semantic-anchor: scenario.shipment-start] -->
+    <logger name="com.example.eventmodel.ShipmentStarted" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+</configuration>

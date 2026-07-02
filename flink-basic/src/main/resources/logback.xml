@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Flink Basic Logback Configuration -->
+<configuration debug="false">
+    
+    <!-- Property definitions -->
+    <property name="APP_NAME" value="flink-basic"/>
+    <property name="LOG_FILE" value="logs/flink-basic"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    
+    <!-- Console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- File appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- Application loggers -->
+    <logger name="com.example" level="INFO" appender-ref="CONSOLE"/>
+    <logger name="com.example.flinkbasic" level="INFO" appender-ref="CONSOLE"/>
+    
+    <!-- Flink logging -->
+    <logger name="org.apache.flink" level="INFO" appender-ref="CONSOLE"/>
+    
+    <!-- Kafka client logging -->
+    <logger name="org.apache.kafka" level="WARN" appender-ref="CONSOLE"/>
+    
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    
+    <!-- Scenario-specific logging with semantic anchors -->
+    
+    <!-- Order Creation [semantic-anchor: scenario.order-creation] -->
+    <logger name="com.example.flinkbasic.FlinkStreamProcessor$OrderCreatedProcessor" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Payment Processing [semantic-anchor: scenario.payment-processing] -->
+    <logger name="com.example.flinkbasic.FlinkStreamProcessor$PaymentReceivedProcessor" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <logger name="com.example.flinkbasic.FlinkStreamProcessor$PaymentFailedProcessor" 
+            level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Order Cancellation [semantic-anchor: scenario.order-cancellation] -->
+    <logger name="com.example.flinkbasic.FlinkStreamProcessor$OrderCancelledProcessor" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Shipment Start [semantic-anchor: scenario.shipment-start] -->
+    <logger name="com.example.flinkbasic.FlinkStreamProcessor$ShipmentStartedProcessor" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Pattern Detection -->
+    <logger name="com.example.flinkbasic.FlinkStreamProcessor$PaymentProcessingPatternDetector" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <logger name="com.example.flinkbasic.FlinkStreamProcessor$CompleteOrderFlowDetector" 
+            level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <!-- Technology-specific logging [semantic-anchor: technology.flink] -->
+    <logger name="org.apache.flink.streaming" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+</configuration>

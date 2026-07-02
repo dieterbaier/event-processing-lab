@@ -1,0 +1,67 @@
+# Event Processing Lab - Git Ignore
+# [semantic-anchor: event-processing-lab]
+
+# General
+*.iml
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# Gradle
+.gradle/
+gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
+build/
+dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Kafka local data
+kafka-logs/
+zookeeper/
+
+# Docker
+.docker/
+
+# Temporary files
+tmp/
+temp/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Test output
+test-results/
+
+# Dependency caches
+*.gradle
