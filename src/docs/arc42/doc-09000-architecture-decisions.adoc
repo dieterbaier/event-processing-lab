@@ -1,0 +1,119 @@
+---
+id: DOC-09000-architecture-decisions
+type: Document
+title: 9. Architecture Decisions
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Index of Architecture Decision Records (ADRs)
+tags:
+  - arc42
+  - architecture-decisions
+  - adr
+  - index
+relations: []
+---
+[[architecture-decisions]]
+= 9. Architecture Decisions
+
+
+
+== ADR Index
+
+The following Architecture Decision Records (ADRs) document the key architectural decisions for the Event Processing Lab project. Each ADR follows the Nygard format with Pugh Matrix analysis.
+
+[cols="1,2,3,1", options="header"]
+|===
+| ADR ID
+| Title
+| Status
+| Semantic Anchor
+
+| xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| Use Kafka as Event Backbone
+| Accepted
+|
+
+| xref:adr-002-use-json-serialization.adoc[ADR-002]
+| Use JSON Serialization for First Iteration
+| Accepted
+|
+
+| xref:adr-003-keep-spring-boot-optional.adoc[ADR-003]
+| Keep Spring Boot Optional, Use Plain Java
+| Accepted
+|
+
+| xref:adr-004-separate-implementations.adoc[ADR-004]
+| Separate Esper and Flink Implementations
+| Accepted
+|
+|===
+
+== ADR-001: Use Kafka as Event Backbone
+
+
+
+See xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] for full details.
+
+=== Summary
+
+Use Apache Kafka as the central event transport mechanism for the Event Processing Lab.
+
+== ADR-002: Use JSON Serialization for First Iteration
+
+
+
+See xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] for full details.
+
+=== Summary
+
+Use JSON format for event serialization in the initial implementation.
+
+== ADR-003: Keep Spring Boot Optional, Use Plain Java
+
+
+
+See xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java] for full details.
+
+=== Summary
+
+Prefer plain Java implementations where simpler, keep Spring Boot optional.
+
+== ADR-004: Separate Esper and Flink Implementations
+
+
+
+See xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations] for full details.
+
+=== Summary
+
+Maintain separate implementations for Esper and Flink to enable direct comparison.
+
+== ADR Statistics
+
+[cols="1,1", options="header"]
+|===
+| Total ADRs
+| 4
+
+| Accepted
+| 4
+
+| Deprecated
+| 0
+
+| Superseded
+| 0
+|===
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:doc-04000-solution-strategy.adoc[Solution Strategy]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. Each ADR should be validated for proper format and content.

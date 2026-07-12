@@ -1,0 +1,336 @@
+---
+id: DOC-004-roadmap
+type: Document
+title: Project Roadmap
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Development phases and milestones for the Event Processing Lab
+tags:
+  - roadmap
+  - phases
+  - milestones
+  - planning
+relations:
+  - type: relates_to
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Roadmap shows how goals will be achieved
+    reviewed: false
+---
+[[project-roadmap]]
+= Project Roadmap
+
+
+
+== Overview
+
+The Event Processing Lab is developed in phases, with each phase delivering specific capabilities and learning outcomes. The roadmap balances immediate value with long-term architectural goals.
+
+== Phase 1: Foundation (Completed)
+
+
+
+=== Objectives
+
+* Establish project structure and build system
+* Implement basic event model
+* Set up Kafka as event backbone
+* Create basic producer and consumer
+
+=== Deliverables
+
+[cols="1,2,1", options="header"]
+|===
+| Item
+| Description
+| Status
+
+| Java 21 Gradle multi-module project
+| Project structure with 6 modules
+| Complete
+
+| Event Model
+| Base event class, event types, serialization
+| Complete
+
+| Kafka Infrastructure
+| Docker Compose configuration, topic setup
+| Complete
+
+| Event Producer
+| Configurable event generation
+| Complete
+
+| Kafka Consumer
+| Basic event consumption and processing
+| Complete
+|===
+
+=== Learning Outcomes
+
+* Understanding of Kafka as event backbone
+* Basic event modeling patterns
+* Gradle multi-module project setup
+
+== Phase 2: CEP Engines (Completed)
+
+
+
+=== Objectives
+
+* Implement Esper CEP engine
+* Implement Flink Basic stream processing
+* Implement Flink CEP pattern detection
+* Demonstrate pattern detection across technologies
+
+=== Deliverables
+
+[cols="1,2,1", options="header"]
+|===
+| Item
+| Description
+| Status
+
+| Esper CEP Module
+| EPL rules for all scenarios, Kafka integration
+| Complete
+
+| Flink Basic Module
+| DataStream API processing, state management
+| Complete
+
+| Flink CEP Module
+| Pattern API implementation, time constraints
+| Complete
+
+| Common Scenarios
+| Order creation, payment processing, timeout detection, cancellation, shipment
+| Complete
+
+| Technology Comparison
+| Initial comparison matrix and documentation
+| Complete
+|===
+
+=== Learning Outcomes
+
+* Esper EPL language and pattern matching
+* Flink DataStream API and state management
+* Flink CEP Pattern API
+* Direct comparison of CEP approaches
+
+== Phase 3: Architecture Documentation (In Progress)
+
+
+
+=== Objectives
+
+* Complete arc42 architecture documentation
+* Document all ADRs with Pugh Matrix analysis
+* Define quality scenarios
+* Identify and document risks
+* Document runtime scenarios
+
+=== Deliverables
+
+[cols="1,2,1", options="header"]
+|===
+| Item
+| Description
+| Status
+
+| arc42 Chapter 1-12
+| Complete architecture documentation
+| In Progress
+
+| ADR-001 through ADR-004
+| Architecture Decision Records with analysis
+| In Progress
+
+| Quality Scenarios
+| 15 quality scenarios with six-part form
+| In Progress
+
+| Risk Documentation
+| 6 risks with assessment and mitigation
+| In Progress
+
+| Technical Debt
+| 10 technical debt items with resolution
+| In Progress
+
+| Runtime Scenarios
+| 5 runtime scenarios with diagrams
+| In Progress
+|===
+
+=== Learning Outcomes
+
+* Architecture documentation best practices
+* Decision documentation with Pugh Matrix
+* Quality scenario definition
+* Risk identification and mitigation
+
+== Phase 4: Testing and Validation (Planned)
+
+
+
+=== Objectives
+
+* Add unit tests for every implementation module (event-model, event-producer,
+  kafka-consumer, esper-cep, flink-basic, flink-cep)
+* Author Gherkin behaviour specifications for the order-lifecycle use case and
+  bridge each scenario to an automated test, following the
+  architecture-knowledge-toolkit `bdd-specification` skill
+* Performance benchmarks
+* End-to-end integration tests
+* Validation of all scenarios
+
+=== Deliverables
+
+[cols="1,2,1", options="header"]
+|===
+| Item
+| Description
+| Status
+
+| Unit Tests
+| Comprehensive unit tests for all implementation modules
+| Planned
+
+| Behaviour Specifications
+| Gherkin feature specs under `features/` bridged to automated tests, per the toolkit `bdd-specification` skill (specs drafted, test bridge pending)
+| In Progress
+
+| Integration Tests
+| Module interaction tests
+| Planned
+
+| Performance Benchmarks
+| Throughput, latency, memory, CPU metrics
+| Planned
+
+| End-to-End Tests
+| Complete scenario validation
+| Planned
+
+| Test Documentation
+| Test strategy, test cases, results
+| Planned
+|===
+
+=== Learning Outcomes
+
+* Testing strategies for event processing systems
+* Performance measurement and analysis
+* End-to-end validation
+
+== Phase 5: Enhancements (Future)
+
+
+
+=== Objectives
+
+* Additional event types and scenarios
+* Advanced patterns
+* Monitoring and observability
+* Containerization and deployment
+
+=== Potential Deliverables
+
+[cols="1,2,1", options="header"]
+|===
+| Item
+| Description
+| Status
+
+| Additional Event Types
+| Inventory, customer, fraud detection events
+| Future
+
+| More Complex Patterns
+| Fraud detection, anomaly detection
+| Future
+
+| Performance Benchmarks
+| Formal benchmark suite and results
+| Future
+
+| Spring Boot Integration
+| Optional Spring Boot implementations
+| Future
+
+| Binary Serialization
+| Avro, Protobuf comparison
+| Future
+
+| Monitoring Integration
+| Prometheus, Grafana, metrics
+| Future
+
+| Comparison Matrix Dashboard
+| Dashboard visualizing the relevant metrics (throughput, latency, consumer lag, state size, rule complexity) to evaluate the Comparison Matrix across technologies
+| Future
+
+| Containerization
+| Docker images for all modules
+| Future
+
+| Kubernetes Deployment
+| Kubernetes manifests and Helm charts
+| Future
+
+| Interactive Tutorials
+| Step-by-step guides for each technology
+| Future
+
+| Additional Technologies
+| Apache Spark, Pulsar Functions, AWS Kinesis
+| Future
+|===
+
+== Milestones
+
+[cols="1,2,2,1", options="header"]
+|===
+| Milestone
+| Description
+| Date
+| Status
+
+| M1: Foundation Complete
+| All Phase 1 deliverables
+| 2026-07-01
+| Complete
+
+| M2: CEP Engines Complete
+| All Phase 2 deliverables
+| 2026-07-02
+| Complete
+
+| M3: Architecture Docs Complete
+| All Phase 3 deliverables
+| 2026-07-03
+| In Progress
+
+| M4: Testing Complete
+| All Phase 4 deliverables
+| 2026-07-15
+| Planned
+
+| M5: Production Ready
+| All Phase 5 deliverables
+| 2026-08-01
+| Future
+|===
+
+== Traceability
+
+* Informs: xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Related to: xref:doc-002-vision-mission.adoc[Vision and Mission]
+
+== Review Notes
+
+This document is AI-assisted and must be reviewed for accuracy and completeness. Milestones and dates should be validated with the project team.

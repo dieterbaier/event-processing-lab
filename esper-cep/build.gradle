@@ -1,0 +1,98 @@
+// Esper CEP Module - Build Configuration
+// [semantic-anchor: component.esper-cep]
+
+plugins {
+    id 'java'
+    id 'application' // For executable applications
+}
+
+// Module description
+description = 'Esper CEP - Complex Event Processing with Esper for order lifecycle events'
+
+// Dependencies
+dependencies {
+    // Project dependencies
+    implementation project(':event-model') // [semantic-anchor: component.event-model]
+    
+    // Kafka Client [semantic-anchor: technology.kafka]
+    implementation "org.apache.kafka:kafka-clients:${kafkaVersion}"
+    
+    // JSON Processing [semantic-anchor: decision.json-serialization]
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    
+    // Esper CEP Engine [semantic-anchor: technology.esper]
+    implementation "com.espertech:esper:${esperVersion}"
+    
+    // Logging
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+    
+    // Testing
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.mockito:mockito-core:5.3.1"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+// Java compatibility
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Application configuration
+application {
+    mainClass = 'com.example.espercep.EsperCepEngine'
+}
+
+// Source and target compatibility
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+// Tasks
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+// Jar manifest attributes
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Event Processing Lab - Esper CEP',
+            'Implementation-Version': version,
+            'Implementation-Vendor': 'Integration Architecture Team',
+            'Main-Class': 'com.example.espercep.EsperCepEngine',
+            'Semantic-Anchor': 'component.esper-cep'
+        )
+    }
+}
+
+// Configuration for the application
+task runEsper(type: JavaExec) {
+    description = 'Run the Esper CEP engine'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = application.mainClass
+    
+    // Pass system properties
+    systemProperty 'kafka.bootstrap.servers', System.getProperty('kafka.bootstrap.servers', 'localhost:9092')
+    systemProperty 'kafka.topic.orders', System.getProperty('kafka.topic.orders', 'order-events')
+    systemProperty 'kafka.group.id', System.getProperty('kafka.group.id', 'esper-cep-group')
+}
+
+// Task to run with default configuration
+task startEsper(type: JavaExec) {
+    description = 'Start the Esper CEP engine with default configuration'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = application.mainClass
+    
+    args 'localhost:9092', 'order-events', 'esper-cep-group'
+}

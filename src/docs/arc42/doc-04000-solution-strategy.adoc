@@ -1,0 +1,201 @@
+---
+id: DOC-04000-solution-strategy
+type: Document
+title: 4. Solution Strategy
+description: Architectural approach, technology stack, and quality goals mapping for the Event Processing Lab
+status: draft
+owner: Integration Architecture Team
+created: 2026-07-02
+reviewed: false
+summary: Architectural approach, technology stack selection, and quality goals mapping
+tags:
+  - arc42
+  - solution-strategy
+  - technology-stack
+  - architecture-approach
+relations: []
+---
+[[solution-strategy]]
+= 4. Solution Strategy
+
+
+
+== Architectural Approach
+
+The Event Processing Lab follows a **comparative architecture pattern** that enables direct comparison of different event processing technologies through a common use case. This approach prioritizes:
+
+* **Learning Value**: Each technology implemented using its native patterns and best practices
+* **Architectural Clarity**: Clear separation between technologies to avoid abstraction leakage
+* **Direct Comparison**: Side-by-side implementation of the same business scenarios
+* **Minimal Complexity**: Focus on core concepts rather than production-ready infrastructure
+
+== Architectural Decisions
+
+The following Architecture Decision Records (ADRs) define the architectural approach for the Event Processing Lab:
+
+[cols="1,2,3,1", options="header"]
+|===
+| ADR ID
+| Title
+| Status
+| Semantic Anchor
+
+| xref:09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| Use Kafka as Event Backbone
+| Accepted
+|
+
+| xref:09-architecture-decisions/adr-002-use-json-serialization.adoc[ADR-002]
+| Use JSON Serialization for First Iteration
+| Accepted
+|
+
+| xref:09-architecture-decisions/adr-003-keep-spring-boot-optional.adoc[ADR-003]
+| Keep Spring Boot Optional, Use Plain Java
+| Accepted
+|
+
+| xref:09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
+| Separate Esper and Flink Implementations
+| Accepted
+|
+
+|===
+
+For detailed information on each ADR, see xref:doc-09000-architecture-decisions.adoc[Architecture Decisions].
+
+== Technology Stack
+
+[cols="1,2,2,1", options="header"]
+|===
+| Layer
+| Technology
+| Purpose
+| Semantic Anchor
+
+| Event Backbone
+| Apache Kafka
+| Event transport and storage
+|
+
+| Serialization
+| JSON with Jackson
+| Event data format
+|
+
+| CEP Engine
+| Esper 8.7.0
+| Lightweight CEP processing
+|
+
+| Stream Processing
+| Apache Flink 1.17.1
+| Distributed stream processing
+|
+
+| Pattern Detection
+| Flink CEP
+| Pattern matching library
+|
+
+| Build Tool
+| Gradle 8.5
+| Multi-module project management
+| 
+
+| Language
+| Java 21
+| Core implementation language
+|
+
+| Logging
+| SLF4J + Logback
+| Logging framework
+| 
+
+|===
+
+== Quality Goals Mapping
+
+[cols="1,2,2", options="header"]
+|===
+| Quality Goal
+| Solution Approach
+| Implementation
+
+| Learnability
+| Separate implementations, clear code, good documentation
+| Each technology in its own module with focused examples
+
+| Understandability
+| Simple architecture, semantic anchors, consistent patterns
+| Clear module boundaries, documented relationships
+
+| Scalability
+| Use of proven scalable technologies (Kafka, Flink)
+| Each module can scale independently
+
+| Modifiability
+| Loose coupling, clear interfaces
+| Event model shared across modules
+
+| Observability
+| Comprehensive logging, metrics-ready
+| Logback configuration in each module
+
+|===
+
+== Technology Comparison
+
+[[comparison-matrix]]
+=== Comparison Matrix
+
+The comparison matrix summarizes how each technology stack behaves along the
+project's comparison dimensions. The current values are a *preliminary,
+reviewable assessment* (`reviewed: false`); they are hypotheses to be confirmed
+by running the shared use case and measuring the quality scenarios in
+xref:doc-10000-quality-requirements.adoc[Chapter 10]. See the README section
+"Running a use case to evaluate the Comparison Matrix" for how to reproduce the
+observations.
+
+[cols="1,1,1,1,1", options="header"]
+|===
+| Aspect | Kafka + Consumer | Kafka + Esper | Kafka + Flink | Kafka + Flink CEP
+
+| Scalability | Medium | Low | High | High
+| Operational Complexity | Low | Low | High | High
+| State Handling | Manual | Automatic | Automatic | Automatic
+| Rule Complexity | High | Low | Medium | Medium
+| Pattern Detection | Manual | Excellent | Good | Excellent
+| Latency | Low | Medium | Medium | Medium
+| Throughput | High | Medium | High | High
+| Learning Curve | Low | Medium | High | High
+|===
+
+[[comparison-dimensions]]
+=== Comparison Dimensions
+
+. *Scalability* — horizontal scaling, partitioning strategy, consumer-group
+  behavior, and resource utilization under load.
+. *Operational Complexity* — deployment requirements, monitoring and management,
+  failure recovery, and configuration effort.
+. *State Handling* — state management approach, checkpointing and persistence,
+  state size and memory usage, and recovery after failure.
+. *Rule Complexity* — rule/pattern definition syntax, maintainability,
+  testability, and performance impact.
+. *Architectural Trade-offs* — technology maturity, ecosystem, vendor lock-in
+  potential, and integration complexity.
+
+Each dimension is exercised by the runtime scenarios in
+xref:doc-06000-runtime-view.adoc[Chapter 6] and measured by the quality
+scenarios in xref:doc-10000-quality-requirements.adoc[Chapter 10].
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Implements: All ADRs in xref:doc-09000-architecture-decisions.adoc[Architecture Decisions]
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. Content derived from the original architecture documentation and adapted to the toolkit structure.

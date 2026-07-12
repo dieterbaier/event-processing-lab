@@ -1,0 +1,169 @@
+---
+id: ADR-003-keep-spring-boot-optional
+type: ADR
+title: Keep Spring Boot Optional, Use Plain Java
+decision: Prefer plain Java implementations where simpler, keep Spring Boot optional
+status: accepted
+created: 2026-07-02
+author: Integration Architecture Team
+tags:
+  - spring-boot
+  - plain-java
+  - simplicity
+  - learning
+relations:
+  - type: refines
+    target: ADR-001-use-kafka-as-event-backbone
+    status: proposed
+    rationale: Plain Java works well with Kafka client
+    reviewed: false
+reviewed: false
+---
+[[adr-003-keep-spring-boot-optional]]
+= ADR-003: Keep Spring Boot Optional, Use Plain Java
+
+
+
+== Status
+
+[.status-accepted]
+Accepted
+
+== Context
+
+The Event Processing Lab needs to choose between using Spring Boot (with its dependency injection, auto-configuration, and ecosystem) and plain Java for implementing the various modules. This decision affects:
+
+* Learning focus and complexity
+* Dependency management
+* Configuration approach
+* Development speed vs. conceptual clarity
+* Production readiness
+
+== Decision
+
+*Prefer plain Java implementations where simpler, keep Spring Boot optional.*
+
+== Decision Drivers
+
+[cols="1,1,2", options="header"]
+|===
+| Driver
+| Importance
+| Notes
+
+| Learning Focus
+| High
+| Focus on core event processing concepts, not Spring Boot features
+
+| Dependency Minimization
+| High
+| Reduce external dependencies for clarity
+
+| Conceptual Clarity
+| High
+| Make the event processing logic explicit and visible
+
+| Development Speed
+| Medium
+| Spring Boot can speed up development but adds complexity
+
+| Production Readiness
+| Low
+| This is a learning project, not production system
+
+| Ecosystem Integration
+| Medium
+| Spring Boot has good Kafka and other integrations
+
+|===
+
+== Alternatives Considered
+
+=== 1. Plain Java [.selected]#✅ Selected#
+
+*Pros:*
+- Focus on core concepts without framework complexity
+- Minimal dependencies
+- Explicit control over all aspects
+- Easier to understand for beginners
+- Better for demonstrating specific technologies
+
+*Cons:*
+- More manual configuration
+- No built-in dependency injection
+- Less production-ready infrastructure
+
+*Implementation:* Use plain Java with direct library dependencies
+
+=== 2. Spring Boot Primary
+
+*Pros:*
+- Rapid development with auto-configuration
+- Rich ecosystem and integrations
+- Production-ready features (metrics, health checks, etc.)
+- Dependency injection for cleaner code
+
+*Cons:*
+- Adds framework complexity that obscures core concepts
+- More dependencies to manage
+- Auto-configuration can be "magic" that's hard to understand
+- May be overkill for simple modules
+
+*Implementation:* Use Spring Boot as primary framework
+
+=== 3. Hybrid Approach
+
+*Pros:*
+- Use Spring Boot where it adds value
+- Use plain Java for simple modules
+- Best of both worlds
+
+*Cons:*
+- Inconsistent approach across modules
+- More complex build configuration
+- Learning experience varies by module
+
+*Implementation:* Spring Boot for complex modules, plain Java for simple ones
+
+== Consequences
+
+=== Positive Consequences
+
+. *Conceptual Clarity*: The event processing logic is explicit and not hidden behind framework abstractions.
+. *Minimal Dependencies*: Only the essential libraries are included, making the codebase easier to understand.
+. *Learning Focus*: Students can focus on the event processing concepts rather than Spring Boot specifics.
+. *Technology Comparison*: Makes it easier to see the differences between the underlying technologies.
+. *Simplicity*: Plain Java implementations are simpler and more direct.
+
+=== Negative Consequences
+
+. *More Manual Work*: Requires more explicit configuration and dependency management.
+. *Less Production-Ready*: Lacks features like auto-configuration, health checks, and metrics.
+. *Limited Ecosystem*: Don't get the benefits of Spring Boot's extensive ecosystem.
+. *Boilerplate Code*: May require more boilerplate code for common tasks.
+
+== Related Decisions
+
+* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
+* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
+* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations]
+
+== Related Components
+
+* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
+* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer]
+* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
+* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
+* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
+* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
+
+== Related Technologies
+
+* https://spring.io/projects/spring-boot[Spring Boot]
+* https://www.java.com/[Java]
+
+== Related Quality Goals
+
+* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
+* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
+* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability]

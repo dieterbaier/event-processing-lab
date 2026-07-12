@@ -1,0 +1,204 @@
+---
+id: DOC-03000-system-scope-and-context
+type: Document
+title: 3. System Scope and Context
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: System boundary, business context, and external interfaces
+tags:
+  - arc42
+  - scope
+  - context
+  - boundaries
+  - interfaces
+relations:
+  - type: refines
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: System scope elaborates project scope
+    reviewed: false
+---
+[[system-scope-and-context]]
+= 3. System Scope and Context
+
+
+
+== 3.1. System Overview
+
+The Event Processing Lab is a **learning platform** that demonstrates event processing technologies through a common order lifecycle use case. It provides comparable implementations of event processing patterns across Kafka, Esper, Apache Flink, and Flink CEP.
+
+=== System Type
+
+* **Category**: Learning Platform / Technology Comparison
+* **Domain**: Event Processing / Complex Event Processing (CEP)
+* **Purpose**: Education and architectural comparison
+* **Primary Users**: Integration Architects, Technical Leads, Software Engineers
+
+=== Essential Characteristics
+
+[cols="1,3", options="header"]
+|===
+| Characteristic
+| Value
+
+| Technology Stack
+| Java 21, Gradle, Kafka, Esper, Flink, Flink CEP
+
+| Architecture Style
+| Event-Driven Architecture (EDA), Microservices
+
+| Deployment
+| Local development, Docker Compose
+
+| Development Status
+| Active Development
+
+| Documentation
+| arc42 with architecture-knowledge-toolkit extensions
+|===
+
+== 3.2. Business Context
+
+=== Business Goals
+
+[cols="1,3", options="header"]
+|===
+| Goal
+| Description
+
+| Enable Technology Understanding
+| Help architects understand event processing technologies
+
+| Support Decision Making
+| Provide framework for technology selection
+
+| Promote Best Practices
+| Demonstrate architecture and documentation best practices
+
+| Facilitate Learning
+| Create hands-on learning experience with real code
+|===
+
+=== Stakeholders and Benefits
+
+[cols="1,2,3", options="header"]
+|===
+| Stakeholder
+| Benefits
+| Success Criteria
+
+| Integration Architects
+| Deep understanding of technologies, architectural patterns, trade-offs
+| Can design appropriate event processing architectures
+
+| Technical Leads
+| Informed technology selection, understanding of trade-offs
+| Can make better technology decisions
+
+| Software Engineers
+| Practical experience with multiple technologies
+| Can implement event processing solutions effectively
+
+| DevOps Engineers
+| Understanding of deployment and operational requirements
+| Can deploy and operate event processing systems
+|===
+
+== 3.3. System Scope
+
+=== Functional Scope
+
+The system provides:
+
+* Event model definition and serialization
+* Event production (Kafka producer)
+* Event consumption (Kafka consumer)
+* Complex event pattern detection (Esper CEP)
+* Stream processing (Flink DataStream)
+* Pattern detection (Flink CEP)
+* Runtime scenario demonstration
+* Comparison framework
+
+=== Non-Functional Scope
+
+The system demonstrates:
+
+* Scalability characteristics
+* Operational complexity
+* State handling approaches
+* Rule complexity
+* Architectural trade-offs
+
+=== Not in Scope
+
+The system does NOT provide:
+
+* Production-grade deployment
+* Enterprise security (authentication, authorization, encryption)
+* High-availability configurations
+* Performance optimization for production load
+* Binary serialization (Avro, Protobuf) in first iteration
+* Spring Boot integration (optional)
+* Monitoring and alerting infrastructure
+
+== 3.4. System Context
+
+=== Context Diagram
+
+The Event Processing Lab system consists of:
+
+* **Core System**: Event Processing Lab (6 modules)
+* **External Systems**: Apache Kafka (event backbone), Development Environment
+* **Users**: Integration Architects, Developers
+
+=== External Interfaces
+
+[cols="1,2,2,1", options="header"]
+|===
+| Interface
+| Technology
+| Direction
+| Protocol
+
+| Kafka Broker
+| Apache Kafka
+| In/Out
+| Kafka Protocol
+
+| Development Environment
+| Docker Compose
+| N/A
+| Docker API
+
+| Java Development Kit
+| Java 21
+| N/A
+| JDK
+
+| Gradle Build Tool
+| Gradle 8.5+
+| N/A
+| Gradle
+
+| Git Repository
+| Git
+| N/A
+| Git Protocol
+|===
+
+== 3.5. Business Context Diagram
+
+The business context is described in the System Scope and Business Goals sections of this chapter.
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Informs: xref:doc-04000-solution-strategy.adoc[Solution Strategy]
+* Informs: xref:doc-05000-building-block-view.adoc[Building Block View]
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. System boundaries should be validated with stakeholders. Context diagram should be created as PlantUML.

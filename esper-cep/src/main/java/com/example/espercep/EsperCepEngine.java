@@ -1,7 +1,12 @@
 package com.example.espercep;
 
 import com.example.eventmodel.*;
-import com.espertech.esper.client.*;
+import com.espertech.esper.client.Configuration;
+import com.espertech.esper.client.EPAdministrator;
+import com.espertech.esper.client.EPRuntime;
+import com.espertech.esper.client.EPServiceProvider;
+import com.espertech.esper.client.EPServiceProviderManager;
+import com.espertech.esper.client.EPStatement;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.errors.WakeupException;
@@ -23,7 +28,7 @@ public class EsperCepEngine {
     private static final Logger logger = LoggerFactory.getLogger(EsperCepEngine.class);
     
     private final KafkaConsumer<String, String> kafkaConsumer;
-    private final EPSPStatementManager epService;
+    private final EPServiceProvider epService;
     private final String topic;
     private final AtomicBoolean running = new AtomicBoolean(false);
     private final Map<String, Event> eventCache = new HashMap<>();
@@ -64,70 +69,43 @@ public class EsperCepEngine {
     
     /**
      * Initialize the Esper engine and register EPL statements.
-     * @return the configured EPSPStatementManager
+     * @return the configured EPServiceProvider
      */
-    private EPSPStatementManager initializeEsperEngine() {
+    private EPServiceProvider initializeEsperEngine() {
         // Create Esper configuration
         Configuration configuration = new Configuration();
-        configuration.setEngineName("EventProcessingEngine");
-        
-        // Configure time handling
-        configuration.getEngineDefaults().getThreading().setThreadingModel(Configuration.EngineSettings.ThreadingModel.SINGLETHREAD);
         
         // Create Esper service provider
-        EPServiceProvider epService = EPServiceManager.getProvider(configuration);
+        EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider(configuration);
+        EPAdministrator admin = epService.getEPAdministrator();
         
         // Register event types for polymorphic JSON events
-        registerEventTypes(epService);
-        
-        // Create statement manager
-        EPSPStatementManager epStatementManager = epService.getEPSPManager();
+        registerEventTypes(admin);
         
         // Register all EPL statements for our use cases
-        registerEplStatements(epStatementManager);
+        registerEplStatements(admin);
         
-        logger.info("Esper engine initialized with {} statements", epStatementManager.getStatementNames().size());
+        logger.info("Esper engine initialized with {} statements", epService.getEPAdministrator().getStatementNames().length);
         
-        return epStatementManager;
+        return epService;
     }
     
     /**
      * Register event types with Esper for polymorphic event handling.
-     * @param epService the Esper service provider
+     * @param admin the Esper administrator
      */
-    private void registerEventTypes(EPServiceProvider epService) {
-        // In Esper, we need to register the Java classes as event types
-        // The JSON will be deserialized to these classes
-        ConfigurationEventType eventType = new ConfigurationEventType();
+    private void registerEventTypes(EPAdministrator admin) {
+        // In Esper, we can use the @EventType annotation approach or manually register
+        // For simplicity, we'll use the annotation-based approach with Jackson
+        // Register the event classes so Esper can map them from JSON
         
-        // Register OrderCreated
-        eventType.setClassName(OrderCreated.class.getName());
-        epService.getEPAdministrator().getConfiguration().addEventType("OrderCreated", eventType);
-        
-        // Register PaymentReceived
-        eventType = new ConfigurationEventType();
-        eventType.setClassName(PaymentReceived.class.getName());
-        epService.getEPAdministrator().getConfiguration().addEventType("PaymentReceived", eventType);
-        
-        // Register PaymentFailed
-        eventType = new ConfigurationEventType();
-        eventType.setClassName(PaymentFailed.class.getName());
-        epService.getEPAdministrator().getConfiguration().addEventType("PaymentFailed", eventType);
-        
-        // Register OrderCancelled
-        eventType = new ConfigurationEventType();
-        eventType.setClassName(OrderCancelled.class.getName());
-        epService.getEPAdministrator().getConfiguration().addEventType("OrderCancelled", eventType);
-        
-        // Register ShipmentStarted
-        eventType = new ConfigurationEventType();
-        eventType.setClassName(ShipmentStarted.class.getName());
-        epService.getEPAdministrator().getConfiguration().addEventType("ShipmentStarted", eventType);
-        
-        // Register base Event for generic handling
-        eventType = new ConfigurationEventType();
-        eventType.setClassName(Event.class.getName());
-        epService.getEPAdministrator().getConfiguration().addEventType("Event", eventType);
+        // Register all event types - Esper will use Jackson for deserialization
+        admin.getConfiguration().addEventType(OrderCreated.class);
+        admin.getConfiguration().addEventType(PaymentReceived.class);
+        admin.getConfiguration().addEventType(PaymentFailed.class);
+        admin.getConfiguration().addEventType(OrderCancelled.class);
+        admin.getConfiguration().addEventType(ShipmentStarted.class);
+        admin.getConfiguration().addEventType(Event.class);
         
         logger.info("Registered event types with Esper engine");
     }
@@ -136,7 +114,7 @@ public class EsperCepEngine {
      * Register EPL statements for various event processing scenarios.
      * @param epStatementManager the Esper statement manager
      */
-    private void registerEplStatements(EPSPStatementManager epStatementManager) {
+    private void registerEplStatements(EPAdministrator admin) {
         // Create EPL statements as String objects
         String[] eplStatements = {
             // Order Creation Detection [semantic-anchor: scenario.order-creation]
@@ -167,7 +145,7 @@ public class EsperCepEngine {
         // Register each EPL statement with a listener
         for (String epl : eplStatements) {
             try {
-                EPSPStatement statement = epStatementManager.createEPL(epl);
+                EPStatement statement = admin.createEPL(epl);
                 statement.addListener((newData, oldData) -> {
                     processEsperResults(newData, oldData, statement.getName());
                 });
@@ -255,27 +233,17 @@ public class EsperCepEngine {
     private String createOrderStateMachineEpl() {
         // Track order state transitions
         return "@name('order-state-machine') " +
-               "SELECT orderId, 
-" +
-               "       CASE WHEN oc IS NOT NULL THEN 'CREATED' 
-" +
-               "            WHEN pr IS NOT NULL THEN 'PAID' 
-" +
-               "            WHEN ss IS NOT NULL THEN 'SHIPPED' 
-" +
-               "            WHEN oc_cancel IS NOT NULL THEN 'CANCELLED' 
-" +
-               "            ELSE 'UNKNOWN' END as state, 
-" +
+               "SELECT orderId, " +
+               "       CASE WHEN oc IS NOT NULL THEN 'CREATED' " +
+               "            WHEN pr IS NOT NULL THEN 'PAID' " +
+               "            WHEN ss IS NOT NULL THEN 'SHIPPED' " +
+               "            WHEN oc_cancel IS NOT NULL THEN 'CANCELLED' " +
+               "            ELSE 'UNKNOWN' END as state, " +
                "       latestEvent.timestamp as timestamp " +
-               "FROM pattern[every latestEvent=Event -> 
-" +
-               "       (oc=OrderCreated(orderId = latestEvent.getOrderId()) OR 
-" +
-               "        pr=PaymentReceived(orderId = latestEvent.getOrderId()) OR 
-" +
-               "        ss=ShipmentStarted(orderId = latestEvent.getOrderId()) OR 
-" +
+               "FROM pattern[every latestEvent=Event -> " +
+               "       (oc=OrderCreated(orderId = latestEvent.getOrderId()) OR " +
+               "        pr=PaymentReceived(orderId = latestEvent.getOrderId()) OR " +
+               "        ss=ShipmentStarted(orderId = latestEvent.getOrderId()) OR " +
                "        oc_cancel=OrderCancelled(orderId = latestEvent.getOrderId()))] " +
                "OUTPUT ALL EVERY 1 EVENT";
     }
@@ -544,26 +512,9 @@ public class EsperCepEngine {
      */
     private void sendToEsper(Event event) {
         try {
-            // Send the event to Esper based on its type
-            switch (event.getEventTypeEnum()) {
-                case ORDER_CREATED:
-                    epService.route((OrderCreated) event);
-                    break;
-                case PAYMENT_RECEIVED:
-                    epService.route((PaymentReceived) event);
-                    break;
-                case PAYMENT_FAILED:
-                    epService.route((PaymentFailed) event);
-                    break;
-                case ORDER_CANCELLED:
-                    epService.route((OrderCancelled) event);
-                    break;
-                case SHIPMENT_STARTED:
-                    epService.route((ShipmentStarted) event);
-                    break;
-                default:
-                    logger.warn("Unknown event type for Esper: {}", event.getEventType());
-            }
+            // Send the event to Esper
+            EPRuntime runtime = epService.getEPRuntime();
+            runtime.sendEvent(event);
         } catch (Exception e) {
             logger.error("Error sending event to Esper: " + e.getMessage(), e);
         }

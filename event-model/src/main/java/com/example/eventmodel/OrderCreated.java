@@ -1,5 +1,6 @@
 package com.example.eventmodel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -118,6 +119,7 @@ public class OrderCreated extends Event {
             this.unitPrice = unitPrice;
         }
         
+        @JsonIgnore
         public BigDecimal getTotalPrice() {
             return unitPrice.multiply(BigDecimal.valueOf(quantity));
         }

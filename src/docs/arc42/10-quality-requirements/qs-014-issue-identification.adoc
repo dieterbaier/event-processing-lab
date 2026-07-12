@@ -1,0 +1,71 @@
+---
+id: QS-014-issue-identification
+type: QualityScenario
+title: Issue Identification
+status: proposed
+owner: architecture
+created: 2026-07-12
+reviewed: false
+summary: Issue Identification quality scenario for the Event Processing Lab.
+tags:
+  - quality
+  - observability
+relations:
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Concretizes the observability quality goal.
+    reviewed: false
+---
+[[qs-014-issue-identification]]
+== QS-014-issue-identification: Issue Identification
+
+
+
+=== Status
+
+Proposed. AI-assisted; the response measure is a reviewable target.
+
+=== Scenario
+
+[cols="1,3", options="header"]
+|===
+| Element | Description
+| Source | Operator
+| Stimulus | An error or event loss occurs
+| Environment | Operation under a fault condition
+| Artifact | Logs and the module's error handling
+| Response | The failing module and cause are surfaced
+| Response Measure | Failing module identified from logs within 10 minutes
+|===
+
+=== Rationale
+
+Fast fault localization supports the reliability comparison.
+
+=== Assumptions
+
+* Values are initial targets for a single-node learning setup and must be reviewed.
+
+=== Impact
+
+include::generated/qs-014-issue-identification-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qs-014-issue-identification-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qs-014-issue-identification-traceability.adoc[leveloffset=+2]
+
+=== Open Questions
+
+* Is the target measure appropriate for the learning scope?
+
+=== Review Notes
+
+Mark reviewed only after the measure, environment, and stakeholder value are confirmed.

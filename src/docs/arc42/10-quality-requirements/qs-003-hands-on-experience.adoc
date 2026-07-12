@@ -1,0 +1,71 @@
+---
+id: QS-003-hands-on-experience
+type: QualityScenario
+title: Hands-on Experience Effectiveness
+status: proposed
+owner: architecture
+created: 2026-07-12
+reviewed: false
+summary: Hands-on Experience Effectiveness quality scenario for the Event Processing Lab.
+tags:
+  - quality
+  - learnability
+relations:
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Concretizes the learnability quality goal.
+    reviewed: false
+---
+[[qs-003-hands-on-experience]]
+== QS-003-hands-on-experience: Hands-on Experience Effectiveness
+
+
+
+=== Status
+
+Proposed. AI-assisted; the response measure is a reviewable target.
+
+=== Scenario
+
+[cols="1,3", options="header"]
+|===
+| Element | Description
+| Source | Learner
+| Stimulus | Runs an order-lifecycle scenario end to end (produce then process)
+| Environment | Local development with Kafka started via docker-compose
+| Artifact | Event producer and one processing module
+| Response | The scenario runs and emits observable processing results
+| Response Measure | First successful end-to-end run achieved within 30 minutes of initial setup
+|===
+
+=== Rationale
+
+Fast first success keeps learners engaged and lowers the barrier to entry.
+
+=== Assumptions
+
+* Values are initial targets for a single-node learning setup and must be reviewed.
+
+=== Impact
+
+include::generated/qs-003-hands-on-experience-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qs-003-hands-on-experience-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qs-003-hands-on-experience-traceability.adoc[leveloffset=+2]
+
+=== Open Questions
+
+* Is the target measure appropriate for the learning scope?
+
+=== Review Notes
+
+Mark reviewed only after the measure, environment, and stakeholder value are confirmed.

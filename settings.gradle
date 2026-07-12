@@ -1,0 +1,35 @@
+// Event Processing Lab - Gradle Settings
+// [semantic-anchor: event-processing-lab]
+
+// Define all modules in the multi-module project
+rootProject.name = 'event-processing-lab'
+
+// Include all modules
+include('event-model')
+include('event-producer')
+include('kafka-consumer')
+include('esper-cep')
+include('flink-basic')
+include('flink-cep')
+
+// Configure module paths (all in root directory)
+project(':event-model').projectDir = file('event-model')
+project(':event-producer').projectDir = file('event-producer')
+project(':kafka-consumer').projectDir = file('kafka-consumer')
+project(':esper-cep').projectDir = file('esper-cep')
+project(':flink-basic').projectDir = file('flink-basic')
+project(':flink-cep').projectDir = file('flink-cep')
+
+// Module dependencies hierarchy (for visualization)
+// event-processing-lab
+// ├── event-model           [semantic-anchor: component.event-model]
+// ├── event-producer        [semantic-anchor: component.event-producer]
+// │   └── depends on: event-model
+// ├── kafka-consumer        [semantic-anchor: component.kafka-consumer]
+// │   └── depends on: event-model
+// ├── esper-cep             [semantic-anchor: component.esper-cep]
+// │   └── depends on: event-model
+// ├── flink-basic           [semantic-anchor: component.flink-basic]
+// │   └── depends on: event-model
+// └── flink-cep             [semantic-anchor: component.flink-cep]
+//     └── depends on: event-model, flink-basic (optional)

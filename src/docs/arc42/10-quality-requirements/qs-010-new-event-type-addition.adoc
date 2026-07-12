@@ -1,0 +1,71 @@
+---
+id: QS-010-new-event-type-addition
+type: QualityScenario
+title: New Event Type Addition
+status: proposed
+owner: architecture
+created: 2026-07-12
+reviewed: false
+summary: New Event Type Addition quality scenario for the Event Processing Lab.
+tags:
+  - quality
+  - modifiability
+relations:
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Concretizes the modifiability quality goal.
+    reviewed: false
+---
+[[qs-010-new-event-type-addition]]
+== QS-010-new-event-type-addition: New Event Type Addition
+
+
+
+=== Status
+
+Proposed. AI-assisted; the response measure is a reviewable target.
+
+=== Scenario
+
+[cols="1,3", options="header"]
+|===
+| Element | Description
+| Source | Developer
+| Stimulus | Adds a new event type to the domain
+| Environment | Development
+| Artifact | event-model plus producer and consumers
+| Response | The new type flows through the pipeline without breaking existing types
+| Response Measure | Added and wired across modules within 1 day with no regression in existing scenarios
+|===
+
+=== Rationale
+
+Easy experimentation with new events is an explicit modifiability goal.
+
+=== Assumptions
+
+* Values are initial targets for a single-node learning setup and must be reviewed.
+
+=== Impact
+
+include::generated/qs-010-new-event-type-addition-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qs-010-new-event-type-addition-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qs-010-new-event-type-addition-traceability.adoc[leveloffset=+2]
+
+=== Open Questions
+
+* Is the target measure appropriate for the learning scope?
+
+=== Review Notes
+
+Mark reviewed only after the measure, environment, and stakeholder value are confirmed.

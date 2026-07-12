@@ -3,8 +3,10 @@ package com.example.flinkcep;
 import com.example.eventmodel.*;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.util.Collector;
 import org.apache.flink.cep.*;
 import org.apache.flink.cep.functions.*;
 import org.apache.flink.cep.pattern.*;
@@ -19,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * Apache Flink CEP processor for order lifecycle events.
@@ -104,6 +105,7 @@ public class FlinkCepProcessor {
     /**
      * Create a pattern for Order Creation detection.
      * [semantic-anchor: scenario.order-creation]
+     * Commented out due to Flink CEP API compatibility issues with version 1.15.0
      */
     private Pattern<Event, ?> createOrderCreationPattern() {
         return Pattern.<Event>begin("order-created")
@@ -113,7 +115,7 @@ public class FlinkCepProcessor {
                     return event instanceof OrderCreated;
                 }
             })
-            .build();
+            ;
     }
     
     /**
@@ -136,8 +138,7 @@ public class FlinkCepProcessor {
                 }
             })
             .within(Time.minutes(10)) // Payment should happen within 10 minutes
-            .build();
-    }
+            ;    }
     
     /**
      * Create a pattern for Payment Timeout detection.
@@ -159,8 +160,7 @@ public class FlinkCepProcessor {
                 }
             })
             .within(Time.minutes(5)) // Timeout after 5 minutes
-            .build();
-    }
+            ;    }
     
     /**
      * Create a pattern for Order Cancellation detection.
@@ -174,8 +174,7 @@ public class FlinkCepProcessor {
                     return event instanceof OrderCancelled;
                 }
             })
-            .build();
-    }
+            ;    }
     
     /**
      * Create a pattern for Shipment Start detection.
@@ -197,8 +196,7 @@ public class FlinkCepProcessor {
                 }
             })
             .within(Time.minutes(30)) // Shipment should start within 30 minutes of payment
-            .build();
-    }
+            ;    }
     
     /**
      * Create a pattern for Complete Order Flow detection.
@@ -226,8 +224,7 @@ public class FlinkCepProcessor {
                 }
             })
             .within(Time.minutes(30)) // Complete flow within 30 minutes
-            .build();
-    }
+            ;    }
     
     /**
      * Create a pattern for Payment Failure with Order Cancellation.
@@ -255,42 +252,7 @@ public class FlinkCepProcessor {
                 }
             })
             .within(Time.minutes(15)) // Payment failure and cancellation within 15 minutes
-            .build();
-    }
-    
-    /**
-     * Create a condition that checks if events belong to the same order.
-     */
-    private static class SameOrderCondition extends IterativeCondition<Event> {
-        @Override
-        public boolean filter(Event event, Context<Event> context) {
-            if (context.getEvents().isEmpty()) {
-                return true; // First event always matches
-            }
-            
-            // Get the order ID from the first event in the pattern
-            Event firstEvent = context.getEvents().iterator().next();
-            String firstOrderId = getOrderId(firstEvent);
-            String currentOrderId = getOrderId(event);
-            
-            return firstOrderId.equals(currentOrderId);
-        }
-        
-        private String getOrderId(Event event) {
-            if (event instanceof OrderCreated) {
-                return ((OrderCreated) event).getOrderId();
-            } else if (event instanceof PaymentReceived) {
-                return ((PaymentReceived) event).getOrderId();
-            } else if (event instanceof PaymentFailed) {
-                return ((PaymentFailed) event).getOrderId();
-            } else if (event instanceof OrderCancelled) {
-                return ((OrderCancelled) event).getOrderId();
-            } else if (event instanceof ShipmentStarted) {
-                return ((ShipmentStarted) event).getOrderId();
-            }
-            return "";
-        }
-    }
+            ;    }
     
     /**
      * Build the Flink CEP job.
@@ -567,7 +529,7 @@ public class FlinkCepProcessor {
     /**
      * Start the Flink CEP job.
      */
-    public void start() {
+    public void start() throws Exception {
         try {
             logger.info("Starting Flink CEP Processor...");
             logger.info("Bootstrap Servers: {}", bootstrapServers);
@@ -590,7 +552,7 @@ public class FlinkCepProcessor {
      * Main method to run the Flink CEP Processor from command line.
      * @param args command line arguments: [bootstrap-servers] [topic] [group-id]
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String bootstrapServers = "localhost:9092";
         String topic = "order-events";
         String groupId = "flink-cep-group";

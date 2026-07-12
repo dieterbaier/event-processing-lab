@@ -1,0 +1,358 @@
+---
+id: ADR-002-use-json-serialization
+type: ADR
+title: Use JSON Serialization for First Iteration
+decision: Use JSON format for event serialization in the initial implementation
+status: accepted
+created: 2026-07-02
+author: Integration Architecture Team
+tags:
+  - serialization
+  - json
+  - event-format
+  - data
+relations:
+  - type: refines
+    target: ADR-003-keep-spring-boot-optional
+    status: proposed
+    rationale: Plain Java JSON libraries are sufficient for learning purposes
+    reviewed: false
+reviewed: false
+---
+[[adr-002-use-json-serialization]]
+= ADR-002: Use JSON Serialization for First Iteration
+
+
+
+== Status
+
+[.status-accepted]
+Accepted
+
+== Context
+
+The Event Processing Lab needs a serialization format for events transmitted through the Kafka event backbone. The serialization format must:
+
+* Be readable by all processing engines (Esper, Flink, custom consumers)
+* Support all event types (OrderCreated, PaymentReceived, PaymentFailed, OrderCancelled, ShipmentStarted)
+* Enable easy debugging and understanding of event content
+* Be extensible for future event types
+* Work well with Kafka's message format
+
+== Decision
+
+*Use JSON (JavaScript Object Notation) as the serialization format for the first iteration of the Event Processing Lab.*
+
+== Decision Drivers
+
+[cols="1,1,2", options="header"]
+|===
+| Driver
+| Importance
+| Notes
+
+| Human Readability
+| High
+| Important for learning and debugging
+
+| Debugging Ease
+| High
+| Must be easy to inspect event content
+
+| Cross-Language Support
+| Medium
+| Should work with different technologies
+
+| Performance
+| Medium
+| Should not significantly impact throughput
+
+| Schema Evolution
+| Medium
+| Should support adding new fields
+
+| Extensibility
+| Medium
+| Should support new event types
+
+| Learning Value
+| High
+| JSON is widely understood, good for learning
+
+| Ecosystem
+| Medium
+| Should have good library support
+
+|===
+
+== Alternatives Considered
+
+=== 1. JSON [.selected]#✅ Selected#
+
+*Pros:* Human-readable, easy to debug, widely supported, schema-flexible, language-agnostic
+
+*Cons:* Verbose (larger message size), no built-in schema validation, slower parsing than binary formats
+
+*Libraries:* Jackson, Gson, JSON-B (Java), native support in most languages
+
+=== 2. Apache Avro
+
+*Pros:* Compact binary format, schema evolution support, built-in validation, efficient serialization
+
+*Cons:* Less human-readable, requires schema registry, more complex setup
+
+*Libraries:* Avro Java library, Confluent Schema Registry
+
+=== 3. Protocol Buffers (Protobuf)
+
+*Pros:* Compact binary format, very fast serialization/deserialization, strong typing
+
+*Cons:* Less human-readable, requires .proto file definitions, schema management
+
+*Libraries:* protobuf-java, good ecosystem
+
+=== 4. Apache Thrift
+
+*Pros:* Binary format, schema evolution, multiple language support
+
+*Cons:* Less human-readable, complex IDL, decreasing popularity
+
+*Libraries:* Thrift Java library
+
+=== 5. Java Serialization
+
+*Pros:* Native Java support, simple to implement
+
+*Cons:* Java-only, not human-readable, security issues, version compatibility problems
+
+*Libraries:* Built into Java
+
+== Pugh Matrix Analysis
+
+[cols="1,1,1,1,1,1,1", options="header"]
+|===
+| Criteria
+| Weight
+| JSON
+| Avro
+| Protobuf
+| Thrift
+| Java Serialization
+
+| Human Readability
+| 5
+| +1 (Excellent)
+| -1 (Binary)
+| -1 (Binary)
+| -1 (Binary)
+| -1 (Binary)
+
+| Debugging Ease
+| 5
+| +1 (Easy)
+| 0 (With Tools)
+| 0 (With Tools)
+| 0 (With Tools)
+| -1 (Difficult)
+
+| Cross-Language Support
+| 4
+| +1 (Universal)
+| +1 (Good)
+| +1 (Good)
+| +1 (Good)
+| -1 (Java Only)
+
+| Performance
+| 3
+| 0 (Adequate)
+| +1 (Fast)
+| +1 (Very Fast)
+| +1 (Fast)
+| +1 (Fast)
+
+| Schema Evolution
+| 3
+| +1 (Flexible)
+| +1 (Built-in)
+| +1 (Built-in)
+| +1 (Built-in)
+| -1 (Poor)
+
+| Extensibility
+| 3
+| +1 (Easy)
+| +1 (Easy)
+| +1 (Easy)
+| +1 (Easy)
+| -1 (Difficult)
+
+| Learning Value
+| 4
+| +1 (High)
+| 0 (Medium)
+| 0 (Medium)
+| -1 (Low)
+| -1 (Low)
+
+| Ecosystem
+| 3
+| +1 (Universal)
+| +1 (Good)
+| +1 (Good)
+| 0 (Good)
+| -1 (Java Only)
+
+| *Total*
+| 
+| *+29*
+| *+10*
+| *+13*
+| *+8*
+| *-12*
+
+|===
+
+== Consequences
+
+=== Positive Consequences
+
+. *Human Readability*: JSON events can be easily read and understood by humans, making debugging and learning much easier.
+. *Universal Support*: JSON is supported by virtually all programming languages and technologies, ensuring compatibility across all processing engines.
+. *Debugging Friendly*: Events can be inspected using simple text editors, command-line tools, or browser-based tools without requiring specialized software.
+. *Easy to Learn*: JSON is a widely known format, reducing the learning curve for understanding event content.
+. *Schema Flexibility*: JSON allows for easy addition of new fields and event types without requiring schema updates.
+. *Integration Simplicity*: Most Kafka clients and processing engines have built-in or easy JSON support.
+
+=== Negative Consequences
+
+. *Message Size*: JSON is more verbose than binary formats, resulting in larger message sizes and potentially lower throughput.
+. *Parsing Performance*: JSON parsing is slower than binary serialization, which may impact performance at very high throughput.
+. *No Schema Validation*: Without additional tooling, there's no built-in validation of event structure.
+. *No Type Safety*: JSON doesn't preserve type information, requiring careful handling in consuming applications.
+. *Schema Evolution Complexity*: While flexible, managing schema changes across multiple consumers can become complex without a schema registry.
+
+== Risk Mitigations
+
+[cols="1,2,1", options="header"]
+|===
+| Risk
+| Mitigation
+| Status
+
+| Performance bottleneck from JSON parsing
+| Use efficient JSON libraries (Jackson), benchmark performance
+| ⚠️ Monitor
+
+| Message size too large for high throughput
+| Compress messages (gzip, snappy), use efficient field naming
+| ✅ Implemented
+
+| Schema inconsistencies between producers and consumers
+| Document event schemas, use consistent field naming
+| ✅ Implemented
+
+| Type safety issues in consumers
+| Use proper DTOs with validation, add type information in events
+| ✅ Implemented
+
+|===
+
+== Future Considerations
+
+For production scenarios or high-throughput requirements, consider migrating to:
+
+. *Apache Avro*: If schema evolution and validation are critical
+. *Protocol Buffers*: If performance is paramount and human readability is less important
+. *Hybrid Approach*: Use JSON for development/learning, Avro/Protobuf for production benchmarks
+
+This migration would be documented in a new ADR and would maintain backward compatibility where possible.
+
+== Related Decisions
+
+* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
+* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java]
+
+== Related Components
+
+* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
+* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer]
+* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
+* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
+* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
+* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
+
+== Related Technologies
+
+* https://www.json.org/[JSON]
+* https://github.com/FasterXML/jackson[Jackson] - JSON library for Java
+* https://github.com/google/gson[Gson] - Alternative JSON library
+
+== Related Quality Goals
+
+* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
+* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
+* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability]
+
+== Related Scenarios
+
+* All runtime scenarios benefit from JSON's human readability for debugging
+
+== Implementation Details
+
+All events will follow a consistent JSON structure:
+
+[source,json]
+----
+{
+  "eventId": "unique-uuid",
+  "eventType": "OrderCreated|PaymentReceived|PaymentFailed|OrderCancelled|ShipmentStarted",
+  "timestamp": "2026-07-02T10:30:00Z",
+  "version": "1.0",
+  "payload": {
+    // Event-specific fields
+  }
+}
+----
+
+=== Event-Specific Payloads
+
+==== OrderCreated
+[source,json]
+----
+{
+  "eventId": "550e8400-e29b-41d4-a716-446655440000",
+  "eventType": "OrderCreated",
+  "timestamp": "2026-07-02T10:30:00Z",
+  "version": "1.0",
+  "payload": {
+    "orderId": "ORD-12345",
+    "customerId": "CUST-67890",
+    "orderItems": [
+      {"productId": "PROD-001", "quantity": 2, "unitPrice": 19.99},
+      {"productId": "PROD-002", "quantity": 1, "unitPrice": 29.99}
+    ],
+    "totalAmount": 69.97,
+    "currency": "USD"
+  }
+}
+----
+
+==== PaymentReceived
+[source,json]
+----
+{
+  "eventId": "550e8400-e29b-41d4-a716-446655440001",
+  "eventType": "PaymentReceived",
+  "timestamp": "2026-07-02T10:35:00Z",
+  "version": "1.0",
+  "payload": {
+    "orderId": "ORD-12345",
+    "paymentId": "PAY-54321",
+    "amount": 69.97,
+    "currency": "USD",
+    "paymentMethod": "CreditCard",
+    "transactionId": "TXN-98765"
+  }
+}
+----

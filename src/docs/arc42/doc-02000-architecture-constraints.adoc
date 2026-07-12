@@ -1,0 +1,147 @@
+---
+id: DOC-02000-architecture-constraints
+type: Document
+title: 2. Architecture Constraints
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Technical and organizational constraints that shape the architecture
+tags:
+  - arc42
+  - constraints
+  - technical
+  - organizational
+relations:
+  - type: refines
+    target: DOC-04000-solution-strategy
+    status: proposed
+    rationale: Constraints inform solution strategy
+    reviewed: false
+---
+[[architecture-constraints]]
+= 2. Architecture Constraints
+
+
+
+== 2.1. Technical Constraints
+
+[cols="1,2,2", options="header"]
+|===
+| Constraint
+| Description
+| Impact
+
+| Java 21 Requirement
+| Must use Java 21 or later for language features and compatibility
+| Limits Java version choices, enables modern language features
+
+| Gradle Build System
+| Must use Gradle as the build tool (version 8.5+)
+| Standardizes build configuration across modules
+
+| Kafka Dependency
+| Must use Apache Kafka as event backbone
+| All modules must integrate with Kafka
+
+| JSON Serialization
+| First iteration uses JSON for event serialization
+| Human-readable, but less efficient than binary formats
+
+| Plain Java Preferred
+| Use plain Java where simpler, Spring Boot optional
+| Reduces dependencies, focuses on core concepts
+
+| Separate Implementations
+| Maintain separate implementations for each technology
+| Enables direct comparison, may lead to code duplication
+|===
+
+== 2.2. Organizational Constraints
+
+[cols="1,2,2", options="header"]
+|===
+| Constraint
+| Description
+| Impact
+
+| Learning Focus
+| Primary goal is learning and understanding, not production
+| Simplifies implementation, prioritizes clarity over completeness
+
+| Single Maintainer
+| Project maintained by Integration Architecture Team
+| Centralized decision-making, limited resources
+
+| Open Source
+| Project is open source under MIT License
+| Public visibility, community contributions possible
+
+| Time Constraints
+| Project has development timeline and milestones
+| Prioritizes high-value features, defers nice-to-haves
+|===
+
+== 2.3. Convention Constraints
+
+[cols="1,2,2", options="header"]
+|===
+| Constraint
+| Description
+| Impact
+
+| arc42 Template
+| Must follow arc42 architecture documentation template
+| Standardized structure, comprehensive coverage
+
+| YAML Front Matter
+| All documentation files must include YAML metadata
+| Enables tooling, traceability, machine processing
+
+| Semantic Anchors
+| Must use semantic anchors for cross-referencing
+| Enables precise linking, improves navigation
+
+| AsciiDoc Format
+| All documentation must be in AsciiDoc format
+| Consistent formatting, PlantUML support
+
+| PlantUML Diagrams
+| Must use PlantUML for architecture diagrams
+| Consistent diagram style, text-based diagrams
+
+| Cross-Cutting Concepts
+| Must address security, testing, observability, error handling
+| Comprehensive architecture coverage
+|===
+
+== 2.4. External Constraints
+
+[cols="1,2,2", options="header"]
+|===
+| Constraint
+| Description
+| Impact
+
+| Technology Versions
+| Must use specific versions of Kafka, Esper, Flink, etc.
+| Version compatibility must be maintained
+
+| License Compatibility
+| All dependencies must have compatible licenses
+| MIT license limits dependency choices
+
+| Integration Requirements
+| Must integrate with existing development environment
+| Docker, Gradle, Java ecosystem compatibility
+|===
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Informs: xref:doc-04000-solution-strategy.adoc[Solution Strategy]
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. Constraints should be validated with the project context. Additional constraints may emerge as the project progresses.

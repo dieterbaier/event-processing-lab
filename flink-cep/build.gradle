@@ -1,0 +1,114 @@
+// Flink CEP Module - Build Configuration
+// [semantic-anchor: component.flink-cep]
+
+plugins {
+    id 'java'
+    id 'application' // For executable applications
+}
+
+// Module description
+description = 'Flink CEP - Pattern detection with Flink CEP library for order lifecycle events'
+
+// Dependencies
+dependencies {
+    // Project dependencies
+    implementation project(':event-model') // [semantic-anchor: component.event-model]
+    implementation project(':flink-basic') // [semantic-anchor: component.flink-basic] - for shared utilities
+    
+    // Kafka Client [semantic-anchor: technology.kafka]
+    implementation "org.apache.kafka:kafka-clients:${kafkaVersion}"
+    
+    // Flink Core [semantic-anchor: technology.flink]
+    implementation "org.apache.flink:flink-java:${flinkVersion}"
+    implementation "org.apache.flink:flink-streaming-java_2.12:${flinkVersion}"
+    implementation "org.apache.flink:flink-clients_2.12:${flinkVersion}"
+    
+    // Flink Kafka Connector
+    implementation "org.apache.flink:flink-connector-kafka_2.12:${flinkVersion}"
+    
+    // Flink CEP Library [semantic-anchor: technology.flink-cep]
+    // Same Flink release and Scala suffix as flink-core/streaming above.
+    implementation "org.apache.flink:flink-cep_2.12:${flinkVersion}"
+    
+    // JSON Processing [semantic-anchor: decision.json-serialization]
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    
+    // Logging
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+    
+    // Testing
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.mockito:mockito-core:5.3.1"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+// Java compatibility
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Application configuration
+application {
+    mainClass = 'com.example.flinkcep.FlinkCepProcessor'
+}
+
+// Source and target compatibility
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+// Tasks
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+// Jar manifest attributes
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Event Processing Lab - Flink CEP',
+            'Implementation-Version': version,
+            'Implementation-Vendor': 'Integration Architecture Team',
+            'Main-Class': 'com.example.flinkcep.FlinkCepProcessor',
+            'Semantic-Anchor': 'component.flink-cep'
+        )
+    }
+}
+
+// Configuration for the application
+task runFlinkCep(type: JavaExec) {
+    description = 'Run the Flink CEP processor'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = application.mainClass
+    
+    // Flink requires additional JVM options
+    jvmArgs = [
+        '-XX:MaxMetaspaceSize=512m',
+        '-XX:MaxDirectMemorySize=1G'
+    ]
+}
+
+// Task to run with default configuration
+task startFlinkCep(type: JavaExec) {
+    description = 'Start the Flink CEP processor with default configuration'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = application.mainClass
+    
+    jvmArgs = [
+        '-XX:MaxMetaspaceSize=512m',
+        '-XX:MaxDirectMemorySize=1G'
+    ]
+    
+    args 'localhost:9092', 'order-events', 'flink-cep-group'
+}

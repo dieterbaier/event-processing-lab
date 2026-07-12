@@ -1,0 +1,128 @@
+---
+id: DOC-002-vision-mission
+type: Document
+title: Vision and Mission
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Project vision, mission, and strategic goals for the Event Processing Lab
+tags:
+  - vision
+  - mission
+  - strategy
+  - project
+relations:
+  - type: relates_to
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Vision and mission inform project goals
+    reviewed: false
+---
+[[vision-and-mission]]
+= Vision and Mission
+
+
+
+== Vision
+
+To create the **premier learning platform** for integration architects to understand, compare, and master event processing technologies through hands-on experience with real-world scenarios.
+
+== Mission
+
+The Event Processing Lab provides:
+
+* **Comprehensive Technology Coverage**: In-depth exploration of Kafka, Esper, Apache Flink, and Flink CEP
+* **Practical Learning**: Hands-on implementation of event processing patterns and scenarios
+* **Architectural Insight**: Clear understanding of trade-offs, capabilities, and best practices
+* **Comparison Framework**: Side-by-side evaluation of technologies across multiple dimensions
+* **Real-World Relevance**: Use case driven by actual business scenarios (order lifecycle)
+
+== Strategic Goals
+
+[cols="1,3", options="header"]
+|===
+| Goal
+| Description
+
+| Enable Technology Mastery
+| Equip integration architects with deep understanding of each event processing technology
+
+| Provide Practical Experience
+| Offer hands-on implementation and testing of real scenarios
+
+| Demonstrate Architectural Trade-offs
+| Show how different technologies solve the same problems differently
+
+| Build Comparison Framework
+| Create reusable methodology for evaluating event processing technologies
+
+| Support Continuous Learning
+| Enable ongoing experimentation and exploration beyond the initial scenarios
+|===
+
+== Target Audience
+
+[cols="1,2", options="header"]
+|===
+| Audience
+| Description
+
+| Integration Architects
+| Primary audience - designing event-driven architectures
+
+| Software Engineers
+| Implementing event processing solutions
+
+| Technical Leads
+| Making technology selection decisions
+
+| DevOps Engineers
+| Deploying and operating event processing systems
+
+| Data Engineers
+| Processing event streams at scale
+|===
+
+== Value Proposition
+
+The Event Processing Lab uniquely provides:
+
+* **Multi-Technology Comparison**: Single project covering Kafka, Esper, Flink, and Flink CEP
+* **Common Use Case**: Consistent order lifecycle scenario across all implementations
+* **Architecture-First**: Well-documented architecture following arc42 and architecture-knowledge-toolkit
+* **Learning-Focused**: Designed specifically for understanding, not production deployment
+* **Semantic Anchors**: Rich cross-referencing throughout documentation and code
+
+== Success Criteria
+
+[cols="1,2,3", options="header"]
+|===
+| Criterion
+| Measurement
+| Target
+
+| Technology Understanding
+| Percentage of learners who can explain each technology's capabilities
+| 90% +
+
+| Practical Application
+| Percentage of learners who can implement a new scenario
+| 80% +
+
+| Architecture Comprehension
+| Percentage of learners who understand the architectural trade-offs
+| 85% +
+
+| Comparison Effectiveness
+| Ability to select appropriate technology for given requirements
+| 75% +
+|===
+
+== Traceability
+
+* Informs: xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+
+== Review Notes
+
+This document is AI-assisted and must be reviewed for accuracy and completeness.

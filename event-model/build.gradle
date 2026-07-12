@@ -1,0 +1,84 @@
+// Event Model Module - Build Configuration
+// [semantic-anchor: component.event-model]
+
+plugins {
+    id 'java-library' // This is a library module providing event DTOs
+}
+
+// Module description
+description = 'Event Model - Common event DTOs and serialization for the Event Processing Lab'
+
+// Dependencies
+dependencies {
+    // JSON Processing [semantic-anchor: decision.json-serialization]
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+    
+    // Logging
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    
+    // Testing
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.mockito:mockito-core:5.3.1"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+// Java compatibility
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Source and target compatibility
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+// Tasks
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+// Jar manifest attributes
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Event Processing Lab - Event Model',
+            'Implementation-Version': version,
+            'Implementation-Vendor': 'Integration Architecture Team',
+            'Built-By': System.getProperty('user.name'),
+            'Built-Date': new Date().toString(),
+            'Built-JDK': System.getProperty('java.version'),
+            'Semantic-Anchor': 'component.event-model'
+        )
+    }
+}
+
+// Generate Javadoc (commented out to fix Gradle compatibility)
+// task javadocJar(type: Jar, dependsOn: javadoc) {
+//     archiveClassifier = 'javadoc'
+//     from javadoc.destinationDirectory
+// }
+
+// Generate Sources JAR (commented out to fix Gradle compatibility)
+// task sourcesJar(type: Jar) {
+//     archiveClassifier = 'sources'
+//     from sourceSets.main.allJava
+// }
+
+// Artifacts for publishing (if needed - commented out to fix Gradle compatibility)
+// artifacts {
+//     archives javadocJar
+//     archives sourcesJar
+// }

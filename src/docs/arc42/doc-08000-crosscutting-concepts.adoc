@@ -1,0 +1,429 @@
+---
+id: DOC-08000-crosscutting-concepts
+type: Document
+title: 8. Cross-Cutting Concepts
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Security, testing, observability, error handling, and other cross-cutting concerns
+tags:
+  - arc42
+  - cross-cutting
+  - security
+  - testing
+  - observability
+  - error-handling
+  - concepts
+relations: []
+---
+[[crosscutting-concepts]]
+= 8. Cross-Cutting Concepts
+
+
+
+== 8.1. Threat Model
+
+
+
+=== STRIDE Analysis
+
+[cols="1,2,3,2", options="header"]
+|===
+| Threat ID
+| Category
+| Description
+| Mitigation
+
+| T-001
+| Spoofing
+| Unauthorized user or system impersonates another
+| Authentication and authorization (future enhancement)
+
+| T-002
+| Tampering
+| Malicious modification of events or data
+| Digital signatures, checksums (future enhancement)
+
+| T-003
+| Repudiation
+| User or system denies performing an action
+| Audit logging, event correlation
+
+| T-004
+| Information Disclosure
+| Unauthorized access to sensitive data
+| Encryption, access controls (future enhancement)
+
+| T-005
+| Denial of Service
+| System overwhelmed by excessive requests
+| Resource limits, rate limiting, circuit breakers
+
+| T-006
+| Elevation of Privilege
+| Unauthorized access to higher privileges
+| Principle of least privilege, access controls
+|===
+
+=== Risk Matrix
+
+[cols="1,2,2,2", options="header"]
+|===
+| Risk
+| Likelihood
+| Impact
+| Priority
+
+| T-001 Spoofing
+| Low
+| Medium
+| Low
+
+| T-002 Tampering
+| Low
+| Medium
+| Low
+
+| T-003 Repudiation
+| Low
+| Medium
+| Low
+
+| T-004 Information Disclosure
+| Low
+| Medium
+| Low
+
+| T-005 Denial of Service
+| Medium
+| High
+| High
+
+| T-006 Elevation of Privilege
+| Low
+| High
+| Low
+|===
+
+== 8.2. Security
+
+
+
+=== Security Approach
+
+For a learning project, security is simplified but follows best practices:
+
+* **Event Integrity**: Events are immutable once published
+* **Audit Trail**: All processing is logged for traceability
+* **Validation**: Events are validated before processing
+* **Isolation**: Each module runs in its own process
+
+=== Security Controls
+
+[cols="1,2,2", options="header"]
+|===
+| Control
+| Implementation
+| Status
+
+| Input Validation
+| Event deserialization and business rule validation
+| Implemented
+
+| Logging
+| Comprehensive logging with correlation IDs
+| Implemented
+
+| Error Handling
+| Graceful error handling with appropriate recovery
+| Partial
+
+| Configuration Security
+| Sensitive configuration externalized
+| Partial
+
+| Dependency Security
+| Regular dependency updates and vulnerability scanning
+| Planned
+|===
+
+== 8.3. Test
+
+
+
+=== Testing Strategy
+
+The project follows a **testing pyramid** approach with multiple levels of testing.
+
+=== Test Levels
+
+[cols="1,2,3,1", options="header"]
+|===
+| Level
+| Type
+| Scope
+| Status
+
+| Unit Tests
+| Business logic tests
+| Individual classes and methods
+| Partial
+
+| Integration Tests
+| Module interaction tests
+| Within a module
+| Partial
+
+| Component Tests
+| End-to-end module tests
+| Complete module functionality
+| Planned
+
+| System Tests
+| Complete scenario tests
+| Cross-module scenarios
+| Planned
+|===
+
+=== Test Coverage
+
+[cols="1,2,2,1", options="header"]
+|===
+| Module
+| Target Coverage
+| Current Coverage
+| Status
+
+| event-model
+| 100%
+| Partial
+| Needs work
+
+| event-producer
+| 100%
+| Partial
+| Needs work
+
+| kafka-consumer
+| 100%
+| Partial
+| Needs work
+
+| esper-cep
+| 100%
+| Partial
+| Needs work
+
+| flink-basic
+| 100%
+| Partial
+| Needs work
+
+| flink-cep
+| 100%
+| Partial
+| Needs work
+|===
+
+=== Test Traceability
+
+Each test references its use case ID or scenario for traceability:
+
+* Unit tests: Reference the class and method under test
+* Integration tests: Reference the module interaction being tested
+* Scenario tests: Reference the runtime scenario from Chapter 6
+
+== 8.4. Observability
+
+
+
+
+=== Observability Pillars
+
+[cols="1,3,2", options="header"]
+|===
+| Pillar
+| Implementation
+| Status
+
+| Logging
+| SLF4J with Logback, structured logging
+| Implemented
+
+| Metrics
+| Technology-specific metrics (Kafka, Flink)
+| Partial
+
+| Tracing
+| Correlation IDs for event flow tracking
+| Partial
+
+| Monitoring
+| Health checks and status endpoints
+| Planned
+|===
+
+=== Logging Strategy
+
+[cols="1,2,3", options="header"]
+|===
+| Level
+| Usage
+| Example
+
+| ERROR
+| Critical failures, unrecoverable errors
+| Failed to connect to Kafka
+
+| WARN
+| Recoverable errors, unexpected conditions
+| Payment timeout detected
+
+| INFO
+| Normal operations, significant events
+| OrderCreated event processed
+
+| DEBUG
+| Detailed processing information
+| Event details, internal state
+
+| TRACE
+| Very detailed debugging
+| Method entry/exit, variable values
+|===
+
+=== Correlation
+
+All logs include:
+
+* **Timestamp**: When the event occurred
+* **Level**: Log level (ERROR, WARN, INFO, DEBUG, TRACE)
+* **Logger**: Class or component name
+* **Message**: Human-readable description
+* **Correlation ID**: Unique ID for tracking event flow
+* **Event ID**: Unique ID for the event being processed
+
+== 8.5. Error Handling
+
+
+
+=== Error Handling Strategy
+
+[cols="1,2,3", options="header"]
+|===
+| Error Type
+| Handling Strategy
+| Recovery
+
+| Transient Errors
+| Retry with exponential backoff
+| Automatic recovery
+
+| Configuration Errors
+| Fail fast with clear error message
+| Manual correction required
+
+| Validation Errors
+| Reject with detailed error information
+| Manual correction required
+
+| Resource Errors
+| Circuit breaker pattern
+| Automatic recovery after timeout
+
+| Processing Errors
+| Dead letter queue / error topic
+| Manual intervention required
+|===
+
+=== Error Recovery Patterns
+
+[cols="1,3,2", options="header"]
+|===
+| Pattern
+| Description
+| Implementation
+
+| Retry
+| Automatic retry for transient errors
+| Exponential backoff with jitter
+
+| Circuit Breaker
+| Prevent repeated calls to failing services
+| Resilience4j or custom implementation
+
+| Fallback
+| Provide alternative processing path
+| Default values, cached data
+
+| Dead Letter Queue
+| Store failed events for later processing
+| Kafka error topic
+
+| Timeout
+| Abandon processing after timeout period
+| Time-based circuit breaker
+|===
+
+== 8.6. Additional Concepts
+
+=== Configuration Management
+
+[cols="1,2,2", options="header"]
+|===
+| Source
+| Usage
+| Example
+
+| gradle.properties
+| Build-time configuration
+| Kafka bootstrap servers
+
+| Command-line arguments
+| Runtime configuration
+| Topic name, rate
+
+| Environment variables
+| Environment-specific configuration
+| KAFKA_BOOTSTRAP_SERVERS
+
+| Configuration files
+| Complex configuration
+| application.yml (future)
+|===
+
+=== Performance Considerations
+
+[cols="1,2,2", options="header"]
+|===
+| Aspect
+| Consideration
+| Current Status
+
+| Throughput
+| Events processed per second
+| Not benchmarked
+
+| Latency
+| Time from event publication to processing
+| Not benchmarked
+
+| Memory Usage
+| Heap and native memory consumption
+| Not benchmarked
+
+| CPU Utilization
+| Processing overhead
+| Not benchmarked
+|===
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:doc-11000-risks-and-technical-debt.adoc[Risks and Technical Debt]
+* Implements:
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. All cross-cutting concepts should be validated against the implementation.

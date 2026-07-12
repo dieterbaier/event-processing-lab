@@ -1,0 +1,71 @@
+---
+id: QS-008-consumer-scaling
+type: QualityScenario
+title: Consumer Scaling
+status: proposed
+owner: architecture
+created: 2026-07-12
+reviewed: false
+summary: Consumer Scaling quality scenario for the Event Processing Lab.
+tags:
+  - quality
+  - scalability
+relations:
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Concretizes the scalability quality goal.
+    reviewed: false
+---
+[[qs-008-consumer-scaling]]
+== QS-008-consumer-scaling: Consumer Scaling
+
+
+
+=== Status
+
+Proposed. AI-assisted; the response measure is a reviewable target.
+
+=== Scenario
+
+[cols="1,3", options="header"]
+|===
+| Element | Description
+| Source | Operator
+| Stimulus | Increases the number of consumer instances in the group
+| Environment | Normal operation with a partitioned topic
+| Artifact | Kafka consumer group
+| Response | Partitions rebalance and aggregate throughput increases
+| Response Measure | Near-linear throughput gain up to the partition count (within +/-20%)
+|===
+
+=== Rationale
+
+Consumer-group scaling demonstrates Kafka's horizontal scalability.
+
+=== Assumptions
+
+* Values are initial targets for a single-node learning setup and must be reviewed.
+
+=== Impact
+
+include::generated/qs-008-consumer-scaling-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qs-008-consumer-scaling-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qs-008-consumer-scaling-traceability.adoc[leveloffset=+2]
+
+=== Open Questions
+
+* Is the target measure appropriate for the learning scope?
+
+=== Review Notes
+
+Mark reviewed only after the measure, environment, and stakeholder value are confirmed.

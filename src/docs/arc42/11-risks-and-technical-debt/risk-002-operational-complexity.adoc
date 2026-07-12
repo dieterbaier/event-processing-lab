@@ -1,0 +1,117 @@
+---
+id: RISK-002-operational-complexity
+type: Risk
+title: Operational Complexity Too High
+status: proposed
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Risk that operational complexity may become too high leading to difficulty in setup and maintenance
+tags:
+  - risk
+  - operational-complexity
+  - setup
+  - maintenance
+  - complexity
+relations:
+  - type: depends_on
+    target: ADR-001-use-kafka-as-event-backbone
+    status: proposed
+    rationale: Kafka adds operational complexity
+    reviewed: false
+  - type: mitigates
+    target: ADR-003-keep-spring-boot-optional
+    status: proposed
+    rationale: Plain Java reduces framework complexity
+    reviewed: false
+    reviewed: false
+  - type: relates_to
+    target: RISK-005-performance-bottleneck
+    status: proposed
+    rationale: Both are operational concerns
+    reviewed: false
+---
+[[risk-002-operational-complexity]]
+= RISK-002: Operational Complexity Too High
+
+
+
+== Status
+
+Proposed.
+
+This risk is AI-assisted. It identifies a concern for review and does not decide risk acceptance.
+
+== Risk Statement
+
+Because the project involves multiple complex technologies (Kafka, Esper, Flink), **operational complexity may become too high**, leading to difficulty in setup, configuration, and troubleshooting.
+
+== Assessment
+
+[cols="1,3", options="header"]
+|===
+| Field
+| Value
+
+| Likelihood
+| Medium
+
+| Impact
+| Medium
+
+| Priority
+| Medium
+
+| Timeframe
+| Near-term
+
+| Confidence
+| High
+|===
+
+== Mitigation Options
+
+* Keep implementations minimal and focused on learning objectives
+* Document thoroughly with clear setup and configuration guides
+* Provide Docker Compose configurations for easy local development
+* Create troubleshooting guides for common issues
+* Implement comprehensive logging for observability
+
+== Decision or Acceptance
+
+The risk is currently mitigated through documentation and simplification. Operational complexity is acceptable for a learning project.
+
+== Traceability
+
+[cols="1,1,3", options="header"]
+|===
+| Relation
+| Target
+| Rationale
+
+| `depends_on`
+| xref:../09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| Kafka adds operational complexity
+
+| `mitigates`
+| xref:../09-architecture-decisions/adr-003-keep-spring-boot-optional.adoc[ADR-003]
+| Plain Java reduces framework complexity
+
+| `addresses`
+| xref:../10-quality-requirements/qs-003-hands-on-experience.adoc[QS-003]
+| Complexity may affect time to first run
+
+| `relates_to`
+| xref:../doc-08000-crosscutting-concepts.adoc[Threat Model T-002]
+| Related to unauthorized access threat
+|===
+
+== Open Questions
+
+* What is the acceptable level of operational complexity for a learning project?
+* How do we measure operational complexity?
+* Should we provide pre-configured environments?
+
+== Review Notes
+
+State this risk can be marked reviewed only after the assessment and mitigation path are confirmed by the accountable owner. The mitigation options should be evaluated for effectiveness and feasibility.

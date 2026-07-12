@@ -1,0 +1,99 @@
+---
+id: RISK-001-state-explosion
+type: Risk
+title: State Explosion in CEP Engines
+status: proposed
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Risk of uncontrolled state growth in CEP engines leading to resource exhaustion
+tags:
+  - risk
+  - state-management
+  - cep
+  - performance
+  - memory
+relations: []
+---
+[[risk-001-state-explosion]]
+= RISK-001: State Explosion in CEP Engines
+
+
+
+== Status
+
+Proposed.
+
+This risk is AI-assisted. It identifies a concern for review and does not decide risk acceptance.
+
+== Risk Statement
+
+Because complex event pattern matching requires maintaining state for partial matches, **state explosion may occur in CEP engines**, leading to memory exhaustion and system instability.
+
+== Assessment
+
+[cols="1,3", options="header"]
+|===
+| Field
+| Value
+
+| Likelihood
+| Medium
+
+| Impact
+| High
+
+| Priority
+| High
+
+| Timeframe
+| Medium-term
+
+| Confidence
+| Medium
+|===
+
+== Mitigation Options
+
+* Limit window sizes in CEP rules to bound state growth
+* Use efficient pattern definitions that minimize state requirements
+* Monitor state size and set alerts for abnormal growth
+* Implement state cleanup mechanisms for expired partial matches
+* Consider stateless pattern matching where possible
+* Use time-based state expiration for long-running patterns
+* Limit the number of concurrent patterns in development mode
+
+== Decision or Acceptance
+
+The risk is currently mitigated through implementation best practices. State size monitoring should be added for production use. For the learning purposes of this project, the risk is acceptable with proper guidance and configuration.
+
+== Traceability
+
+[cols="1,1,3", options="header"]
+|===
+| Relation
+| Target
+| Rationale
+
+| `depends_on`
+| xref:../09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
+| State explosion is a concern for CEP engines
+
+| `addresses`
+| xref:../10-quality-requirements/qs-009-pattern-complexity-handling.adoc[QS-009]
+| Pattern complexity may contribute to state growth
+
+| `relates_to`
+| xref:../doc-08000-crosscutting-concepts.adoc[Threat Model T-001]
+| Related to denial of service threat
+|===
+
+== Open Questions
+
+* Should we implement state monitoring in the CEP modules?
+* What are appropriate window sizes for learning scenarios?
+* How do we detect and alert on state growth?
+
+== Review Notes
+
+State this risk can be marked reviewed only after the assessment and mitigation path are confirmed by the accountable owner. The mitigation options should be evaluated for effectiveness and feasibility.

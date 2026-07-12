@@ -1,0 +1,106 @@
+---
+id: RISK-004-event-loss
+type: Risk
+title: Event Loss During Processing
+status: proposed
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Risk of event loss during processing leading to incomplete or incorrect results
+tags:
+  - risk
+  - event-loss
+  - reliability
+  - data-integrity
+  - kafka
+relations:
+  - type: depends_on
+    target: ADR-001-use-kafka-as-event-backbone
+    status: proposed
+    rationale: Kafka provides durability guarantees
+    reviewed: false
+---
+[[risk-004-event-loss]]
+= RISK-004: Event Loss During Processing
+
+
+
+== Status
+
+Proposed.
+
+This risk is AI-assisted. It identifies a concern for review and does not decide risk acceptance.
+
+== Risk Statement
+
+Because event processing involves multiple steps and potential failures, **event loss may occur during processing**, leading to incomplete or incorrect results.
+
+== Assessment
+
+[cols="1,3", options="header"]
+|===
+| Field
+| Value
+
+| Likelihood
+| Low
+
+| Impact
+| High
+
+| Priority
+| Medium
+
+| Timeframe
+| Near-term
+
+| Confidence
+| High
+|===
+
+== Mitigation Options
+
+* Use durable commits in Kafka consumers to prevent data loss
+* Monitor consumer offsets to detect processing gaps
+* Implement end-to-end acknowledgments where possible
+* Use transactional processing for critical operations
+* Implement dead letter queues for failed events
+
+== Decision or Acceptance
+
+The risk is currently mitigated through Kafka's durability guarantees. For this learning project, minimal event loss is acceptable.
+
+== Traceability
+
+[cols="1,1,3", options="header"]
+|===
+| Relation
+| Target
+| Rationale
+
+| `depends_on`
+| xref:../09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| Kafka provides durability guarantees
+
+| `addresses`
+|
+| Event loss detection is part of observability
+
+| `relates_to`
+| xref:../doc-08000-crosscutting-concepts.adoc[Error Handling]
+| Error handling is a cross-cutting concern
+
+| `relates_to`
+|
+| Kafka is the event backbone
+|===
+
+== Open Questions
+
+* How do we detect event loss in a distributed system?
+* Should we implement end-to-end acknowledgments?
+* What is an acceptable level of event loss for a learning project?
+
+== Review Notes
+
+State this risk can be marked reviewed only after the assessment and mitigation path are confirmed by the accountable owner. The mitigation options should be evaluated for effectiveness and feasibility.
