@@ -7,7 +7,7 @@ owner: development
 created: 2026-07-02
 reviewed: false
 summary: Limited error handling in some modules
-.tags:
+tags:
   - technical-debt
   - error-handling
   - reliability
@@ -61,11 +61,11 @@ Add comprehensive error handling with appropriate recovery mechanisms, graceful 
 | Rationale
 
 | `affects`
-| xref:../05-building-block-view.adoc#kafka-consumer[kafka-consumer]
+| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
 | Kafka consumer needs error handling
 
 | `affects`
-| xref:../05-building-block-view.adoc#flink-basic[flink-basic]
+| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
 | Flink basic needs error handling
 
 | `addresses`
@@ -73,11 +73,11 @@ Add comprehensive error handling with appropriate recovery mechanisms, graceful 
 | Better error handling improves issue identification
 
 | `relates_to`
-| xref:RISK-004-event-loss.adoc[RISK-004]
+| xref:risk-004-event-loss.adoc[RISK-004]
 | Better error handling reduces event loss risk
 
 | `relates_to`
-| xref:../08-crosscutting-concepts.adoc[Error Handling]
+| xref:../doc-08000-crosscutting-concepts.adoc[Error Handling]
 | Error handling is a cross-cutting concept
 |===
 

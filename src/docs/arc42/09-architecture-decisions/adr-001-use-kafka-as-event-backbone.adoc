@@ -1,6 +1,6 @@
 ---
 id: ADR-001-use-kafka-as-event-backbone
-type: ArchitectureDecision
+type: ADR
 title: Use Kafka as Event Backbone
 decision: Use Apache Kafka as the event backbone for the Event Processing Lab
 status: accepted
@@ -246,9 +246,9 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 == Related Components
 
-* xref:05-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
-* xref:05-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
-* xref:05-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
+* xref:doc-05000-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
+* xref:doc-05000-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
+* xref:doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
 
 == Related Technologies
 
@@ -257,12 +257,12 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 == Related Quality Goals
 
-* xref:01-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
-* xref:01-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
-* xref:01-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
+* xref:doc-01000-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
+* xref:doc-01000-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
+* xref:doc-01000-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
 
 == Related Scenarios
 
-* xref:06-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
-* xref:06-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
-* xref:06-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]
+* xref:doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
+* xref:doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
+* xref:doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]

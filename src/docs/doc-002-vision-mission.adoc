@@ -1,5 +1,5 @@
 ---
-id: vision-mission
+id: DOC-002-vision-mission
 type: Document
 title: Vision and Mission
 status: draft
@@ -7,14 +7,14 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Project vision, mission, and strategic goals for the Event Processing Lab
-.tags:
+tags:
   - vision
   - mission
   - strategy
   - project
 relations:
   - type: relates_to
-    target: DOC-101-introduction-and-goals
+    target: DOC-01000-introduction-and-goals
     status: proposed
     rationale: Vision and mission inform project goals
     reviewed: false
@@ -123,7 +123,7 @@ The Event Processing Lab uniquely provides:
 
 == Traceability
 
-* Informs: xref:DOC-101-introduction-and-goals.adoc[Introduction and Goals]
+* Informs: xref:DOC-01000-introduction-and-goals.adoc[Introduction and Goals]
 * Related to: xref:canvas/business-model-canvas.adoc[Business Model Canvas]
 * Related to: xref:canvas/value-proposition-canvas.adoc[Value Proposition Canvas]
 

@@ -1,5 +1,5 @@
 ---
-id: DOC-110-quality-requirements
+id: DOC-10000-quality-requirements
 type: Document
 title: 10. Quality Requirements
 status: draft
@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Quality goals, scenarios, and quality tree for the Event Processing Lab
-.tags:
+tags:
   - arc42
   - quality
   - scenarios
@@ -15,7 +15,7 @@ summary: Quality goals, scenarios, and quality tree for the Event Processing Lab
   - measurement
 relations:
   - type: addresses
-    target: DOC-101-introduction-and-goals
+    target: DOC-01000-introduction-and-goals
     status: proposed
     rationale: Quality scenarios concretize quality goals
     reviewed: false
@@ -198,7 +198,7 @@ Include::10-quality-requirements/QS-015-event-flow-tracing.adoc[leveloffset=+1]
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Concretizes: xref:01-introduction-and-goals.adoc[Chapter 1.2 Quality Goals]
+* Concretizes: xref:doc-01000-introduction-and-goals.adoc[Chapter 1.2 Quality Goals]
 
 == Review Notes
 

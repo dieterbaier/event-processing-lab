@@ -1,5 +1,5 @@
 ---
-id: DOC-101-introduction-and-goals
+id: DOC-01000-introduction-and-goals
 type: Document
 title: 1. Introduction and Goals
 status: draft
@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Project purpose, quality goals, and stakeholders for the Event Processing Lab
-.tags:
+tags:
   - arc42
   - introduction
   - goals
@@ -145,8 +145,8 @@ Additional quality characteristics addressed in Chapter 10:
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Refines: xref:vision-mission.adoc[Vision and Mission]
-* Addressed by: xref:roadmap.adoc[Project Roadmap]
+* Refines: xref:doc-002-vision-mission.adoc[Vision and Mission]
+* Addressed by: xref:doc-004-roadmap.adoc[Project Roadmap]
 
 == Review Notes
 

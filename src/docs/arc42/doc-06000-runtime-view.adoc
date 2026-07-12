@@ -1,5 +1,5 @@
 ---
-id: DOC-601-runtime-view
+id: DOC-06000-runtime-view
 type: Document
 title: 6. Runtime View
 description: Runtime scenarios and error handling for the Event Processing Lab
@@ -8,7 +8,7 @@ owner: Integration Architecture Team
 created: 2026-07-02
 reviewed: false
 summary: Runtime scenarios demonstrating system behavior and error handling approaches
-.tags:
+tags:
   - arc42
   - runtime-view
   - scenarios
@@ -215,7 +215,7 @@ FlinkCep -> FlinkCep : Emit timeout detection result
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:05-building-block-view.adoc[Building Block View]
+* Related to: xref:doc-05000-building-block-view.adoc[Building Block View]
 * Implements: All components in runtime scenarios
 
 == Review Notes

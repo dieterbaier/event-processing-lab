@@ -1,5 +1,5 @@
 ---
-id: DOC-111-risks-and-technical-debt
+id: DOC-11000-risks-and-technical-debt
 type: Document
 title: 11. Risks and Technical Debt
 status: draft
@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Identified risks and technical debt for the Event Processing Lab
-.tags:
+tags:
   - arc42
   - risks
   - technical-debt
@@ -15,12 +15,12 @@ summary: Identified risks and technical debt for the Event Processing Lab
   - assessment
 relations:
   - type: refines
-    target: DOC-108-crosscutting-concepts
+    target: DOC-08000-crosscutting-concepts
     status: proposed
     rationale: Risks elaborate the cross-cutting concepts
     reviewed: false
   - type: addresses
-    target: DOC-101-introduction-and-goals
+    target: DOC-01000-introduction-and-goals
     status: proposed
     rationale: Risks may impact quality goals
     reviewed: false
@@ -46,17 +46,17 @@ This chapter is AI-assisted and must be reviewed for accuracy and completeness.
 
 The following risks have been identified for the Event Processing Lab project. Each risk uses the format: Because <cause>, <event> may occur, leading to <impact>.
 
-Include::11-risks-and-technical-debt/RISK-001-state-explosion.adoc[leveloffset=+1]
+Include::11-risks-and-technical-debt/risk-001-state-explosion.adoc[leveloffset=+1]
 
-Include::11-risks-and-technical-debt/RISK-002-operational-complexity.adoc[leveloffset=+1]
+Include::11-risks-and-technical-debt/risk-002-operational-complexity.adoc[leveloffset=+1]
 
-Include::11-risks-and-technical-debt/RISK-003-technology-compatibility.adoc[leveloffset=+1]
+Include::11-risks-and-technical-debt/risk-003-technology-compatibility.adoc[leveloffset=+1]
 
-Include::11-risks-and-technical-debt/RISK-004-event-loss.adoc[leveloffset=+1]
+Include::11-risks-and-technical-debt/risk-004-event-loss.adoc[leveloffset=+1]
 
-Include::11-risks-and-technical-debt/RISK-005-performance-bottleneck.adoc[leveloffset=+1]
+Include::11-risks-and-technical-debt/risk-005-performance-bottleneck.adoc[leveloffset=+1]
 
-Include::11-risks-and-technical-debt/RISK-006-learning-curve-too-steep.adoc[leveloffset=+1]
+Include::11-risks-and-technical-debt/risk-006-learning-curve-too-steep.adoc[leveloffset=+1]
 
 == 11.2. Technical Debt
 
@@ -218,10 +218,10 @@ Include::11-risks-and-technical-debt/TD-010-event-validation.adoc[leveloffset=+2
 
 == Traceability
 
-* Refines: xref:DOC-108-crosscutting-concepts.adoc[Cross-Cutting Concepts]
-* Related to: xref:DOC-101-introduction-and-goals.adoc[Introduction and Goals]
-* Contains: xref:08-crosscutting-concepts.adoc[Threat Model]
-* Addressed by: xref:roadmap.adoc[Project Roadmap]
+* Refines: xref:DOC-08000-crosscutting-concepts.adoc[Cross-Cutting Concepts]
+* Related to: xref:DOC-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Contains: xref:doc-08000-crosscutting-concepts.adoc[Threat Model]
+* Addressed by: xref:doc-004-roadmap.adoc[Project Roadmap]
 
 == Assumptions
 

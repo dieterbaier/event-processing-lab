@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Risk that the learning curve may be too steep leading to frustration and reduced effectiveness
-.tags:
+tags:
   - risk
   - learning-curve
   - usability
@@ -79,7 +79,7 @@ The risk is currently mitigated through comprehensive documentation. The learnin
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/ADR-004.adoc[ADR-004]
+| xref:../09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
 | Separate implementations require learning multiple approaches
 
 | `addresses`

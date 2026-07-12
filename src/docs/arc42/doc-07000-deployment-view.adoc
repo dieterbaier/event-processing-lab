@@ -1,5 +1,5 @@
 ---
-id: DOC-107-deployment-view
+id: DOC-07000-deployment-view
 type: Document
 title: 7. Deployment View
 status: draft
@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Deployment architecture and environments for the Event Processing Lab
-.tags:
+tags:
   - arc42
   - deployment
   - architecture
@@ -350,8 +350,8 @@ volumes:
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:05-building-block-view.adoc[Building Block View]
-* Related to: xref:03-system-scope-and-context.adoc[System Scope and Context]
+* Related to: xref:doc-05000-building-block-view.adoc[Building Block View]
+* Related to: xref:doc-03000-system-scope-and-context.adoc[System Scope and Context]
 
 == Review Notes
 

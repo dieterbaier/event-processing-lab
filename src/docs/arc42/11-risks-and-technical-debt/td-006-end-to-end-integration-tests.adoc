@@ -7,7 +7,7 @@ owner: development
 created: 2026-07-02
 reviewed: false
 summary: No end-to-end integration tests
-.tags:
+tags:
   - technical-debt
   - testing
   - integration
@@ -56,23 +56,23 @@ Add end-to-end test scenarios that verify the complete event processing flow fro
 | Rationale
 
 | `affects`
-| xref:../05-building-block-view.adoc#event-producer[event-producer]
+| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
 | Event producer is part of end-to-end flow
 
 | `affects`
-| xref:../05-building-block-view.adoc#kafka-consumer[kafka-consumer]
+| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
 | Kafka consumer is part of end-to-end flow
 
 | `affects`
-| xref:../05-building-block-view.adoc#esper-cep[esper-cep]
+| xref:../doc-05000-building-block-view.adoc#esper-cep[esper-cep]
 | Esper CEP is part of end-to-end flow
 
 | `affects`
-| xref:../05-building-block-view.adoc#flink-basic[flink-basic]
+| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
 | Flink basic is part of end-to-end flow
 
 | `affects`
-| xref:../05-building-block-view.adoc#flink-cep[flink-cep]
+| xref:../doc-05000-building-block-view.adoc#flink-cep[flink-cep]
 | Flink CEP is part of end-to-end flow
 
 | `addresses`
@@ -80,7 +80,7 @@ Add end-to-end test scenarios that verify the complete event processing flow fro
 | End-to-end tests needed for technology comparison
 
 | `relates_to`
-| xref:../06-runtime-view.adoc[Runtime View]
+| xref:../doc-06000-runtime-view.adoc[Runtime View]
 | Runtime scenarios should be testable end-to-end
 |===
 

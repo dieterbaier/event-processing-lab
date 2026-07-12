@@ -1,5 +1,5 @@
 ---
-id: DOC-501-building-block-view
+id: DOC-05000-building-block-view
 type: Document
 title: 5. Building Block View
 description: Module structure, component details, and architectural diagrams for the Event Processing Lab
@@ -8,7 +8,7 @@ owner: Integration Architecture Team
 created: 2026-07-02
 reviewed: false
 summary: Modular architecture with clear separation of concerns and detailed component descriptions
-.tags:
+tags:
   - arc42
   - building-block-view
   - components
@@ -16,7 +16,7 @@ summary: Modular architecture with clear separation of concerns and detailed com
   - modules
 relations:
   - type: refines
-    target: DOC-103-system-scope-and-context
+    target: DOC-03000-system-scope-and-context
     status: proposed
     rationale: Building blocks relate to system context
     reviewed: false
@@ -303,8 +303,8 @@ EsperCepEngine --> EventSerializer : "uses"
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:03-system-scope-and-context.adoc[System Scope and Context]
-* Appears in: xref:06-runtime-view.adoc[Runtime View] scenarios
+* Related to: xref:doc-03000-system-scope-and-context.adoc[System Scope and Context]
+* Appears in: xref:doc-06000-runtime-view.adoc[Runtime View] scenarios
 
 == Review Notes
 

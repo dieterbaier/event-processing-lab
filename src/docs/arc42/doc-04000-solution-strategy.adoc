@@ -1,5 +1,5 @@
 ---
-id: DOC-401-solution-strategy
+id: DOC-04000-solution-strategy
 type: Document
 title: 4. Solution Strategy
 description: Architectural approach, technology stack, and quality goals mapping for the Event Processing Lab
@@ -8,7 +8,7 @@ owner: Integration Architecture Team
 created: 2026-07-02
 reviewed: false
 summary: Architectural approach, technology stack selection, and quality goals mapping
-.tags:
+tags:
   - arc42
   - solution-strategy
   - technology-stack
@@ -40,29 +40,29 @@ The following Architecture Decision Records (ADRs) define the architectural appr
 | Status
 | Semantic Anchor
 
-| xref:09-architecture-decisions/ADR-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| xref:09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
 | Use Kafka as Event Backbone
 | Accepted
 | [semantic-anchor: decision.kafka-as-event-backbone]
 
-| xref:09-architecture-decisions/ADR-002-use-json-serialization.adoc[ADR-002]
+| xref:09-architecture-decisions/adr-002-use-json-serialization.adoc[ADR-002]
 | Use JSON Serialization for First Iteration
 | Accepted
 | [semantic-anchor: decision.json-serialization]
 
-| xref:09-architecture-decisions/ADR-003-keep-spring-boot-optional.adoc[ADR-003]
+| xref:09-architecture-decisions/adr-003-keep-spring-boot-optional.adoc[ADR-003]
 | Keep Spring Boot Optional, Use Plain Java
 | Accepted
 | [semantic-anchor: decision.plain-java-over-spring]
 
-| xref:09-architecture-decisions/ADR-004-separate-implementations.adoc[ADR-004]
+| xref:09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
 | Separate Esper and Flink Implementations
 | Accepted
 | [semantic-anchor: decision.separate-implementations]
 
 |===
 
-For detailed information on each ADR, see xref:09-architecture-decisions.adoc[Architecture Decisions].
+For detailed information on each ADR, see xref:doc-09000-architecture-decisions.adoc[Architecture Decisions].
 
 == Technology Stack
 
@@ -148,8 +148,8 @@ For detailed information on each ADR, see xref:09-architecture-decisions.adoc[Ar
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:01-introduction-and-goals.adoc[Introduction and Goals]
-* Implements: All ADRs in xref:09-architecture-decisions.adoc[Architecture Decisions]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Implements: All ADRs in xref:doc-09000-architecture-decisions.adoc[Architecture Decisions]
 
 == Review Notes
 

@@ -1,5 +1,5 @@
 ---
-id: DOC-108-crosscutting-concepts
+id: DOC-08000-crosscutting-concepts
 type: Document
 title: 8. Cross-Cutting Concepts
 status: draft
@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Security, testing, observability, error handling, and other cross-cutting concerns
-.tags:
+tags:
   - arc42
   - cross-cutting
   - security
@@ -421,7 +421,7 @@ All logs include:
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:11-risks-and-technical-debt.adoc[Risks and Technical Debt]
+* Related to: xref:doc-11000-risks-and-technical-debt.adoc[Risks and Technical Debt]
 * Implements: [semantic-anchor: quality.observability]
 
 == Review Notes

@@ -7,7 +7,7 @@ owner: development
 created: 2026-07-02
 reviewed: false
 summary: Limited validation in event model
-.tags:
+tags:
   - technical-debt
   - validation
   - reliability
@@ -66,7 +66,7 @@ Add comprehensive validation to the event model, including field validation, bus
 | Rationale
 
 | `affects`
-| xref:../05-building-block-view.adoc#event-model[event-model]
+| xref:../doc-05000-building-block-view.adoc#event-model[event-model]
 | Event model needs comprehensive validation
 
 | `addresses`
@@ -74,7 +74,7 @@ Add comprehensive validation to the event model, including field validation, bus
 | Better validation improves issue identification
 
 | `relates_to`
-| xref:RISK-004-event-loss.adoc[RISK-004]
+| xref:risk-004-event-loss.adoc[RISK-004]
 | Better validation reduces event loss risk from malformed events
 
 | `relates_to`

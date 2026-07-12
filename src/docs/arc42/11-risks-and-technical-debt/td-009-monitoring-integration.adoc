@@ -7,7 +7,7 @@ owner: development
 created: 2026-07-02
 reviewed: false
 summary: No monitoring integration
-.tags:
+tags:
   - technical-debt
   - monitoring
   - observability
@@ -56,23 +56,23 @@ Add metrics collection and monitoring integration using a standard metrics libra
 | Rationale
 
 | `affects`
-| xref:../05-building-block-view.adoc#event-producer[event-producer]
+| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
 | Event producer needs monitoring
 
 | `affects`
-| xref:../05-building-block-view.adoc#kafka-consumer[kafka-consumer]
+| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
 | Kafka consumer needs monitoring
 
 | `affects`
-| xref:../05-building-block-view.adoc#esper-cep[esper-cep]
+| xref:../doc-05000-building-block-view.adoc#esper-cep[esper-cep]
 | Esper CEP needs monitoring
 
 | `affects`
-| xref:../05-building-block-view.adoc#flink-basic[flink-basic]
+| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
 | Flink basic needs monitoring
 
 | `affects`
-| xref:../05-building-block-view.adoc#flink-cep[flink-cep]
+| xref:../doc-05000-building-block-view.adoc#flink-cep[flink-cep]
 | Flink CEP needs monitoring
 
 | `addresses`
@@ -84,7 +84,7 @@ Add metrics collection and monitoring integration using a standard metrics libra
 | Monitoring integration addresses monitoring effectiveness
 
 | `relates_to`
-| xref:../08-crosscutting-concepts.adoc[Observability]
+| xref:../doc-08000-crosscutting-concepts.adoc[Observability]
 | Observability is a cross-cutting concept
 |===
 

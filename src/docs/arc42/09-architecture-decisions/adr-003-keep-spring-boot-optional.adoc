@@ -1,6 +1,6 @@
 ---
 id: ADR-003-keep-spring-boot-optional
-type: ArchitectureDecision
+type: ADR
 title: Keep Spring Boot Optional, Use Plain Java
 decision: Prefer plain Java implementations where simpler, keep Spring Boot optional
 status: accepted
@@ -144,18 +144,18 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 
 == Related Decisions
 
-* xref:ADR-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
-* xref:ADR-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
-* xref:ADR-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations] [semantic-anchor: decision.separate-implementations]
+* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
+* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
+* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations] [semantic-anchor: decision.separate-implementations]
 
 == Related Components
 
-* xref:../05-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
-* xref:../05-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
-* xref:../05-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
-* xref:../05-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
-* xref:../05-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
-* xref:../05-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
+* xref:../doc-05000-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
+* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
+* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
+* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
+* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
+* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
 
 == Related Technologies
 
@@ -164,6 +164,6 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 
 == Related Quality Goals
 
-* xref:../01-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
-* xref:../01-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
-* xref:../01-introduction-and-goals.adoc#modifiability[Modifiability] [semantic-anchor: quality.modifiability]
+* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
+* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
+* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability] [semantic-anchor: quality.modifiability]

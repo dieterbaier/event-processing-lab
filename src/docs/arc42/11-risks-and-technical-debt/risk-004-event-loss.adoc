@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Risk of event loss during processing leading to incomplete or incorrect results
-.tags:
+tags:
   - risk
   - event-loss
   - reliability
@@ -79,7 +79,7 @@ The risk is currently mitigated through Kafka's durability guarantees. For this 
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/ADR-001.adoc[ADR-001]
+| xref:../09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
 | Kafka provides durability guarantees
 
 | `addresses`
@@ -87,7 +87,7 @@ The risk is currently mitigated through Kafka's durability guarantees. For this 
 | Event loss detection is part of observability
 
 | `relates_to`
-| xref:../08-crosscutting-concepts.adoc[Error Handling]
+| xref:../doc-08000-crosscutting-concepts.adoc[Error Handling]
 | Error handling is a cross-cutting concern
 
 | `relates_to`

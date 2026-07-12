@@ -1,5 +1,5 @@
 ---
-id: roadmap
+id: DOC-004-roadmap
 type: Document
 title: Project Roadmap
 status: draft
@@ -7,14 +7,14 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Development phases and milestones for the Event Processing Lab
-.tags:
+tags:
   - roadmap
   - phases
   - milestones
   - planning
 relations:
   - type: relates_to
-    target: DOC-101-introduction-and-goals
+    target: DOC-01000-introduction-and-goals
     status: proposed
     rationale: Roadmap shows how goals will be achieved
     reviewed: false
@@ -316,8 +316,8 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Traceability
 
-* Informs: xref:DOC-101-introduction-and-goals.adoc[Introduction and Goals]
-* Related to: xref:vision-mission.adoc[Vision and Mission]
+* Informs: xref:DOC-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Related to: xref:doc-002-vision-mission.adoc[Vision and Mission]
 * Related to: xref:canvas/architecture-inception-canvas.adoc[Architecture Inception Canvas]
 
 == Review Notes

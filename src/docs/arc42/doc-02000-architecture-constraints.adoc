@@ -1,5 +1,5 @@
 ---
-id: DOC-102-architecture-constraints
+id: DOC-02000-architecture-constraints
 type: Document
 title: 2. Architecture Constraints
 status: draft
@@ -7,14 +7,14 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Technical and organizational constraints that shape the architecture
-.tags:
+tags:
   - arc42
   - constraints
   - technical
   - organizational
 relations:
   - type: refines
-    target: DOC-401-solution-strategy
+    target: DOC-04000-solution-strategy
     status: proposed
     rationale: Constraints inform solution strategy
     reviewed: false
@@ -139,8 +139,8 @@ relations:
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:01-introduction-and-goals.adoc[Introduction and Goals]
-* Informs: xref:04-solution-strategy.adoc[Solution Strategy]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Informs: xref:doc-04000-solution-strategy.adoc[Solution Strategy]
 
 == Review Notes
 

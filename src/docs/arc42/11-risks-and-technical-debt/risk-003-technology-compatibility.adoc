@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Risk of technology compatibility issues due to version requirements and dependencies
-.tags:
+tags:
   - risk
   - compatibility
   - versions
@@ -25,7 +25,7 @@ relations:
     rationale: Compatibility issues increase operational complexity
     reviewed: false
   - type: addresses
-    target: DOC-102-architecture-constraints
+    target: DOC-02000-architecture-constraints
     status: proposed
     rationale: Version constraints are architectural constraints
     reviewed: false
@@ -89,15 +89,15 @@ The risk is currently mitigated through careful version selection. Compatibility
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/ADR-001.adoc[ADR-001]
+| xref:../09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
 | Kafka version compatibility is critical
 
 | `relates_to`
-| xref:RISK-002-operational-complexity.adoc[RISK-002]
+| xref:risk-002-operational-complexity.adoc[RISK-002]
 | Compatibility issues increase operational complexity
 
 | `addresses`
-| xref:../04-solution-strategy.adoc[Technology Stack]
+| xref:../doc-04000-solution-strategy.adoc[Technology Stack]
 | Version compatibility is part of technology selection
 
 | `relates_to`

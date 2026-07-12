@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Risk of performance bottlenecks due to JSON serialization and parsing overhead
-.tags:
+tags:
   - risk
   - performance
   - json
@@ -79,7 +79,7 @@ The risk is currently monitored. For a learning project, the performance impact 
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/ADR-002.adoc[ADR-002]
+| xref:../09-architecture-decisions/adr-002-use-json-serialization.adoc[ADR-002]
 | JSON serialization decision affects performance
 
 | `addresses`

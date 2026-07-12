@@ -7,14 +7,14 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Open and answered questions about the Event Processing Lab
-.tags:
+tags:
   - qa
   - questions
   - answers
   - knowledge-base
 relations:
   - type: addresses
-    target: DOC-101-introduction-and-goals
+    target: DOC-01000-introduction-and-goals
     status: proposed
     rationale: Q&A clarifies project goals and scope
     reviewed: false
@@ -223,9 +223,9 @@ This document captures questions that have arisen during the project and their a
 
 == Traceability
 
-* Related to: xref:vision-mission.adoc[Vision and Mission]
-* Related to: xref:DOC-101-introduction-and-goals.adoc[Introduction and Goals]
-* Addressed by: xref:roadmap.adoc[Project Roadmap]
+* Related to: xref:doc-002-vision-mission.adoc[Vision and Mission]
+* Related to: xref:DOC-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Addressed by: xref:doc-004-roadmap.adoc[Project Roadmap]
 
 == Review Notes
 

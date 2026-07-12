@@ -1,5 +1,5 @@
 ---
-id: DOC-103-system-scope-and-context
+id: DOC-03000-system-scope-and-context
 type: Document
 title: 3. System Scope and Context
 status: draft
@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: System boundary, business context, and external interfaces
-.tags:
+tags:
   - arc42
   - scope
   - context
@@ -15,7 +15,7 @@ summary: System boundary, business context, and external interfaces
   - interfaces
 relations:
   - type: refines
-    target: DOC-101-introduction-and-goals
+    target: DOC-01000-introduction-and-goals
     status: proposed
     rationale: System scope elaborates project scope
     reviewed: false
@@ -198,9 +198,9 @@ See xref:canvas/business-model-canvas.adoc[Business Model Canvas] for detailed b
 == Traceability
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:01-introduction-and-goals.adoc[Introduction and Goals]
-* Informs: xref:04-solution-strategy.adoc[Solution Strategy]
-* Informs: xref:05-building-block-view.adoc[Building Block View]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Informs: xref:doc-04000-solution-strategy.adoc[Solution Strategy]
+* Informs: xref:doc-05000-building-block-view.adoc[Building Block View]
 
 == Review Notes
 

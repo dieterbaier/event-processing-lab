@@ -7,7 +7,7 @@ owner: architecture
 created: 2026-07-02
 reviewed: false
 summary: Risk of uncontrolled state growth in CEP engines leading to resource exhaustion
-.tags:
+tags:
   - risk
   - state-management
   - cep
@@ -76,7 +76,7 @@ The risk is currently mitigated through implementation best practices. State siz
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/ADR-004.adoc[ADR-004]
+| xref:../09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
 | State explosion is a concern for CEP engines
 
 | `addresses`
@@ -84,7 +84,7 @@ The risk is currently mitigated through implementation best practices. State siz
 | Pattern complexity may contribute to state growth
 
 | `relates_to`
-| xref:../08-crosscutting-concepts.adoc[Threat Model T-001]
+| xref:../doc-08000-crosscutting-concepts.adoc[Threat Model T-001]
 | Related to denial of service threat
 |===
 

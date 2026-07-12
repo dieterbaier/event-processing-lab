@@ -1,6 +1,6 @@
 ---
 id: ADR-004-separate-implementations
-type: ArchitectureDecision
+type: ADR
 title: Separate Esper and Flink Implementations
 decision: Maintain separate implementations for Esper and Flink to enable direct comparison
 status: accepted
@@ -150,16 +150,16 @@ This decision impacts:
 
 == Related Decisions
 
-* xref:ADR-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
-* xref:ADR-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
-* xref:ADR-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java] [semantic-anchor: decision.plain-java-over-spring]
+* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
+* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
+* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java] [semantic-anchor: decision.plain-java-over-spring]
 
 == Related Components
 
-* xref:../05-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
-* xref:../05-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
-* xref:../05-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
-* xref:../05-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
+* xref:../doc-05000-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
+* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
+* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
+* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
 
 == Related Technologies
 
@@ -169,12 +169,12 @@ This decision impacts:
 
 == Related Quality Goals
 
-* xref:../01-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
-* xref:../01-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
-* xref:../01-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
+* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
+* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
+* xref:../doc-01000-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
 
 == Related Scenarios
 
-* xref:../06-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
-* xref:../06-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
-* xref:../06-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]
+* xref:../doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
+* xref:../doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
+* xref:../doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]
