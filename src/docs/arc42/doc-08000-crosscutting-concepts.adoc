@@ -20,11 +20,11 @@ relations: []
 [[crosscutting-concepts]]
 = 8. Cross-Cutting Concepts
 
-[semantic-anchor: event-processing-lab]
+
 
 == 8.1. Threat Model
 
-[semantic-anchor: component.threat-model]
+
 
 === STRIDE Analysis
 
@@ -108,7 +108,7 @@ relations: []
 
 == 8.2. Security
 
-[semantic-anchor: component.security]
+
 
 === Security Approach
 
@@ -150,7 +150,7 @@ For a learning project, security is simplified but follows best practices:
 
 == 8.3. Test
 
-[semantic-anchor: component.test]
+
 
 === Testing Strategy
 
@@ -236,8 +236,8 @@ Each test references its use case ID or scenario for traceability:
 
 == 8.4. Observability
 
-[semantic-anchor: component.observability]
-[semantic-anchor: quality.observability]
+
+
 
 === Observability Pillars
 
@@ -306,7 +306,7 @@ All logs include:
 
 == 8.5. Error Handling
 
-[semantic-anchor: component.error-handling]
+
 
 === Error Handling Strategy
 
@@ -422,7 +422,7 @@ All logs include:
 
 * Part of: xref:arc42.adoc[arc42 Architecture Documentation]
 * Related to: xref:doc-11000-risks-and-technical-debt.adoc[Risks and Technical Debt]
-* Implements: [semantic-anchor: quality.observability]
+* Implements:
 
 == Review Notes
 

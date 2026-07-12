@@ -20,7 +20,7 @@ relations:
 [[qs-001-technology-comparison-effectiveness]]
 == QS-001-technology-comparison-effectiveness: Technology Comparison Effectiveness
 
-[semantic-anchor: quality.learnability]
+
 
 === Status
 

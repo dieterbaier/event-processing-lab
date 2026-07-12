@@ -18,7 +18,7 @@ relations: []
 [[solution-strategy]]
 = 4. Solution Strategy
 
-[semantic-anchor: event-processing-lab]
+
 
 == Architectural Approach
 
@@ -43,22 +43,22 @@ The following Architecture Decision Records (ADRs) define the architectural appr
 | xref:09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
 | Use Kafka as Event Backbone
 | Accepted
-| [semantic-anchor: decision.kafka-as-event-backbone]
+|
 
 | xref:09-architecture-decisions/adr-002-use-json-serialization.adoc[ADR-002]
 | Use JSON Serialization for First Iteration
 | Accepted
-| [semantic-anchor: decision.json-serialization]
+|
 
 | xref:09-architecture-decisions/adr-003-keep-spring-boot-optional.adoc[ADR-003]
 | Keep Spring Boot Optional, Use Plain Java
 | Accepted
-| [semantic-anchor: decision.plain-java-over-spring]
+|
 
 | xref:09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
 | Separate Esper and Flink Implementations
 | Accepted
-| [semantic-anchor: decision.separate-implementations]
+|
 
 |===
 
@@ -76,27 +76,27 @@ For detailed information on each ADR, see xref:doc-09000-architecture-decisions.
 | Event Backbone
 | Apache Kafka
 | Event transport and storage
-| [semantic-anchor: technology.kafka]
+|
 
 | Serialization
 | JSON with Jackson
 | Event data format
-| [semantic-anchor: decision.json-serialization]
+|
 
 | CEP Engine
 | Esper 8.7.0
 | Lightweight CEP processing
-| [semantic-anchor: technology.esper]
+|
 
 | Stream Processing
 | Apache Flink 1.17.1
 | Distributed stream processing
-| [semantic-anchor: technology.flink]
+|
 
 | Pattern Detection
 | Flink CEP
 | Pattern matching library
-| [semantic-anchor: technology.flink-cep]
+|
 
 | Build Tool
 | Gradle 8.5
@@ -106,7 +106,7 @@ For detailed information on each ADR, see xref:doc-09000-architecture-decisions.
 | Language
 | Java 21
 | Core implementation language
-| [semantic-anchor: technology.java]
+|
 
 | Logging
 | SLF4J + Logback
@@ -144,6 +144,51 @@ For detailed information on each ADR, see xref:doc-09000-architecture-decisions.
 | Logback configuration in each module
 
 |===
+
+== Technology Comparison
+
+[[comparison-matrix]]
+=== Comparison Matrix
+
+The comparison matrix summarizes how each technology stack behaves along the
+project's comparison dimensions. The current values are a *preliminary,
+reviewable assessment* (`reviewed: false`); they are hypotheses to be confirmed
+by running the shared use case and measuring the quality scenarios in
+xref:doc-10000-quality-requirements.adoc[Chapter 10]. See the README section
+"Running a use case to evaluate the Comparison Matrix" for how to reproduce the
+observations.
+
+[cols="1,1,1,1,1", options="header"]
+|===
+| Aspect | Kafka + Consumer | Kafka + Esper | Kafka + Flink | Kafka + Flink CEP
+
+| Scalability | Medium | Low | High | High
+| Operational Complexity | Low | Low | High | High
+| State Handling | Manual | Automatic | Automatic | Automatic
+| Rule Complexity | High | Low | Medium | Medium
+| Pattern Detection | Manual | Excellent | Good | Excellent
+| Latency | Low | Medium | Medium | Medium
+| Throughput | High | Medium | High | High
+| Learning Curve | Low | Medium | High | High
+|===
+
+[[comparison-dimensions]]
+=== Comparison Dimensions
+
+. *Scalability* — horizontal scaling, partitioning strategy, consumer-group
+  behavior, and resource utilization under load.
+. *Operational Complexity* — deployment requirements, monitoring and management,
+  failure recovery, and configuration effort.
+. *State Handling* — state management approach, checkpointing and persistence,
+  state size and memory usage, and recovery after failure.
+. *Rule Complexity* — rule/pattern definition syntax, maintainability,
+  testability, and performance impact.
+. *Architectural Trade-offs* — technology maturity, ecosystem, vendor lock-in
+  potential, and integration complexity.
+
+Each dimension is exercised by the runtime scenarios in
+xref:doc-06000-runtime-view.adoc[Chapter 6] and measured by the quality
+scenarios in xref:doc-10000-quality-requirements.adoc[Chapter 10].
 
 == Traceability
 

@@ -23,7 +23,7 @@ relations:
 [[risk-004-event-loss]]
 = RISK-004: Event Loss During Processing
 
-[semantic-anchor: risk.event-loss]
+
 
 == Status
 
@@ -83,7 +83,7 @@ The risk is currently mitigated through Kafka's durability guarantees. For this 
 | Kafka provides durability guarantees
 
 | `addresses`
-| [semantic-anchor: quality.observability]
+|
 | Event loss detection is part of observability
 
 | `relates_to`
@@ -91,7 +91,7 @@ The risk is currently mitigated through Kafka's durability guarantees. For this 
 | Error handling is a cross-cutting concern
 
 | `relates_to`
-| [semantic-anchor: technology.kafka]
+|
 | Kafka is the event backbone
 |===
 

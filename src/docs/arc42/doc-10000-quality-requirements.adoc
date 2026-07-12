@@ -23,7 +23,7 @@ relations:
 [[quality-requirements]]
 = 10. Quality Requirements
 
-[semantic-anchor: event-processing-lab]
+
 
 == Quality Tree
 
@@ -78,77 +78,77 @@ The following quality scenarios are defined for the Event Processing Lab:
 
 | QS-001
 | Technology Comparison Effectiveness
-| [semantic-anchor: quality.learnability]
+|
 | Concretizing
 
 | QS-002
 | Learning Objective Achievement
-| [semantic-anchor: quality.learnability]
+|
 | Concretizing
 
 | QS-003
 | Hands-on Experience Effectiveness
-| [semantic-anchor: quality.learnability]
+|
 | Concretizing
 
 | QS-004
 | Architecture Comprehension
-| [semantic-anchor: quality.understandability]
+|
 | Concretizing
 
 | QS-005
 | Debugging Effectiveness
-| [semantic-anchor: quality.understandability]
+|
 | Concretizing
 
 | QS-006
 | Architecture Review Effectiveness
-| [semantic-anchor: quality.understandability]
+|
 | Concretizing
 
 | QS-007
 | Throughput Achievement
-| [semantic-anchor: quality.scalability]
+|
 | Concretizing
 
 | QS-008
 | Consumer Scaling
-| [semantic-anchor: quality.scalability]
+|
 | Concretizing
 
 | QS-009
 | Pattern Complexity Handling
-| [semantic-anchor: quality.scalability]
+|
 | Concretizing
 
 | QS-010
 | New Event Type Addition
-| [semantic-anchor: quality.modifiability]
+|
 | Concretizing
 
 | QS-011
 | Serialization Change
-| [semantic-anchor: quality.modifiability]
+|
 | Concretizing
 
 | QS-012
 | Pattern Modification
-| [semantic-anchor: quality.modifiability]
+|
 | Concretizing
 
 | QS-013
 | Monitoring Effectiveness
-| [semantic-anchor: quality.observability]
+|
 | Concretizing
 
 | QS-014
 | Issue Identification
-| [semantic-anchor: quality.observability]
+|
 | Concretizing
 
 | QS-015
 | Event Flow Tracing
-| [semantic-anchor: quality.observability]
+|
 | Concretizing
 |===
 

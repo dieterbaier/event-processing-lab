@@ -24,7 +24,7 @@ relations:
 [[building-block-view]]
 = 5. Building Block View
 
-[semantic-anchor: event-processing-lab]
+
 
 == Level-1: Module Structure
 
@@ -54,16 +54,16 @@ FlinkBasic --> FlinkCep : "optional dependency"
 @enduml
 ----
 
-[semantic-anchor: component.event-model]
-[semantic-anchor: component.event-producer]
-[semantic-anchor: component.kafka-consumer]
-[semantic-anchor: component.esper-cep]
-[semantic-anchor: component.flink-basic]
-[semantic-anchor: component.flink-cep]
+
+
+
+
+
+
 
 == Level-2: Module Details
 
-=== Event Model Module [semantic-anchor: component.event-model]
+=== Event Model Module
 
 [cols="1,2", options="header"]
 |===
@@ -130,7 +130,7 @@ Event <|-- ShipmentStarted
 @enduml
 ----
 
-=== Event Producer Module [semantic-anchor: component.event-producer]
+=== Event Producer Module
 
 [cols="1,2", options="header"]
 |===
@@ -144,7 +144,7 @@ Event <|-- ShipmentStarted
 | Event generation, Kafka production, rate control
 
 | Technology
-| Kafka Producer API [semantic-anchor: technology.kafka]
+| Kafka Producer API
 
 | Configuration
 | Bootstrap servers, topic, rate
@@ -184,7 +184,7 @@ OrderEventProducer --> EventFactory : "uses"
 @enduml
 ----
 
-=== Kafka Consumer Module [semantic-anchor: component.kafka-consumer]
+=== Kafka Consumer Module
 
 [cols="1,2", options="header"]
 |===
@@ -198,7 +198,7 @@ OrderEventProducer --> EventFactory : "uses"
 | Kafka consumption, event processing, simple correlation
 
 | Technology
-| Kafka Consumer API [semantic-anchor: technology.kafka]
+| Kafka Consumer API
 
 | Configuration
 | Bootstrap servers, topic, group ID
@@ -208,7 +208,7 @@ OrderEventProducer --> EventFactory : "uses"
 
 |===
 
-=== Esper CEP Module [semantic-anchor: component.esper-cep]
+=== Esper CEP Module
 
 [cols="1,2", options="header"]
 |===
@@ -222,7 +222,7 @@ OrderEventProducer --> EventFactory : "uses"
 | EPL rule definition, pattern detection, event correlation
 
 | Technology
-| Esper 8.7.0 [semantic-anchor: technology.esper], Kafka Consumer
+| Esper 8.7.0, Kafka Consumer
 
 | Patterns
 | Order creation, payment processing, timeout detection, complete flows
@@ -246,13 +246,13 @@ class EsperCepEngine {
 }
 
 EsperCepEngine --> Kafka : "consumes from"
-EsperCepEngine --> Esper : "uses [semantic-anchor: technology.esper]"
+EsperCepEngine --> Esper : "uses"
 EsperCepEngine --> EventSerializer : "uses"
 
 @enduml
 ----
 
-=== Flink Basic Module [semantic-anchor: component.flink-basic]
+=== Flink Basic Module
 
 [cols="1,2", options="header"]
 |===
@@ -266,7 +266,7 @@ EsperCepEngine --> EventSerializer : "uses"
 | Event consumption, stream operations, windowing, state management
 
 | Technology
-| Apache Flink 1.17.1 [semantic-anchor: technology.flink], Kafka Connector
+| Apache Flink 1.17.1, Kafka Connector
 
 | Operations
 | Filtering, mapping, keying, windowing, pattern detection
@@ -276,7 +276,7 @@ EsperCepEngine --> EventSerializer : "uses"
 
 |===
 
-=== Flink CEP Module [semantic-anchor: component.flink-cep]
+=== Flink CEP Module
 
 [cols="1,2", options="header"]
 |===
@@ -290,7 +290,7 @@ EsperCepEngine --> EventSerializer : "uses"
 | Pattern definition, matching, complex event detection
 
 | Technology
-| Flink CEP [semantic-anchor: technology.flink-cep], Kafka Connector
+| Flink CEP, Kafka Connector
 
 | Patterns
 | Order creation, payment processing, timeout, cancellation, complete flows

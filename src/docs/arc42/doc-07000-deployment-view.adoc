@@ -18,7 +18,7 @@ relations: []
 [[deployment-view]]
 = 7. Deployment View
 
-[semantic-anchor: event-processing-lab]
+
 
 == 7.1. Deployment Overview
 
@@ -136,7 +136,7 @@ volumes:
 
 === event-model Module
 
-[semantic-anchor: component.event-model]
+
 
 [cols="1,2,2", options="header"]
 |===
@@ -155,7 +155,7 @@ volumes:
 
 === event-producer Module
 
-[semantic-anchor: component.event-producer]
+
 
 [cols="1,2,2", options="header"]
 |===
@@ -178,7 +178,7 @@ volumes:
 
 === kafka-consumer Module
 
-[semantic-anchor: component.kafka-consumer]
+
 
 [cols="1,2,2", options="header"]
 |===
@@ -201,7 +201,7 @@ volumes:
 
 === esper-cep Module
 
-[semantic-anchor: component.esper-cep]
+
 
 [cols="1,2,2", options="header"]
 |===
@@ -224,7 +224,7 @@ volumes:
 
 === flink-basic Module
 
-[semantic-anchor: component.flink-basic]
+
 
 [cols="1,2,2", options="header"]
 |===
@@ -247,7 +247,7 @@ volumes:
 
 === flink-cep Module
 
-[semantic-anchor: component.flink-cep]
+
 
 [cols="1,2,2", options="header"]
 |===

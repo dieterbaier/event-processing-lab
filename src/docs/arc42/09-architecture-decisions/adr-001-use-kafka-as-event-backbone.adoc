@@ -27,7 +27,7 @@ reviewed: false
 [[adr-001-use-kafka-as-event-backbone]]
 = ADR-001: Use Kafka as Event Backbone
 
-[semantic-anchor: decision.kafka-as-event-backbone]
+
 
 == Status
 
@@ -241,28 +241,28 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 == Related Decisions
 
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
-* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations] [semantic-anchor: decision.separate-implementations]
+* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
+* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations]
 
 == Related Components
 
-* xref:doc-05000-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
-* xref:doc-05000-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
-* xref:doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
+* xref:doc-05000-building-block-view.adoc#event-model[Event Model]
+* xref:doc-05000-building-block-view.adoc#event-producer[Event Producer]
+* xref:doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
 
 == Related Technologies
 
-* https://kafka.apache.org/[Apache Kafka] [semantic-anchor: technology.kafka]
+* https://kafka.apache.org/[Apache Kafka]
 * https://docs.confluent.io/platform/current/connect/index.html[Kafka Connect]
 
 == Related Quality Goals
 
-* xref:doc-01000-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
-* xref:doc-01000-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
-* xref:doc-01000-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
+* xref:doc-01000-introduction-and-goals.adoc#learnability[Learnability]
+* xref:doc-01000-introduction-and-goals.adoc#understandability[Understandability]
+* xref:doc-01000-introduction-and-goals.adoc#scalability[Scalability]
 
 == Related Scenarios
 
-* xref:doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
-* xref:doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
-* xref:doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]
+* xref:doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow]
+* xref:doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow]
+* xref:doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection]

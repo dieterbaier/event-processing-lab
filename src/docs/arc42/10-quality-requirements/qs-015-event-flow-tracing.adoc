@@ -20,7 +20,7 @@ relations:
 [[qs-015-event-flow-tracing]]
 == QS-015-event-flow-tracing: Event Flow Tracing
 
-[semantic-anchor: quality.observability]
+
 
 === Status
 

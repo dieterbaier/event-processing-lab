@@ -20,7 +20,7 @@ relations:
 [[qs-004-architecture-comprehension]]
 == QS-004-architecture-comprehension: Architecture Comprehension
 
-[semantic-anchor: quality.understandability]
+
 
 === Status
 

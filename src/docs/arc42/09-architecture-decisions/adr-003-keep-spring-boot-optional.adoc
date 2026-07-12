@@ -22,7 +22,7 @@ reviewed: false
 [[adr-003-keep-spring-boot-optional]]
 = ADR-003: Keep Spring Boot Optional, Use Plain Java
 
-[semantic-anchor: decision.plain-java-over-spring]
+
 
 == Status
 
@@ -144,26 +144,26 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 
 == Related Decisions
 
-* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
-* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations] [semantic-anchor: decision.separate-implementations]
+* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
+* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
+* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations]
 
 == Related Components
 
-* xref:../doc-05000-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
-* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
-* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
-* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
-* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
-* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
+* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
+* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer]
+* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
+* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
+* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
+* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
 
 == Related Technologies
 
 * https://spring.io/projects/spring-boot[Spring Boot]
-* https://www.java.com/[Java] [semantic-anchor: technology.java]
+* https://www.java.com/[Java]
 
 == Related Quality Goals
 
-* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
-* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
-* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability] [semantic-anchor: quality.modifiability]
+* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
+* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
+* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability]

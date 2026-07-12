@@ -18,17 +18,17 @@ relations: []
 [[runtime-view]]
 = 6. Runtime View
 
-[semantic-anchor: scenario.order-creation]
-[semantic-anchor: scenario.payment-processing]
-[semantic-anchor: scenario.payment-timeout]
-[semantic-anchor: scenario.order-cancellation]
-[semantic-anchor: scenario.shipment-start]
+
+
+
+
+
 
 The following runtime scenarios demonstrate the system behavior across different technologies.
 
 == Runtime Scenarios
 
-=== Order Creation Flow [semantic-anchor: scenario.order-creation]
+=== Order Creation Flow
 
 [plantuml,scenario-order-creation,png]
 ----
@@ -66,12 +66,12 @@ FlinkCep -> FlinkCep : Detect OrderCreated pattern
 . Each technology demonstrates different approaches to handling the same event
 
 *Technologies Involved:*
-- [semantic-anchor: technology.kafka] (Event transport)
-- [semantic-anchor: decision.json-serialization] (Event serialization)
-- [semantic-anchor: component.event-producer] (Event generation)
+- (Event transport)
+- (Event serialization)
+- (Event generation)
 - All consumer modules (processing)
 
-=== Payment Processing Flow [semantic-anchor: scenario.payment-processing]
+=== Payment Processing Flow
 
 [plantuml,scenario-payment-processing,png]
 ----
@@ -112,12 +112,12 @@ FlinkCep -> FlinkCep : Detect payment processing pattern
    - Flink CEP: Pattern detection with CEP library
 
 *Technologies Involved:*
-- [semantic-anchor: technology.kafka] (Event transport with same key)
-- [semantic-anchor: technology.esper] (Pattern detection)
-- [semantic-anchor: technology.flink] (Stream processing)
-- [semantic-anchor: technology.flink-cep] (Pattern detection)
+- (Event transport with same key)
+- (Pattern detection)
+- (Stream processing)
+- (Pattern detection)
 
-=== Payment Timeout Detection [semantic-anchor: scenario.payment-timeout]
+=== Payment Timeout Detection
 
 [plantuml,scenario-payment-timeout,png]
 ----
@@ -158,11 +158,11 @@ FlinkCep -> FlinkCep : Emit timeout detection result
    - Flink CEP: Pattern with time constraints and NOT NEXT
 
 *Technologies Involved:*
-- [semantic-anchor: technology.esper] (Timer-based rules)
-- [semantic-anchor: technology.flink] (Windowing and watermarks)
-- [semantic-anchor: technology.flink-cep] (Pattern timeout)
+- (Timer-based rules)
+- (Windowing and watermarks)
+- (Pattern timeout)
 
-=== Order Cancellation Flow [semantic-anchor: scenario.order-cancellation]
+=== Order Cancellation Flow
 
 *Steps:*
 . OrderCreated event is processed
@@ -174,7 +174,7 @@ FlinkCep -> FlinkCep : Emit timeout detection result
    - Flink Basic: Stateful processing of cancellation
    - Flink CEP: Pattern matching for cancellation flows
 
-=== Shipment Start Flow [semantic-anchor: scenario.shipment-start]
+=== Shipment Start Flow
 
 *Steps:*
 . OrderCreated and PaymentReceived events are processed

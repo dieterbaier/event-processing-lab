@@ -23,7 +23,7 @@ relations:
 [[system-scope-and-context]]
 = 3. System Scope and Context
 
-[semantic-anchor: event-processing-lab]
+
 
 == 3.1. System Overview
 

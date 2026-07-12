@@ -33,7 +33,7 @@ relations:
 [[risk-003-technology-compatibility]]
 = RISK-003: Technology Compatibility Issues
 
-[semantic-anchor: risk.technology-compatibility]
+
 
 == Status
 

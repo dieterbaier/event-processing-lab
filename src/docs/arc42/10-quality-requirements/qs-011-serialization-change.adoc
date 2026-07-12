@@ -20,7 +20,7 @@ relations:
 [[qs-011-serialization-change]]
 == QS-011-serialization-change: Serialization Change
 
-[semantic-anchor: quality.modifiability]
+
 
 === Status
 

@@ -20,7 +20,7 @@ relations:
 [[qs-005-debugging-effectiveness]]
 == QS-005-debugging-effectiveness: Debugging Effectiveness
 
-[semantic-anchor: quality.understandability]
+
 
 === Status
 

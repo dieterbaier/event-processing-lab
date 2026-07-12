@@ -20,7 +20,7 @@ relations:
 [[qs-008-consumer-scaling]]
 == QS-008-consumer-scaling: Consumer Scaling
 
-[semantic-anchor: quality.scalability]
+
 
 === Status
 

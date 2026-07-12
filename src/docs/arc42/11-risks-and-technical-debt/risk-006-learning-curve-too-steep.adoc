@@ -23,7 +23,7 @@ relations:
 [[risk-006-learning-curve-too-steep]]
 = RISK-006: Learning Curve Too Steep
 
-[semantic-anchor: risk.learning-curve-too-steep]
+
 
 == Status
 

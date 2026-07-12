@@ -22,7 +22,7 @@ relations:
 [[questions-and-answers]]
 = Questions and Answers
 
-[semantic-anchor: event-processing-lab]
+
 
 == Purpose
 

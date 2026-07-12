@@ -17,7 +17,7 @@ relations: []
 [[td-007-module-documentation]]
 = TD-007: Module Documentation
 
-[semantic-anchor: technical-debt.module-documentation]
+
 
 == Status
 
@@ -80,7 +80,7 @@ Add README files for each module that explain the module's purpose, configuratio
 | Flink CEP module needs documentation
 
 | `addresses`
-| [semantic-anchor: quality.understandability]
+|
 | Module documentation improves understandability
 
 | `relates_to`

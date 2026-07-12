@@ -18,7 +18,7 @@ relations: []
 [[introduction-and-goals]]
 = 1. Introduction and Goals
 
-[semantic-anchor: event-processing-lab]
+
 
 == 1.1. Purpose
 
@@ -34,11 +34,11 @@ By implementing the same business scenarios across multiple technologies, this p
 
 == 1.2. Quality Goals
 
-[semantic-anchor: quality.learnability]
-[semantic-anchor: quality.understandability]
-[semantic-anchor: quality.scalability]
-[semantic-anchor: quality.modifiability]
-[semantic-anchor: quality.observability]
+
+
+
+
+
 
 The top 5 quality goals that drive architecture decisions:
 

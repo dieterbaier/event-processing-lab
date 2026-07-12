@@ -18,7 +18,7 @@ relations: []
 [[risk-001-state-explosion]]
 = RISK-001: State Explosion in CEP Engines
 
-[semantic-anchor: risk.state-explosion]
+
 
 == Status
 

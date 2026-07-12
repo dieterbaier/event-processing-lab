@@ -20,7 +20,7 @@ relations:
 [[qs-010-new-event-type-addition]]
 == QS-010-new-event-type-addition: New Event Type Addition
 
-[semantic-anchor: quality.modifiability]
+
 
 === Status
 

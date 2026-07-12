@@ -22,7 +22,7 @@ relations:
 [[td-005-comprehensive-error-handling]]
 = TD-005: Comprehensive Error Handling
 
-[semantic-anchor: technical-debt.comprehensive-error-handling]
+
 
 == Status
 

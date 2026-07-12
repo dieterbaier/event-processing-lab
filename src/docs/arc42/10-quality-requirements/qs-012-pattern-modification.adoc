@@ -20,7 +20,7 @@ relations:
 [[qs-012-pattern-modification]]
 == QS-012-pattern-modification: Pattern Modification
 
-[semantic-anchor: quality.modifiability]
+
 
 === Status
 

@@ -20,7 +20,7 @@ relations:
 [[qs-003-hands-on-experience]]
 == QS-003-hands-on-experience: Hands-on Experience Effectiveness
 
-[semantic-anchor: quality.learnability]
+
 
 === Status
 

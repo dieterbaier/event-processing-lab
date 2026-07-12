@@ -22,7 +22,7 @@ relations:
 [[architecture-constraints]]
 = 2. Architecture Constraints
 
-[semantic-anchor: event-processing-lab]
+
 
 == 2.1. Technical Constraints
 

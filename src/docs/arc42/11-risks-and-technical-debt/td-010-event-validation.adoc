@@ -27,7 +27,7 @@ relations:
 [[td-010-event-validation]]
 = TD-010: Event Model Validation
 
-[semantic-anchor: technical-debt.event-validation]
+
 
 == Status
 
@@ -78,7 +78,7 @@ Add comprehensive validation to the event model, including field validation, bus
 | Better validation reduces event loss risk from malformed events
 
 | `relates_to`
-| [semantic-anchor: decision.json-serialization]
+|
 | JSON serialization may have validation requirements
 |===
 

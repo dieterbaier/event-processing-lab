@@ -22,7 +22,7 @@ relations:
 [[vision-and-mission]]
 = Vision and Mission
 
-[semantic-anchor: event-processing-lab]
+
 
 == Vision
 

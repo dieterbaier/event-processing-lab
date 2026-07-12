@@ -17,7 +17,7 @@ relations: []
 [[td-008-externalized-configuration]]
 = TD-008: Externalized Configuration
 
-[semantic-anchor: technical-debt.externalized-configuration]
+
 
 == Status
 
@@ -64,7 +64,7 @@ Externalize all configuration to configuration files or environment variables, f
 | Kafka consumer needs externalized configuration
 
 | `addresses`
-| [semantic-anchor: quality.modifiability]
+|
 | Externalized configuration improves modifiability
 
 | `relates_to`

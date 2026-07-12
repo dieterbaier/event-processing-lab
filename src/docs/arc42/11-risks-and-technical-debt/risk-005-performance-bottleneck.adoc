@@ -23,7 +23,7 @@ relations:
 [[risk-005-performance-bottleneck]]
 = RISK-005: Performance Bottleneck in JSON Parsing
 
-[semantic-anchor: risk.performance-bottleneck]
+
 
 == Status
 
@@ -83,11 +83,11 @@ The risk is currently monitored. For a learning project, the performance impact 
 | JSON serialization decision affects performance
 
 | `addresses`
-| [semantic-anchor: decision.json-serialization]
+|
 | Performance is a consideration for serialization choice
 
 | `relates_to`
-| [semantic-anchor: quality.scalability]
+|
 | Performance bottleneck affects scalability
 
 | `addresses`

@@ -17,7 +17,7 @@ relations: []
 [[architecture-decisions]]
 = 9. Architecture Decisions
 
-[semantic-anchor: event-processing-lab]
+
 
 == ADR Index
 
@@ -33,27 +33,27 @@ The following Architecture Decision Records (ADRs) document the key architectura
 | xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
 | Use Kafka as Event Backbone
 | Accepted
-| [semantic-anchor: decision.kafka-as-event-backbone]
+|
 
 | xref:adr-002-use-json-serialization.adoc[ADR-002]
 | Use JSON Serialization for First Iteration
 | Accepted
-| [semantic-anchor: decision.json-serialization]
+|
 
 | xref:adr-003-keep-spring-boot-optional.adoc[ADR-003]
 | Keep Spring Boot Optional, Use Plain Java
 | Accepted
-| [semantic-anchor: decision.plain-java-over-spring]
+|
 
 | xref:adr-004-separate-implementations.adoc[ADR-004]
 | Separate Esper and Flink Implementations
 | Accepted
-| [semantic-anchor: decision.separate-implementations]
+|
 |===
 
 == ADR-001: Use Kafka as Event Backbone
 
-[semantic-anchor: decision.kafka-as-event-backbone]
+
 
 See xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] for full details.
 
@@ -63,7 +63,7 @@ Use Apache Kafka as the central event transport mechanism for the Event Processi
 
 == ADR-002: Use JSON Serialization for First Iteration
 
-[semantic-anchor: decision.json-serialization]
+
 
 See xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] for full details.
 
@@ -73,7 +73,7 @@ Use JSON format for event serialization in the initial implementation.
 
 == ADR-003: Keep Spring Boot Optional, Use Plain Java
 
-[semantic-anchor: decision.plain-java-over-spring]
+
 
 See xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java] for full details.
 
@@ -83,7 +83,7 @@ Prefer plain Java implementations where simpler, keep Spring Boot optional.
 
 == ADR-004: Separate Esper and Flink Implementations
 
-[semantic-anchor: decision.separate-implementations]
+
 
 See xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations] for full details.
 

@@ -75,7 +75,7 @@ relations:
 :version: 1.0.0-SNAPSHOT
 :imagesdir: images
 
-[semantic-anchor: event-processing-lab]
+
 
 This document provides the complete architecture documentation for the Event Processing Lab project, organized according to the arc42 template and following the docs-as-code-toolkit/architecture-knowledge-toolkit conventions.
 

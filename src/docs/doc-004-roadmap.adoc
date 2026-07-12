@@ -22,7 +22,7 @@ relations:
 [[project-roadmap]]
 = Project Roadmap
 
-[semantic-anchor: event-processing-lab]
+
 
 == Overview
 
@@ -30,7 +30,7 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Phase 1: Foundation (Completed)
 
-[semantic-anchor: phase.foundation]
+
 
 === Objectives
 
@@ -76,7 +76,7 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Phase 2: CEP Engines (Completed)
 
-[semantic-anchor: phase.cep-engines]
+
 
 === Objectives
 
@@ -123,7 +123,7 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Phase 3: Architecture Documentation (In Progress)
 
-[semantic-anchor: phase.architecture-documentation]
+
 
 === Objectives
 
@@ -175,11 +175,15 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Phase 4: Testing and Validation (Planned)
 
-[semantic-anchor: phase.testing-validation]
+
 
 === Objectives
 
-* Comprehensive testing framework
+* Add unit tests for every implementation module (event-model, event-producer,
+  kafka-consumer, esper-cep, flink-basic, flink-cep)
+* Author Gherkin behaviour specifications for the order-lifecycle use case and
+  bridge each scenario to an automated test, following the
+  architecture-knowledge-toolkit `bdd-specification` skill
 * Performance benchmarks
 * End-to-end integration tests
 * Validation of all scenarios
@@ -193,8 +197,12 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 | Status
 
 | Unit Tests
-| All modules have comprehensive unit tests
+| Comprehensive unit tests for all implementation modules
 | Planned
+
+| Behaviour Specifications
+| Gherkin feature specs under `features/` bridged to automated tests, per the toolkit `bdd-specification` skill (specs drafted, test bridge pending)
+| In Progress
 
 | Integration Tests
 | Module interaction tests
@@ -221,7 +229,7 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Phase 5: Enhancements (Future)
 
-[semantic-anchor: phase.enhancements]
+
 
 === Objectives
 
@@ -260,6 +268,10 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 | Monitoring Integration
 | Prometheus, Grafana, metrics
+| Future
+
+| Comparison Matrix Dashboard
+| Dashboard visualizing the relevant metrics (throughput, latency, consumer lag, state size, rule complexity) to evaluate the Comparison Matrix across technologies
 | Future
 
 | Containerization

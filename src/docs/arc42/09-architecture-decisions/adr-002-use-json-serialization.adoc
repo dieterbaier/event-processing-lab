@@ -22,7 +22,7 @@ reviewed: false
 [[adr-002-use-json-serialization]]
 = ADR-002: Use JSON Serialization for First Iteration
 
-[semantic-anchor: decision.json-serialization]
+
 
 == Status
 
@@ -270,29 +270,29 @@ This migration would be documented in a new ADR and would maintain backward comp
 
 == Related Decisions
 
-* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
-* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java] [semantic-anchor: decision.plain-java-over-spring]
+* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
+* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java]
 
 == Related Components
 
-* xref:../doc-05000-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
-* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
-* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
-* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
-* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
-* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
+* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
+* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer]
+* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
+* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
+* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
+* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
 
 == Related Technologies
 
-* https://www.json.org/[JSON] [semantic-anchor: technology.json]
+* https://www.json.org/[JSON]
 * https://github.com/FasterXML/jackson[Jackson] - JSON library for Java
 * https://github.com/google/gson[Gson] - Alternative JSON library
 
 == Related Quality Goals
 
-* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
-* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
-* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability] [semantic-anchor: quality.modifiability]
+* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
+* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
+* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability]
 
 == Related Scenarios
 

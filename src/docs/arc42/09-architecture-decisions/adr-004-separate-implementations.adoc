@@ -22,7 +22,7 @@ reviewed: false
 [[adr-004-separate-implementations]]
 = ADR-004: Separate Esper and Flink Implementations
 
-[semantic-anchor: decision.separate-implementations]
+
 
 == Status
 
@@ -150,31 +150,31 @@ This decision impacts:
 
 == Related Decisions
 
-* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
-* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java] [semantic-anchor: decision.plain-java-over-spring]
+* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
+* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
+* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java]
 
 == Related Components
 
-* xref:../doc-05000-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
-* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
-* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
-* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
+* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
+* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
+* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
+* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
 
 == Related Technologies
 
-* https://www.espertech.com/esper/[Esper CEP Engine] [semantic-anchor: technology.esper]
-* https://flink.apache.org/[Apache Flink] [semantic-anchor: technology.flink]
-* https://nightlies.apache.org/flink/flink-docs-stable/docs/libs/cep/[Flink CEP Documentation] [semantic-anchor: technology.flink-cep]
+* https://www.espertech.com/esper/[Esper CEP Engine]
+* https://flink.apache.org/[Apache Flink]
+* https://nightlies.apache.org/flink/flink-docs-stable/docs/libs/cep/[Flink CEP Documentation]
 
 == Related Quality Goals
 
-* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
-* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
-* xref:../doc-01000-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
+* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
+* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
+* xref:../doc-01000-introduction-and-goals.adoc#scalability[Scalability]
 
 == Related Scenarios
 
-* xref:../doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
-* xref:../doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
-* xref:../doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]
+* xref:../doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow]
+* xref:../doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow]
+* xref:../doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection]

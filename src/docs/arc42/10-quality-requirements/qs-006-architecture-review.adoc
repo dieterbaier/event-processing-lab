@@ -20,7 +20,7 @@ relations:
 [[qs-006-architecture-review]]
 == QS-006-architecture-review: Architecture Review Effectiveness
 
-[semantic-anchor: quality.understandability]
+
 
 === Status
 

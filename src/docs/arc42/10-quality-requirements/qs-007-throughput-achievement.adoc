@@ -20,7 +20,7 @@ relations:
 [[qs-007-throughput-achievement]]
 == QS-007-throughput-achievement: Throughput Achievement
 
-[semantic-anchor: quality.scalability]
+
 
 === Status
 

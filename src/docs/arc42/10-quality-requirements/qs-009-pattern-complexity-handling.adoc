@@ -20,7 +20,7 @@ relations:
 [[qs-009-pattern-complexity-handling]]
 == QS-009-pattern-complexity-handling: Pattern Complexity Handling
 
-[semantic-anchor: quality.scalability]
+
 
 === Status
 

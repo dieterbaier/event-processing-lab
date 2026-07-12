@@ -37,12 +37,12 @@ This chapter is AI-assisted and must be reviewed for accuracy and completeness.
 
 == 11.1. Risks
 
-[semantic-anchor: risk.state-explosion]
-[semantic-anchor: risk.operational-complexity]
-[semantic-anchor: risk.technology-compatibility]
-[semantic-anchor: risk.event-loss]
-[semantic-anchor: risk.performance-bottleneck]
-[semantic-anchor: risk.learning-curve-too-steep]
+
+
+
+
+
+
 
 The following risks have been identified for the Event Processing Lab project. Each risk uses the format: Because <cause>, <event> may occur, leading to <impact>.
 

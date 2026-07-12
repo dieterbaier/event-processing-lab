@@ -17,7 +17,7 @@ relations: []
 [[td-006-end-to-end-integration-tests]]
 = TD-006: End-to-End Integration Tests
 
-[semantic-anchor: technical-debt.end-to-end-integration-tests]
+
 
 == Status
 

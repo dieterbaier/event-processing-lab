@@ -34,7 +34,7 @@ relations:
 [[risk-002-operational-complexity]]
 = RISK-002: Operational Complexity Too High
 
-[semantic-anchor: risk.operational-complexity]
+
 
 == Status
 
