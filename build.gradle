@@ -1,0 +1,167 @@
+// Event Processing Lab - Root Build Configuration
+// [semantic-anchor: event-processing-lab]
+
+// Define project-wide properties
+plugins {
+    id 'base' // Base plugin for common functionality
+    id 'java' // Java plugin for root project
+}
+
+// Project metadata
+group = 'com.example.eventprocessing'
+version = '1.0.0-SNAPSHOT'
+
+// Project description
+description = 'Event Processing Lab - A learning project comparing Kafka, Esper, Apache Flink and Flink CEP'
+
+// Java compatibility
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21) // Java 21 [semantic-anchor: technology.java]
+    }
+}
+
+// Repositories for all modules
+repositories {
+    mavenCentral() // Primary repository for all dependencies
+    maven { url 'https://repo1.maven.org/maven2/' } // Maven Central fallback
+    maven { url 'https://packages.confluent.io/maven/' } // Confluent for Kafka clients
+}
+
+// Dependency versions (centralized version management)
+ext {
+    // Core dependencies
+    jacksonVersion = '2.15.3'
+    slf4jVersion = '2.0.9'
+    logbackVersion = '1.4.14'
+    
+    // Kafka dependencies [semantic-anchor: technology.kafka]
+    kafkaVersion = '3.6.1'
+    kafkaClientsVersion = kafkaVersion
+    
+    // Esper dependencies [semantic-anchor: technology.esper]
+    esperVersion = '7.1.0'
+    
+    // Flink dependencies [semantic-anchor: technology.flink]
+    flinkVersion = '1.14.6'
+    flinkCepVersion = '1.15.0'
+    
+    // Testing dependencies
+    junitVersion = '5.10.0'
+    testcontainersVersion = '1.19.3'
+}
+
+// Dependency configurations (for submodules to use)
+configurations {
+    // Common dependencies that can be shared across modules
+    commonDependencies
+}
+
+// Define dependency bundles for reuse across modules
+dependencies {
+    // Logging
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+    
+    // JSON Processing [semantic-anchor: decision.json-serialization]
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    
+    // Testing
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+// Configure all subprojects
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'application' // For executable applications
+    
+    // Java compatibility for all subprojects
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+    
+    // Common repositories
+    repositories {
+        mavenCentral()
+        maven { url 'https://packages.confluent.io/maven/' }
+    }
+    
+    // Common configurations
+    configurations {
+        // Define common test configuration for all subprojects
+        testCommon
+    }
+    
+    // Common tasks
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+        options.release = 21 // Target Java 21 bytecode
+    }
+    
+    tasks.withType(Test) {
+        useJUnitPlatform()
+        testLogging {
+            events 'passed', 'skipped', 'failed'
+        }
+    }
+    
+    // Source and target compatibility
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+}
+
+// Configure specific subprojects
+configure([
+    subprojects.find { it.name == 'event-model' },
+    subprojects.find { it.name == 'event-producer' },
+    subprojects.find { it.name == 'kafka-consumer' },
+    subprojects.find { it.name == 'esper-cep' },
+    subprojects.find { it.name == 'flink-basic' },
+    subprojects.find { it.name == 'flink-cep' }
+]) {
+    // These are all Java library or application projects
+    apply plugin: 'java-library'
+}
+
+// Task to build all modules
+task buildAll(type: GradleBuild) {
+    description = 'Build all modules in the project'
+    // Build all subprojects
+    dependsOn subprojects.collect { it.tasks.build }
+}
+
+// Task to run all tests
+task testAll(type: GradleBuild) {
+    description = 'Run all tests in all modules'
+    dependsOn subprojects.collect { it.tasks.test }
+}
+
+// Task to clean all modules
+task cleanAll(type: GradleBuild) {
+    description = 'Clean all modules in the project'
+    dependsOn subprojects.collect { it.tasks.clean }
+}
+
+// Task to generate documentation
+task generateDocs(type: GradleBuild) {
+    description = 'Generate all documentation for the project'
+    doLast {
+        println("Documentation is in src/docs/ directory")
+        println("arc42 Architecture Documentation: ${file('src/docs/arc42.adoc').absolutePath}")
+        println("ADRs: ${file('src/docs/arc42/09-architecture-decisions').absolutePath}")
+    }
+}
+
+// Print project information
+gradle.projectsLoaded {
+    rootProject.children.each { subproject ->
+        println("Module: ${subproject.name} [semantic-anchor: component.${subproject.name}]")
+        println("  Path: ${subproject.projectDir}")
+    }
+}

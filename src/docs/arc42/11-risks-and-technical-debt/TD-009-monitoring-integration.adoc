@@ -1,0 +1,99 @@
+---
+id: TD-009-monitoring-integration
+type: TechnicalDebt
+title: Monitoring Integration
+status: proposed
+owner: development
+created: 2026-07-02
+reviewed: false
+summary: No monitoring integration
+.tags:
+  - technical-debt
+  - monitoring
+  - observability
+  - metrics
+relations: []
+---
+[[td-009-monitoring-integration]]
+= TD-009: Monitoring Integration
+
+[semantic-anchor: technical-debt.monitoring-integration]
+
+== Status
+
+Proposed.
+
+This technical debt item is AI-assisted. It identifies work needed for review and does not decide acceptance.
+
+== Technical Debt Statement
+
+Because there is no monitoring integration, **we cannot observe the runtime behavior** of the modules, making it difficult to understand performance, detect issues, and troubleshoot problems.
+
+== Details
+
+* **Module**: all
+* **Impact**: Observability gap - cannot observe runtime behavior
+* **Priority**: Low
+* **Type**: Observability gap
+
+== Resolution
+
+Add metrics collection and monitoring integration using a standard metrics library (e.g., Micrometer, Prometheus client) with configurable exporters.
+
+== Acceptance Criteria
+
+* All modules collect relevant metrics (throughput, latency, errors, etc.)
+* Metrics are exportable to monitoring systems
+* Monitoring integration is configurable
+* Documentation describes available metrics
+
+== Traceability
+
+[cols="1,1,3", options="header"]
+|===
+| Relation
+| Target
+| Rationale
+
+| `affects`
+| xref:../05-building-block-view.adoc#event-producer[event-producer]
+| Event producer needs monitoring
+
+| `affects`
+| xref:../05-building-block-view.adoc#kafka-consumer[kafka-consumer]
+| Kafka consumer needs monitoring
+
+| `affects`
+| xref:../05-building-block-view.adoc#esper-cep[esper-cep]
+| Esper CEP needs monitoring
+
+| `affects`
+| xref:../05-building-block-view.adoc#flink-basic[flink-basic]
+| Flink basic needs monitoring
+
+| `affects`
+| xref:../05-building-block-view.adoc#flink-cep[flink-cep]
+| Flink CEP needs monitoring
+
+| `addresses`
+| [semantic-anchor: quality.observability]
+| Monitoring integration is essential for observability
+
+| `relates_to`
+| xref:../10-quality-requirements/QS-013-monitoring-effectiveness.adoc[QS-013]
+| Monitoring integration addresses monitoring effectiveness
+
+| `relates_to`
+| xref:../08-crosscutting-concepts.adoc[Observability]
+| Observability is a cross-cutting concept
+|===
+
+== Open Questions
+
+* Which metrics library should we use?
+* Should we include dashboards or just metrics collection?
+* What metrics are most important for each module?
+
+== Review Notes
+
+This technical debt item can be marked reviewed only after the implementation plan and acceptance criteria are confirmed by the accountable owner. The resolution approach should be evaluated for feasibility and effectiveness.

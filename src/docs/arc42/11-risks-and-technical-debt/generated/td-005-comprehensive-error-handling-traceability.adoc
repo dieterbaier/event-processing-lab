@@ -1,0 +1,14 @@
+[[generated-traceability-td-005-comprehensive-error-handling]]
+== Traceability
+
+// Generated from architecture artifact metadata. Do not edit manually.
+
+[cols="1,1,3", options="header"]
+|===
+| Direction | Relation | Target
+
+| outgoing
+| mitigates
+| xref:risk-004-event-loss[RISK-004-event-loss]
+
+|===

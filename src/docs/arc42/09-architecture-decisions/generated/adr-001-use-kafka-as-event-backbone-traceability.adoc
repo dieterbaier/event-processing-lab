@@ -1,0 +1,34 @@
+[[generated-traceability-adr-001-use-kafka-as-event-backbone]]
+== Traceability
+
+// Generated from architecture artifact metadata. Do not edit manually.
+
+[cols="1,1,3", options="header"]
+|===
+| Direction | Relation | Target
+
+| outgoing
+| refines
+| xref:adr-002-use-json-serialization[ADR-002-use-json-serialization]
+
+| outgoing
+| refines
+| xref:adr-004-separate-implementations[ADR-004-separate-implementations]
+
+| incoming
+| depends_on
+| xref:risk-002-operational-complexity[RISK-002-operational-complexity]
+
+| incoming
+| depends_on
+| xref:risk-003-technology-compatibility[RISK-003-technology-compatibility]
+
+| incoming
+| depends_on
+| xref:risk-004-event-loss[RISK-004-event-loss]
+
+| incoming
+| refines
+| xref:adr-003-keep-spring-boot-optional[ADR-003-keep-spring-boot-optional]
+
+|===

@@ -1,0 +1,311 @@
+---
+id: DOC-501-building-block-view
+type: Document
+title: 5. Building Block View
+description: Module structure, component details, and architectural diagrams for the Event Processing Lab
+status: draft
+owner: Integration Architecture Team
+created: 2026-07-02
+reviewed: false
+summary: Modular architecture with clear separation of concerns and detailed component descriptions
+.tags:
+  - arc42
+  - building-block-view
+  - components
+  - architecture
+  - modules
+relations:
+  - type: refines
+    target: DOC-103-system-scope-and-context
+    status: proposed
+    rationale: Building blocks relate to system context
+    reviewed: false
+---
+[[building-block-view]]
+= 5. Building Block View
+
+[semantic-anchor: event-processing-lab]
+
+== Level-1: Module Structure
+
+The project follows a modular architecture with clear separation of concerns:
+
+[plantuml,building-blocks-level1,png]
+----
+@startuml
+skinparam monochrome true
+
+package "Event Processing Lab" {
+    [event-model] as EventModel [semantic-anchor: component.event-model]
+    [event-producer] as EventProducer [semantic-anchor: component.event-producer]
+    [kafka-consumer] as KafkaConsumer [semantic-anchor: component.kafka-consumer]
+    [esper-cep] as EsperCep [semantic-anchor: component.esper-cep]
+    [flink-basic] as FlinkBasic [semantic-anchor: component.flink-basic]
+    [flink-cep] as FlinkCep [semantic-anchor: component.flink-cep]
+}
+
+EventModel --> EventProducer : "depends on"
+EventModel --> KafkaConsumer : "depends on"
+EventModel --> EsperCep : "depends on"
+EventModel --> FlinkBasic : "depends on"
+EventModel --> FlinkCep : "depends on"
+FlinkBasic --> FlinkCep : "optional dependency"
+
+@enduml
+----
+
+[semantic-anchor: component.event-model]
+[semantic-anchor: component.event-producer]
+[semantic-anchor: component.kafka-consumer]
+[semantic-anchor: component.esper-cep]
+[semantic-anchor: component.flink-basic]
+[semantic-anchor: component.flink-cep]
+
+== Level-2: Module Details
+
+=== Event Model Module [semantic-anchor: component.event-model]
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Common event DTOs and serialization
+
+| Responsibilities
+| Define event types, provide serialization/deserialization
+
+| Interfaces
+| Event, EventType, EventSerializer, EventFactory
+
+| Data
+| OrderCreated, PaymentReceived, PaymentFailed, OrderCancelled, ShipmentStarted
+
+| Quality
+| Reusable, type-safe, JSON-serializable
+
+|===
+
+[plantuml,event-model,png]
+----
+@startuml
+skinparam monochrome true
+
+class Event {
+    +String eventId
+    +String eventType
+    +Instant timestamp
+    +String version
+    +getEventTypeEnum()
+}
+
+class EventType {
+    ORDER_CREATED
+    PAYMENT_RECEIVED
+    PAYMENT_FAILED
+    ORDER_CANCELLED
+    SHIPMENT_STARTED
+}
+
+class EventSerializer {
+    +serialize(Event)
+    +deserialize(String)
+}
+
+class EventFactory {
+    +createRandomOrderCreated()
+    +createRandomPaymentReceived()
+    +createRandomPaymentFailed()
+    +createRandomOrderCancelled()
+    +createRandomShipmentStarted()
+}
+
+Event <|-- OrderCreated
+Event <|-- PaymentReceived
+Event <|-- PaymentFailed
+Event <|-- OrderCancelled
+Event <|-- ShipmentStarted
+
+@enduml
+----
+
+=== Event Producer Module [semantic-anchor: component.event-producer]
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Generate and publish events to Kafka
+
+| Responsibilities
+| Event generation, Kafka production, rate control
+
+| Technology
+| Kafka Producer API [semantic-anchor: technology.kafka]
+
+| Configuration
+| Bootstrap servers, topic, rate
+
+| Quality
+| Reliable, configurable, observable
+
+|===
+
+[plantuml,event-producer,png]
+----
+@startuml
+skinparam monochrome true
+
+class OrderEventProducer {
+    +KafkaProducer producer
+    +String topic
+    +int eventsPerSecond
+    +start()
+    +stop()
+    +sendEvent(Event)
+    +produceEvent()
+}
+
+class ProducerConfig {
+    +String bootstrapServers
+    +String topic
+    +String clientId
+    +int eventsPerSecond
+    +fromEnvironment()
+}
+
+OrderEventProducer --> Kafka : "publishes to"
+OrderEventProducer --> EventSerializer : "uses"
+OrderEventProducer --> EventFactory : "uses"
+
+@enduml
+----
+
+=== Kafka Consumer Module [semantic-anchor: component.kafka-consumer]
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Basic event consumption from Kafka
+
+| Responsibilities
+| Kafka consumption, event processing, simple correlation
+
+| Technology
+| Kafka Consumer API [semantic-anchor: technology.kafka]
+
+| Configuration
+| Bootstrap servers, topic, group ID
+
+| Quality
+| Simple, educational, observable
+
+|===
+
+=== Esper CEP Module [semantic-anchor: component.esper-cep]
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Complex Event Processing with Esper
+
+| Responsibilities
+| EPL rule definition, pattern detection, event correlation
+
+| Technology
+| Esper 8.7.0 [semantic-anchor: technology.esper], Kafka Consumer
+
+| Patterns
+| Order creation, payment processing, timeout detection, complete flows
+
+| Quality
+| Rule-based, declarative, efficient
+
+|===
+
+[plantuml,esper-cep,png]
+----
+@startuml
+skinparam monochrome true
+
+class EsperCepEngine {
+    +EPSPStatementManager epService
+    +KafkaConsumer kafkaConsumer
+    +registerEventTypes()
+    +registerEplStatements()
+    +processEsperResults()
+}
+
+EsperCepEngine --> Kafka : "consumes from"
+EsperCepEngine --> Esper : "uses [semantic-anchor: technology.esper]"
+EsperCepEngine --> EventSerializer : "uses"
+
+@enduml
+----
+
+=== Flink Basic Module [semantic-anchor: component.flink-basic]
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Stream processing with Flink DataStream API
+
+| Responsibilities
+| Event consumption, stream operations, windowing, state management
+
+| Technology
+| Apache Flink 1.17.1 [semantic-anchor: technology.flink], Kafka Connector
+
+| Operations
+| Filtering, mapping, keying, windowing, pattern detection
+
+| Quality
+| Stateful, scalable, distributed
+
+|===
+
+=== Flink CEP Module [semantic-anchor: component.flink-cep]
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Pattern detection with Flink CEP library
+
+| Responsibilities
+| Pattern definition, matching, complex event detection
+
+| Technology
+| Flink CEP [semantic-anchor: technology.flink-cep], Kafka Connector
+
+| Patterns
+| Order creation, payment processing, timeout, cancellation, complete flows
+
+| Quality
+| Pattern-based, time-aware, stateful
+
+|===
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:03-system-scope-and-context.adoc[System Scope and Context]
+* Appears in: xref:06-runtime-view.adoc[Runtime View] scenarios
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. Content derived from the original architecture documentation and adapted to the toolkit structure.

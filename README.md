@@ -49,12 +49,32 @@ event-processing-lab/
 ├── gradle.properties              # Gradle properties
 ├── src/
 │   └── docs/
-│       ├── architecture.adoc      # arc42 architecture documentation
-│       └── adr/
-│           ├── ADR-001.md        # Use Kafka as Event Backbone
-│           ├── ADR-002.md        # Use JSON Serialization
-│           ├── ADR-003.md        # Plain Java over Spring Boot
-│           └── ADR-004.md        # Separate Implementations
+│       ├── arc42/                 # arc42 architecture documentation
+│       │   ├── 01-introduction-and-goals.adoc
+│       │   ├── 02-architecture-constraints.adoc
+│       │   ├── 03-system-scope-and-context.adoc
+│       │   ├── 04-solution-strategy.adoc
+│       │   ├── 05-building-block-view.adoc
+│       │   ├── 06-runtime-view.adoc
+│       │   ├── 07-deployment-view.adoc
+│       │   ├── 08-crosscutting-concepts.adoc
+│       │   ├── 09-architecture-decisions/
+│       │   │   ├── ADR-001-use-kafka-as-event-backbone.adoc     # Use Kafka as Event Backbone
+│       │   │   ├── ADR-002-use-json-serialization.adoc     # Use JSON Serialization
+│       │   │   ├── ADR-003-keep-spring-boot-optional.adoc     # Plain Java over Spring Boot
+│       │   │   └── ADR-004-separate-implementations.adoc     # Separate Implementations
+│       │   ├── 10-quality-requirements/
+│       │   │   ├── QS-001.adoc through QS-015.adoc
+│       │   ├── 11-risks-and-technical-debt/
+│       │   │   ├── RISK-001.adoc through RISK-006.adoc
+│       │   │   └── TD-001.adoc through TD-010.adoc
+│       │   └── 12-glossary.adoc
+│       ├── arc42.adoc              # Entry point for architecture documentation
+│       ├── canvas/                 # Business and architecture canvases
+│       ├── fragments/              # Reusable documentation fragments
+│       ├── roadmap.adoc
+│       ├── vision-mission.adoc
+│       └── questions-and-answers.adoc
 └── modules/
     ├── event-model/              # [semantic-anchor: component.event-model]
     │   └── src/main/java/com/example/eventmodel/
@@ -99,33 +119,14 @@ event-processing-lab/
 | [Apache Flink](https://flink.apache.org/) | Distributed Stream Processing | flink-basic, flink-cep | [semantic-anchor: technology.flink] |
 | [Flink CEP](https://nightlies.apache.org/flink/flink-docs-stable/docs/libs/cep/) | Pattern Detection Library | flink-cep | [semantic-anchor: technology.flink-cep] |
 
-## Architecture Decisions
+## Architecture Documentation
 
-The following ADRs guide the project's technical direction:
+The complete architecture documentation following the arc42 template and docs-as-code-toolkit conventions is available in the `src/docs/` directory:
 
-### ✅ ADR-001: Use Kafka as Event Backbone [semantic-anchor: decision.kafka-as-event-backbone]
-- **Status**: Accepted
-- **Decision**: Use Apache Kafka as the central event transport mechanism
-- **Consequences**: Provides high throughput, fault tolerance, persistence, and horizontal scalability
-- **Alternatives Considered**: RabbitMQ, Pulsar, NATS
-
-### ✅ ADR-002: Use JSON Serialization for First Iteration [semantic-anchor: decision.json-serialization]
-- **Status**: Accepted
-- **Decision**: Use JSON for event serialization in the initial implementation
-- **Consequences**: Human-readable, easy to debug, cross-language compatible, but less efficient than binary formats
-- **Future Consideration**: Avro or Protobuf for production scenarios
-
-### ✅ ADR-003: Keep Spring Boot Optional, Use Plain Java [semantic-anchor: decision.plain-java-over-spring]
-- **Status**: Accepted
-- **Decision**: Prefer plain Java implementations where simpler
-- **Consequences**: Reduces dependencies, keeps examples focused on core concepts, easier to understand technology-specific features
-- **Exceptions**: Spring Boot may be used for specific integration scenarios
-
-### ✅ ADR-004: Separate Esper and Flink Implementations [semantic-anchor: decision.separate-implementations]
-- **Status**: Accepted
-- **Decision**: Maintain separate implementations for direct comparison
-- **Consequences**: Allows apples-to-apples comparison, but may lead to some code duplication
-- **Mitigation**: Common interfaces in event-model reduce duplication
+* xref:src/docs/arc42.adoc[arc42 Architecture Documentation] - Main entry point
+* xref:src/docs/arc42/09-architecture-decisions.adoc[Architecture Decisions] - ADR index and detailed decision records
+* xref:src/docs/arc42/10-quality-requirements.adoc[Quality Requirements] - Quality tree and measurable scenarios
+* xref:src/docs/arc42/11-risks-and-technical-debt.adoc[Risks and Technical Debt] - Risk assessment and technical debt tracking
 
 ## Quality Goals
 
@@ -144,7 +145,7 @@ The following ADRs guide the project's technical direction:
 
 ### Quality Scenarios (arc42 Chapter 10)
 
-See `src/docs/architecture.adoc` for detailed quality scenarios including:
+See link:src/docs/arc42/10-quality-requirements.adoc[Quality Requirements] for detailed quality scenarios including:
 - Throughput measurement under load
 - Latency measurement for event processing
 - Rule modification and deployment time
@@ -157,27 +158,27 @@ The following runtime scenarios are implemented across all technologies:
 
 ### 1. Order Creation Flow [semantic-anchor: scenario.order-creation]
 ```
-OrderCreated → [Processing] → Order State Updated
+OrderCreated -> [Processing] -> Order State Updated
 ```
 
 ### 2. Payment Processing Flow [semantic-anchor: scenario.payment-processing]
 ```
-OrderCreated → PaymentReceived → [Validation] → Order Confirmed
+OrderCreated -> PaymentReceived -> [Validation] -> Order Confirmed
 ```
 
 ### 3. Payment Timeout Detection [semantic-anchor: scenario.payment-timeout]
 ```
-OrderCreated → [30 minute timeout] → OrderCancelled
+OrderCreated -> [30 minute timeout] -> OrderCancelled
 ```
 
 ### 4. Order Cancellation Flow [semantic-anchor: scenario.order-cancellation]
 ```
-OrderCreated → OrderCancelled → [Refund Processing] → Order Cancelled
+OrderCreated -> OrderCancelled -> [Refund Processing] -> Order Cancelled
 ```
 
 ### 5. Shipment Start Flow [semantic-anchor: scenario.shipment-start]
 ```
-OrderCreated → PaymentReceived → ShipmentStarted → [Tracking] → Order Shipped
+OrderCreated -> PaymentReceived -> ShipmentStarted -> [Tracking] -> Order Shipped
 ```
 
 ## Comparison Matrix
@@ -272,10 +273,11 @@ kafka.bootstrap.servers=localhost:9092
 - Use meaningful variable and method names
 
 ### Documentation
-- All architectural decisions documented in ADRs
-- All runtime scenarios documented in architecture.adoc
+- All architectural decisions documented in arc42 Chapter 9
+- All runtime scenarios documented in arc42 Chapter 6
 - Use PlantUML for diagrams
 - Use AsciiDoc for documentation
+- Follow docs-as-code-toolkit/architecture-knowledge-toolkit structure
 
 ### Testing
 - Unit tests for business logic
@@ -322,32 +324,19 @@ kafka.bootstrap.servers=localhost:9092
 | Technology compatibility issues | Low | Medium | Medium | Use stable versions, test integration early [semantic-anchor: risk.technology-compatibility] |
 | Operational complexity too high | Medium | Medium | Medium | Keep implementations minimal, document thoroughly [semantic-anchor: risk.operational-complexity] |
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes following the project conventions
-4. Update documentation as needed
-5. Submit a pull request
-
-### Commit Message Format
-Use Conventional Commits:
-```
-feat: add new event type
-fix: correct payment timeout logic
-docs: update architecture documentation
-chore: update dependencies
-```
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Architecture Documentation
 
-For detailed architecture documentation, see:
-- [arc42 Architecture Document](src/docs/architecture.adoc)
-- [ADR Index](src/docs/adr/README.md)
+For detailed architecture documentation, see link:src/docs/arc42.adoc[arc42 Architecture Documentation].
+
+The architecture documentation follows the arc42 template with architecture-knowledge-toolkit extensions and includes:
+- link:src/docs/vision-mission.adoc[Vision and Mission]
+- link:src/docs/roadmap.adoc[Project Roadmap]
+- link:src/docs/canvas/architecture-inception-canvas.adoc[Architecture Inception Canvas]
+- link:src/docs/canvas/business-model-canvas.adoc[Business Model Canvas]
+- link:src/docs/canvas/value-proposition-canvas.adoc[Value Proposition Canvas]
+- link:src/docs/canvas/techstack-canvas.adoc[TechStack Canvas]
+- link:src/docs/canvas/architecture-communication-canvas.adoc[Architecture Communication Canvas]
+- All 12 arc42 chapters under link:src/docs/arc42/[src/docs/arc42/]
 
 ## Semantic Anchors
 
@@ -368,10 +357,11 @@ This project uses semantic anchors for cross-referencing across documentation an
 - [Apache Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/)
 - [Flink CEP Documentation](https://nightlies.apache.org/flink/flink-docs-stable/docs/libs/cep/)
 - [arc42 Architecture Template](https://arc42.org/)
-- [docs-as-code-toolkit](https://github.com/arc42/docs-as-code-toolkit)
+- [docs-as-code-toolkit/architecture-knowledge-toolkit](https://github.com/arc42/docs-as-code-toolkit)
 
 ---
 
 *Project Status: Active Development*  
 *Last Updated: 2026-07-02*  
-*Maintainer: Integration Architecture Team*
+*Maintainer: Integration Architecture Team*  
+*Documentation: Following docs-as-code-toolkit/architecture-knowledge-toolkit structure*

@@ -1,0 +1,96 @@
+// Kafka Consumer Module - Build Configuration
+// [semantic-anchor: component.kafka-consumer]
+
+plugins {
+    id 'java'
+    id 'application' // For executable applications
+}
+
+// Module description
+description = 'Kafka Consumer - Basic Kafka consumer for order lifecycle events'
+
+// Dependencies
+dependencies {
+    // Project dependencies
+    implementation project(':event-model') // [semantic-anchor: component.event-model]
+    
+    // Kafka Client [semantic-anchor: technology.kafka]
+    implementation "org.apache.kafka:kafka-clients:${kafkaVersion}"
+    
+    // JSON Processing [semantic-anchor: decision.json-serialization]
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    
+    // Logging
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+    
+    // Testing
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.mockito:mockito-core:5.3.1"
+    testImplementation "org.apache.kafka:kafka-clients:${kafkaVersion}:test"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+// Java compatibility
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// Application configuration
+application {
+    mainClass = 'com.example.kafkaconsumer.OrderEventConsumer'
+}
+
+// Source and target compatibility
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+// Tasks
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+// Jar manifest attributes
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Event Processing Lab - Kafka Consumer',
+            'Implementation-Version': version,
+            'Implementation-Vendor': 'Integration Architecture Team',
+            'Main-Class': 'com.example.kafkaconsumer.OrderEventConsumer',
+            'Semantic-Anchor': 'component.kafka-consumer'
+        )
+    }
+}
+
+// Configuration for the application
+task runConsumer(type: JavaExec) {
+    description = 'Run the Kafka consumer'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = application.mainClass
+    
+    // Pass system properties
+    systemProperty 'kafka.bootstrap.servers', System.getProperty('kafka.bootstrap.servers', 'localhost:9092')
+    systemProperty 'kafka.topic.orders', System.getProperty('kafka.topic.orders', 'order-events')
+    systemProperty 'kafka.group.id', System.getProperty('kafka.group.id', 'kafka-consumer-group')
+}
+
+// Task to run with default configuration
+task startConsumer(type: JavaExec) {
+    description = 'Start the Kafka consumer with default configuration'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = application.mainClass
+    
+    args 'localhost:9092', 'order-events', 'kafka-consumer-group'
+}

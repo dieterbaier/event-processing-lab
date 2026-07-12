@@ -1,0 +1,14 @@
+[[generated-traceability-td-007-module-documentation]]
+== Traceability
+
+// Generated from architecture artifact metadata. Do not edit manually.
+
+[cols="1,1,3", options="header"]
+|===
+| Direction | Relation | Target
+
+| -
+| -
+| No relations recorded in metadata.
+
+|===

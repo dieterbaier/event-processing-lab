@@ -1,0 +1,106 @@
+---
+id: RISK-005-performance-bottleneck
+type: Risk
+title: Performance Bottleneck in JSON Parsing
+status: proposed
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Risk of performance bottlenecks due to JSON serialization and parsing overhead
+.tags:
+  - risk
+  - performance
+  - json
+  - parsing
+  - bottleneck
+relations:
+  - type: depends_on
+    target: ADR-002-use-json-serialization
+    status: proposed
+    rationale: JSON serialization decision affects performance
+    reviewed: false
+---
+[[risk-005-performance-bottleneck]]
+= RISK-005: Performance Bottleneck in JSON Parsing
+
+[semantic-anchor: risk.performance-bottleneck]
+
+== Status
+
+Proposed.
+
+This risk is AI-assisted. It identifies a concern for review and does not decide risk acceptance.
+
+== Risk Statement
+
+Because JSON serialization and parsing can be resource-intensive, **performance bottlenecks may occur in JSON parsing**, leading to degraded throughput and increased latency.
+
+== Assessment
+
+[cols="1,3", options="header"]
+|===
+| Field
+| Value
+
+| Likelihood
+| Medium
+
+| Impact
+| Medium
+
+| Priority
+| Medium
+
+| Timeframe
+| Medium-term
+
+| Confidence
+| Medium
+|===
+
+== Mitigation Options
+
+* Use efficient JSON libraries (e.g., Jackson)
+* Benchmark JSON parsing performance
+* Consider alternative serialization formats for production use
+* Optimize event structure to minimize parsing overhead
+* Implement caching where appropriate
+
+== Decision or Acceptance
+
+The risk is currently monitored. For a learning project, the performance impact is acceptable. For production, alternative formats should be considered.
+
+== Traceability
+
+[cols="1,1,3", options="header"]
+|===
+| Relation
+| Target
+| Rationale
+
+| `depends_on`
+| xref:../09-architecture-decisions/ADR-002.adoc[ADR-002]
+| JSON serialization decision affects performance
+
+| `addresses`
+| [semantic-anchor: decision.json-serialization]
+| Performance is a consideration for serialization choice
+
+| `relates_to`
+| [semantic-anchor: quality.scalability]
+| Performance bottleneck affects scalability
+
+| `addresses`
+| xref:../10-quality-requirements/QS-007-throughput-achievement.adoc[QS-007]
+| Performance affects throughput achievement
+|===
+
+== Open Questions
+
+* What is the actual performance impact of JSON parsing in our use case?
+* Should we benchmark alternative serialization formats?
+* What throughput and latency requirements do we have?
+
+== Review Notes
+
+State this risk can be marked reviewed only after the assessment and mitigation path are confirmed by the accountable owner. The mitigation options should be evaluated for effectiveness and feasibility.

@@ -1,0 +1,268 @@
+---
+id: ADR-001-use-kafka-as-event-backbone
+type: ArchitectureDecision
+title: Use Kafka as Event Backbone
+decision: Use Apache Kafka as the event backbone for the Event Processing Lab
+status: accepted
+created: 2026-07-02
+author: Integration Architecture Team
+tags:
+  - kafka
+  - event-backbone
+  - infrastructure
+  - core
+relations:
+  - type: refines
+    target: ADR-002-use-json-serialization
+    status: proposed
+    rationale: JSON serialization works well with Kafka's message format
+    reviewed: false
+  - type: refines
+    target: ADR-004-separate-implementations
+    status: proposed
+    rationale: Kafka enables independent consumption by separate implementations
+    reviewed: false
+reviewed: false
+---
+[[adr-001-use-kafka-as-event-backbone]]
+= ADR-001: Use Kafka as Event Backbone
+
+[semantic-anchor: decision.kafka-as-event-backbone]
+
+== Status
+
+[.status-accepted]
+Accepted
+
+== Context
+
+The Event Processing Lab needs a central event transport mechanism to connect event producers with various event processing engines (Kafka Consumer, Esper CEP, Flink, Flink CEP). This event backbone must:
+
+* Support high throughput for event streaming
+* Provide fault tolerance and durability
+* Enable horizontal scalability
+* Support multiple concurrent consumers
+* Maintain event ordering within logical partitions
+
+== Decision
+
+*Use Apache Kafka as the event backbone for the Event Processing Lab.*
+
+== Decision Drivers
+
+[cols="1,1,2", options="header"]
+|===
+| Driver
+| Importance
+| Notes
+
+| Throughput
+| High
+| Must handle high event volumes for realistic testing
+
+| Fault Tolerance
+| High
+| Events must not be lost during processing
+
+| Scalability
+| High
+| Must scale horizontally to handle increased load
+
+| Multiple Consumers
+| High
+| Different processing engines need independent access
+
+| Ordering Guarantees
+| Medium
+| Events should be processed in order within partitions
+
+| Ecosystem
+| Medium
+| Good integration with other technologies (Flink, etc.)
+
+| Learning Value
+| High
+| Kafka is widely used, understanding it is valuable
+
+|===
+
+== Alternatives Considered
+
+=== 1. Apache Kafka [.selected]#✅ Selected#
+
+*Pros:*
+- High throughput, fault tolerant, horizontally scalable, built-in partitioning, excellent ecosystem, strong community
+
+*Cons:*
+- More complex to operate, requires ZooKeeper/KRaft, higher resource usage
+
+*Integration:* Native support in Flink, good Java client, widely supported
+
+=== 2. RabbitMQ
+
+*Pros:* Simple to set up and operate, lightweight, good Java support
+
+*Cons:* Lower throughput than Kafka, less suitable for event streaming, no built-in partitioning
+
+*Integration:* Would require custom integration with Flink
+
+=== 3. Apache Pulsar
+
+*Pros:* High throughput, multi-tenancy, built-in functions, good ecosystem
+
+*Cons:* Less mature than Kafka, smaller community, more complex setup
+
+*Integration:* Good Java client, Flink connector available
+
+=== 4. NATS / NATS Streaming
+
+*Pros:* Extremely lightweight, high performance, simple protocol
+
+*Cons:* Less Java ecosystem support, newer streaming capabilities
+
+*Integration:* Limited Flink integration
+
+== Pugh Matrix Analysis
+
+[cols="1,1,1,1,1,1", options="header"]
+|===
+| Criteria
+| Weight
+| Kafka
+| RabbitMQ
+| Pulsar
+| NATS
+
+| Throughput
+| 5
+| +1 (100K+ msg/s)
+| 0 (50K msg/s)
+| +1 (100K+ msg/s)
+| +1 (High)
+
+| Fault Tolerance
+| 5
+| +1 (Replication)
+| -1 (Single node)
+| +1 (Replication)
+| 0 (Configurable)
+
+| Scalability
+| 5
+| +1 (Horizontal)
+| 0 (Vertical)
+| +1 (Horizontal)
+| +1 (Horizontal)
+
+| Multiple Consumers
+| 4
+| +1 (Consumer Groups)
+| +1 (Multiple Queues)
+| +1 (Shared Subs)
+| +1 (Multiple Subs)
+
+| Ordering
+| 3
+| +1 (Per Partition)
+| +1 (Per Queue)
+| +1 (Per Partition)
+| +1 (Per Subject)
+
+| Ecosystem
+| 3
+| +1 (Mature)
+| 0 (Good)
+| 0 (Growing)
+| -1 (Limited)
+
+| Flink Integration
+| 4
+| +1 (Native)
+| -1 (Custom)
+| +1 (Native)
+| -1 (Custom)
+
+| Learning Value
+| 3
+| +1 (Industry Standard)
+| 0 (Common)
+| 0 (Growing)
+| -1 (Niche)
+
+| *Total*
+| 
+| *+29*
+| *+10*
+| *+22*
+| *+10*
+
+|===
+
+== Consequences
+
+=== Positive Consequences
+
+. *High Throughput*: Kafka can handle hundreds of thousands of events per second, enabling realistic performance testing of CEP engines.
+. *Fault Tolerance*: Kafka's replication ensures events are not lost even if nodes fail, providing reliable event transport for learning scenarios.
+. *Horizontal Scalability*: Kafka scales horizontally by adding more brokers, allowing us to demonstrate scaling characteristics.
+. *Multiple Consumer Support*: Kafka's consumer group model allows each processing engine (Esper, Flink, etc.) to consume events independently at their own pace.
+. *Ordering Guarantees*: Kafka maintains strict ordering within partitions, which is important for event pattern detection.
+. *Ecosystem Integration*: Kafka has excellent integration with Flink (native connector) and good Java client support for Esper and custom consumers.
+. *Industry Relevance*: Kafka is widely adopted in industry, making the learning experience directly applicable to real-world scenarios.
+
+=== Negative Consequences
+
+. *Operational Complexity*: Running Kafka requires understanding of brokers, topics, partitions, consumer groups, and configuration options.
+. *Resource Usage*: Kafka requires more resources (memory, disk) than lighter alternatives like RabbitMQ.
+. *Setup Overhead*: Requires additional setup (ZooKeeper or KRaft mode) compared to simpler message brokers.
+. *Learning Curve*: Users need to understand Kafka concepts before effectively using the event backbone.
+
+== Risk Mitigations
+
+[cols="1,2,1", options="header"]
+|===
+| Risk
+| Mitigation
+| Status
+
+| Complexity overwhelming learners
+| Provide simple Docker Compose setup, pre-configured topics
+| ✅ Implemented
+
+| Performance bottlenecks
+| Use appropriate partitioning strategy, monitor throughput
+| ⚠️ Monitor
+
+| Data loss during development
+| Configure appropriate replication factors, use durable commits
+| ✅ Implemented
+
+|===
+
+== Related Decisions
+
+* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
+* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations] [semantic-anchor: decision.separate-implementations]
+
+== Related Components
+
+* xref:05-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
+* xref:05-building-block-view.adoc#event-producer[Event Producer] [semantic-anchor: component.event-producer]
+* xref:05-building-block-view.adoc#kafka-consumer[Kafka Consumer] [semantic-anchor: component.kafka-consumer]
+
+== Related Technologies
+
+* https://kafka.apache.org/[Apache Kafka] [semantic-anchor: technology.kafka]
+* https://docs.confluent.io/platform/current/connect/index.html[Kafka Connect]
+
+== Related Quality Goals
+
+* xref:01-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
+* xref:01-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
+* xref:01-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
+
+== Related Scenarios
+
+* xref:06-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
+* xref:06-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
+* xref:06-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]

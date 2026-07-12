@@ -1,0 +1,223 @@
+---
+id: DOC-601-runtime-view
+type: Document
+title: 6. Runtime View
+description: Runtime scenarios and error handling for the Event Processing Lab
+status: draft
+owner: Integration Architecture Team
+created: 2026-07-02
+reviewed: false
+summary: Runtime scenarios demonstrating system behavior and error handling approaches
+.tags:
+  - arc42
+  - runtime-view
+  - scenarios
+  - error-handling
+relations: []
+---
+[[runtime-view]]
+= 6. Runtime View
+
+[semantic-anchor: scenario.order-creation]
+[semantic-anchor: scenario.payment-processing]
+[semantic-anchor: scenario.payment-timeout]
+[semantic-anchor: scenario.order-cancellation]
+[semantic-anchor: scenario.shipment-start]
+
+The following runtime scenarios demonstrate the system behavior across different technologies.
+
+== Runtime Scenarios
+
+=== Order Creation Flow [semantic-anchor: scenario.order-creation]
+
+[plantuml,scenario-order-creation,png]
+----
+@startuml
+skinparam monochrome true
+
+actor Customer
+participant Producer as "Event Producer"
+participant Kafka as "Kafka"
+participant Consumer as "Kafka Consumer"
+participant Esper as "Esper CEP"
+participant Flink as "Flink Basic"
+participant FlinkCep as "Flink CEP"
+
+Customer -> Producer : Create Order
+Producer -> Kafka : Publish OrderCreated event
+Kafka -> Consumer : Deliver OrderCreated event
+Kafka -> Esper : Deliver OrderCreated event
+Kafka -> Flink : Deliver OrderCreated event
+Kafka -> FlinkCep : Deliver OrderCreated event
+
+Consumer -> Consumer : Log OrderCreated
+Esper -> Esper : Detect OrderCreated pattern
+Flink -> Flink : Process OrderCreated stream
+FlinkCep -> FlinkCep : Detect OrderCreated pattern
+
+@enduml
+----
+
+*Steps:*
+. Customer places an order
+. Event Producer creates OrderCreated event with unique order ID, customer ID, items, and total
+. Producer serializes event to JSON and publishes to Kafka topic
+. All consumers receive the event and process it according to their logic
+. Each technology demonstrates different approaches to handling the same event
+
+*Technologies Involved:*
+- [semantic-anchor: technology.kafka] (Event transport)
+- [semantic-anchor: decision.json-serialization] (Event serialization)
+- [semantic-anchor: component.event-producer] (Event generation)
+- All consumer modules (processing)
+
+=== Payment Processing Flow [semantic-anchor: scenario.payment-processing]
+
+[plantuml,scenario-payment-processing,png]
+----
+@startuml
+skinparam monochrome true
+
+participant Kafka as "Kafka"
+participant Consumer as "Kafka Consumer"
+participant Esper as "Esper CEP"
+participant Flink as "Flink Basic"
+participant FlinkCep as "Flink CEP"
+
+Kafka -> Consumer : Deliver OrderCreated event
+Kafka -> Consumer : Deliver PaymentReceived event
+Kafka -> Esper : Deliver OrderCreated event
+Kafka -> Esper : Deliver PaymentReceived event
+Kafka -> Flink : Deliver OrderCreated event
+Kafka -> Flink : Deliver PaymentReceived event
+Kafka -> FlinkCep : Deliver OrderCreated event
+Kafka -> FlinkCep : Deliver PaymentReceived event
+
+Consumer -> Consumer : Correlate payment with order
+Esper -> Esper : Detect payment processing pattern
+Flink -> Flink : Join streams or use state
+FlinkCep -> FlinkCep : Detect payment processing pattern
+
+@enduml
+----
+
+*Steps:*
+. OrderCreated event is processed by all consumers
+. PaymentReceived event is published to the same Kafka topic
+. Consumers receive PaymentReceived event and correlate it with the original order
+. Different correlation approaches:
+   - Kafka Consumer: Manual correlation using cached events
+   - Esper: EPL pattern matching with automatic correlation
+   - Flink Basic: Stateful processing with keyed streams
+   - Flink CEP: Pattern detection with CEP library
+
+*Technologies Involved:*
+- [semantic-anchor: technology.kafka] (Event transport with same key)
+- [semantic-anchor: technology.esper] (Pattern detection)
+- [semantic-anchor: technology.flink] (Stream processing)
+- [semantic-anchor: technology.flink-cep] (Pattern detection)
+
+=== Payment Timeout Detection [semantic-anchor: scenario.payment-timeout]
+
+[plantuml,scenario-payment-timeout,png]
+----
+@startuml
+skinparam monochrome true
+
+participant Clock as "Timer"
+participant Kafka as "Kafka"
+participant Esper as "Esper CEP"
+participant Flink as "Flink Basic"
+participant FlinkCep as "Flink CEP"
+
+Kafka -> Esper : Deliver OrderCreated event
+Kafka -> Flink : Deliver OrderCreated event
+Kafka -> FlinkCep : Deliver OrderCreated event
+
+Clock -> Esper : Timer ticks (1 minute intervals)
+Clock -> Flink : Watermarks advance
+Clock -> FlinkCep : Watermarks advance
+
+Esper -> Esper : Check for missing PaymentReceived
+Flink -> Flink : Window expires without PaymentReceived
+FlinkCep -> FlinkCep : Pattern timeout triggers
+
+Esper -> Esper : Fire timeout detection rule
+Flink -> Flink : Emit timeout detection result
+FlinkCep -> FlinkCep : Emit timeout detection result
+
+@enduml
+----
+
+*Steps:*
+. OrderCreated event is received
+. No PaymentReceived event is received within the timeout period (5 minutes)
+. Each technology detects the timeout using different mechanisms:
+   - Esper: Timer-based EPL with NOT EXISTS clause
+   - Flink Basic: Window-based processing with state checking
+   - Flink CEP: Pattern with time constraints and NOT NEXT
+
+*Technologies Involved:*
+- [semantic-anchor: technology.esper] (Timer-based rules)
+- [semantic-anchor: technology.flink] (Windowing and watermarks)
+- [semantic-anchor: technology.flink-cep] (Pattern timeout)
+
+=== Order Cancellation Flow [semantic-anchor: scenario.order-cancellation]
+
+*Steps:*
+. OrderCreated event is processed
+. OrderCancelled event is published (due to customer request or timeout)
+. Consumers receive OrderCancelled event and process it accordingly
+. Different handling:
+   - Kafka Consumer: Simple logging and cache cleanup
+   - Esper: Pattern detection for order cancellation
+   - Flink Basic: Stateful processing of cancellation
+   - Flink CEP: Pattern matching for cancellation flows
+
+=== Shipment Start Flow [semantic-anchor: scenario.shipment-start]
+
+*Steps:*
+. OrderCreated and PaymentReceived events are processed
+. ShipmentStarted event is published
+. Consumers receive ShipmentStarted event
+. Correlation with previous events:
+   - Kafka Consumer: Manual correlation using cached order and payment
+   - Esper: Pattern detection for complete order-to-shipment flow
+   - Flink Basic: Stateful processing validating shipment follows payment
+   - Flink CEP: Pattern detection for complete flow
+
+== Error Scenarios
+
+=== Event Deserialization Failure
+
+*Cause:* Malformed JSON or unknown event type
+*Detection:* EventSerializer.deserialize() throws exception
+*Handling:* Log error, skip event, continue processing
+*Impact:* Single event loss, processing continues
+*Recovery:* Fix event format, replay from offset
+
+=== Kafka Connection Failure
+
+*Cause:* Kafka broker unavailable
+*Detection:* Kafka client throws exception
+*Handling:* Retry with exponential backoff, log error
+*Impact:* Processing paused until connection restored
+*Recovery:* Restart consumers when Kafka available
+
+=== Esper Rule Compilation Error
+
+*Cause:* Invalid EPL syntax
+*Detection:* Exception during EPL statement creation
+*Handling:* Fail fast, log detailed error
+*Impact:* Engine fails to start
+*Recovery:* Fix EPL syntax, restart engine
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:05-building-block-view.adoc[Building Block View]
+* Implements: All components in runtime scenarios
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. Content derived from the original architecture documentation and adapted to the toolkit structure. Includes both happy path and error scenarios for comprehensive runtime coverage.

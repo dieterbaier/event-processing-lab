@@ -1,0 +1,156 @@
+---
+id: DOC-401-solution-strategy
+type: Document
+title: 4. Solution Strategy
+description: Architectural approach, technology stack, and quality goals mapping for the Event Processing Lab
+status: draft
+owner: Integration Architecture Team
+created: 2026-07-02
+reviewed: false
+summary: Architectural approach, technology stack selection, and quality goals mapping
+.tags:
+  - arc42
+  - solution-strategy
+  - technology-stack
+  - architecture-approach
+relations: []
+---
+[[solution-strategy]]
+= 4. Solution Strategy
+
+[semantic-anchor: event-processing-lab]
+
+== Architectural Approach
+
+The Event Processing Lab follows a **comparative architecture pattern** that enables direct comparison of different event processing technologies through a common use case. This approach prioritizes:
+
+* **Learning Value**: Each technology implemented using its native patterns and best practices
+* **Architectural Clarity**: Clear separation between technologies to avoid abstraction leakage
+* **Direct Comparison**: Side-by-side implementation of the same business scenarios
+* **Minimal Complexity**: Focus on core concepts rather than production-ready infrastructure
+
+== Architectural Decisions
+
+The following Architecture Decision Records (ADRs) define the architectural approach for the Event Processing Lab:
+
+[cols="1,2,3,1", options="header"]
+|===
+| ADR ID
+| Title
+| Status
+| Semantic Anchor
+
+| xref:09-architecture-decisions/ADR-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| Use Kafka as Event Backbone
+| Accepted
+| [semantic-anchor: decision.kafka-as-event-backbone]
+
+| xref:09-architecture-decisions/ADR-002-use-json-serialization.adoc[ADR-002]
+| Use JSON Serialization for First Iteration
+| Accepted
+| [semantic-anchor: decision.json-serialization]
+
+| xref:09-architecture-decisions/ADR-003-keep-spring-boot-optional.adoc[ADR-003]
+| Keep Spring Boot Optional, Use Plain Java
+| Accepted
+| [semantic-anchor: decision.plain-java-over-spring]
+
+| xref:09-architecture-decisions/ADR-004-separate-implementations.adoc[ADR-004]
+| Separate Esper and Flink Implementations
+| Accepted
+| [semantic-anchor: decision.separate-implementations]
+
+|===
+
+For detailed information on each ADR, see xref:09-architecture-decisions.adoc[Architecture Decisions].
+
+== Technology Stack
+
+[cols="1,2,2,1", options="header"]
+|===
+| Layer
+| Technology
+| Purpose
+| Semantic Anchor
+
+| Event Backbone
+| Apache Kafka
+| Event transport and storage
+| [semantic-anchor: technology.kafka]
+
+| Serialization
+| JSON with Jackson
+| Event data format
+| [semantic-anchor: decision.json-serialization]
+
+| CEP Engine
+| Esper 8.7.0
+| Lightweight CEP processing
+| [semantic-anchor: technology.esper]
+
+| Stream Processing
+| Apache Flink 1.17.1
+| Distributed stream processing
+| [semantic-anchor: technology.flink]
+
+| Pattern Detection
+| Flink CEP
+| Pattern matching library
+| [semantic-anchor: technology.flink-cep]
+
+| Build Tool
+| Gradle 8.5
+| Multi-module project management
+| 
+
+| Language
+| Java 21
+| Core implementation language
+| [semantic-anchor: technology.java]
+
+| Logging
+| SLF4J + Logback
+| Logging framework
+| 
+
+|===
+
+== Quality Goals Mapping
+
+[cols="1,2,2", options="header"]
+|===
+| Quality Goal
+| Solution Approach
+| Implementation
+
+| Learnability
+| Separate implementations, clear code, good documentation
+| Each technology in its own module with focused examples
+
+| Understandability
+| Simple architecture, semantic anchors, consistent patterns
+| Clear module boundaries, documented relationships
+
+| Scalability
+| Use of proven scalable technologies (Kafka, Flink)
+| Each module can scale independently
+
+| Modifiability
+| Loose coupling, clear interfaces
+| Event model shared across modules
+
+| Observability
+| Comprehensive logging, metrics-ready
+| Logback configuration in each module
+
+|===
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Related to: xref:01-introduction-and-goals.adoc[Introduction and Goals]
+* Implements: All ADRs in xref:09-architecture-decisions.adoc[Architecture Decisions]
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. Content derived from the original architecture documentation and adapted to the toolkit structure.

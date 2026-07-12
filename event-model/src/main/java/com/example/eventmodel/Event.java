@@ -1,5 +1,6 @@
 package com.example.eventmodel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.Instant;
@@ -91,6 +92,7 @@ public abstract class Event {
      * Get the EventType enum corresponding to this event.
      * @return the EventType
      */
+    @JsonIgnore
     public EventType getEventTypeEnum() {
         return EventType.fromString(eventType);
     }

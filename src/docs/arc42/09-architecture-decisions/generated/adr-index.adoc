@@ -1,0 +1,10 @@
+[[adr-index]]
+== ADR Index
+
+// Generated from architecture artifact metadata. Do not edit manually.
+
+[cols="1,2,1,3", options="header"]
+|===
+| ADR | Title | Status | Notes
+
+|===

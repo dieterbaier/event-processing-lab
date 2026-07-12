@@ -1,0 +1,54 @@
+[[generated-traceability-arc42]]
+== Traceability
+
+// Generated from architecture artifact metadata. Do not edit manually.
+
+[cols="1,1,3", options="header"]
+|===
+| Direction | Relation | Target
+
+| outgoing
+| refines
+| xref:introduction-and-goals[DOC-101-introduction-and-goals]
+
+| outgoing
+| refines
+| xref:architecture-constraints[DOC-102-architecture-constraints]
+
+| outgoing
+| refines
+| xref:system-scope-and-context[DOC-103-system-scope-and-context]
+
+| outgoing
+| refines
+| xref:deployment-view[DOC-107-deployment-view]
+
+| outgoing
+| refines
+| xref:crosscutting-concepts[DOC-108-crosscutting-concepts]
+
+| outgoing
+| refines
+| xref:architecture-decisions[DOC-109-architecture-decisions]
+
+| outgoing
+| refines
+| xref:quality-requirements[DOC-110-quality-requirements]
+
+| outgoing
+| refines
+| xref:risks-and-technical-debt[DOC-111-risks-and-technical-debt]
+
+| outgoing
+| refines
+| xref:solution-strategy[DOC-401-solution-strategy]
+
+| outgoing
+| refines
+| xref:building-block-view[DOC-501-building-block-view]
+
+| outgoing
+| refines
+| xref:runtime-view[DOC-601-runtime-view]
+
+|===

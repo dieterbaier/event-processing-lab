@@ -1,0 +1,153 @@
+---
+id: DOC-101-introduction-and-goals
+type: Document
+title: 1. Introduction and Goals
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Project purpose, quality goals, and stakeholders for the Event Processing Lab
+.tags:
+  - arc42
+  - introduction
+  - goals
+  - purpose
+  - stakeholders
+relations: []
+---
+[[introduction-and-goals]]
+= 1. Introduction and Goals
+
+[semantic-anchor: event-processing-lab]
+
+== 1.1. Purpose
+
+The Event Processing Lab is a **learning project** designed to enable integration architects to understand, compare, and master different event processing technologies through hands-on experience with a common use case.
+
+By implementing the same business scenarios across multiple technologies, this project provides direct comparison of:
+
+* Architectural trade-offs
+* Scalability characteristics
+* Operational complexity
+* State handling approaches
+* Rule and pattern complexity
+
+== 1.2. Quality Goals
+
+[semantic-anchor: quality.learnability]
+[semantic-anchor: quality.understandability]
+[semantic-anchor: quality.scalability]
+[semantic-anchor: quality.modifiability]
+[semantic-anchor: quality.observability]
+
+The top 5 quality goals that drive architecture decisions:
+
+[cols="1,2,2,2", options="header"]
+|===
+| Priority
+| Quality Goal
+| Description
+| Measurement
+
+| 1
+| Learnability
+| Enable quick understanding of each technology's capabilities and concepts
+| Time to first successful scenario, user feedback scores
+
+| 2
+| Understandability
+| Keep code and architecture simple, clear, and well-documented
+| Code readability, documentation clarity assessments
+
+| 3
+| Scalability
+| Demonstrate how each technology scales with increasing load
+| Throughput under load, latency percentiles, resource utilization
+
+| 4
+| Modifiability
+| Allow easy experimentation with different configurations and scenarios
+| Time to implement changes, number of files affected
+
+| 5
+| Observability
+| Include logging and metrics for understanding system behavior
+| Time to detect issues, time to diagnose issues
+|===
+
+Additional quality characteristics addressed in Chapter 10:
+
+* Performance
+* Reliability
+* Maintainability
+* Security
+* Compatibility
+
+== 1.3. Stakeholders
+
+[cols="1,2,2,1", options="header"]
+|===
+| Role
+| Stakeholder
+| Expectations
+| Priority
+
+| Primary
+| Integration Architects
+| Gain deep understanding of event processing technologies and architectural trade-offs
+| High
+
+| Primary
+| Technical Leads
+| Make informed technology selection decisions for event processing
+| High
+
+| Secondary
+| Software Engineers
+| Implement event processing solutions using appropriate technologies
+| Medium
+
+| Secondary
+| DevOps Engineers
+| Deploy and operate event processing systems effectively
+| Medium
+
+| Secondary
+| Data Engineers
+| Process event streams at scale with appropriate tools
+| Medium
+
+| Tertiary
+| Students / Learners
+| Learn event processing concepts and technologies
+| Low
+|===
+
+== 1.4. Project Scope
+
+=== In Scope
+
+* Event processing technologies: Kafka, Esper, Apache Flink, Flink CEP
+* Use case: Order lifecycle (OrderCreated, PaymentReceived, PaymentFailed, OrderCancelled, ShipmentStarted)
+* Scenarios: Order creation, payment processing, payment timeout, order cancellation, shipment start
+* Documentation: Complete arc42 architecture documentation
+* Architecture: Multi-module Gradle project with clear separation of concerns
+
+=== Out of Scope
+
+* Production-grade deployment and operations
+* Enterprise security features
+* High-availability configurations
+* Performance optimization for production
+* Binary serialization formats (Avro, Protobuf) in first iteration
+* Spring Boot integration (optional, not required)
+
+== Traceability
+
+* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
+* Refines: xref:vision-mission.adoc[Vision and Mission]
+* Addressed by: xref:roadmap.adoc[Project Roadmap]
+
+== Review Notes
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness. Quality goals should be validated with stakeholders. Project scope should be confirmed as appropriate for a learning project.

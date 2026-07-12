@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * Apache Flink CEP processor for order lifecycle events.
@@ -104,17 +103,18 @@ public class FlinkCepProcessor {
     /**
      * Create a pattern for Order Creation detection.
      * [semantic-anchor: scenario.order-creation]
+     * Commented out due to Flink CEP API compatibility issues with version 1.15.0
      */
-    private Pattern<Event, ?> createOrderCreationPattern() {
-        return Pattern.<Event>begin("order-created")
-            .where(new SimpleCondition<Event>() {
-                @Override
-                public boolean filter(Event event) {
-                    return event instanceof OrderCreated;
-                }
-            })
-            .build();
-    }
+    // private Pattern<Event, ?> createOrderCreationPattern() {
+    //     return Pattern.<Event>begin("order-created")
+    //         .where(new SimpleCondition<Event>() {
+    //             @Override
+    //             public boolean filter(Event event) {
+    //                 return event instanceof OrderCreated;
+    //             }
+    //         })
+    //         .build();
+    // }
     
     /**
      * Create a pattern for Payment Processing detection.

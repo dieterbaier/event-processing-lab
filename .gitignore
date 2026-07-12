@@ -62,6 +62,3 @@ temp/
 
 # Test output
 test-results/
-
-# Dependency caches
-*.gradle

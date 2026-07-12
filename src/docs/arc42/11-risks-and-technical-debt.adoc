@@ -1,0 +1,242 @@
+---
+id: DOC-111-risks-and-technical-debt
+type: Document
+title: 11. Risks and Technical Debt
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Identified risks and technical debt for the Event Processing Lab
+.tags:
+  - arc42
+  - risks
+  - technical-debt
+  - mitigation
+  - assessment
+relations:
+  - type: refines
+    target: DOC-108-crosscutting-concepts
+    status: proposed
+    rationale: Risks elaborate the cross-cutting concepts
+    reviewed: false
+  - type: addresses
+    target: DOC-101-introduction-and-goals
+    status: proposed
+    rationale: Risks may impact quality goals
+    reviewed: false
+    reviewed: false
+---
+[[risks-and-technical-debt]]
+= 11. Risks and Technical Debt
+
+== Status
+
+Draft.
+
+This chapter is AI-assisted and must be reviewed for accuracy and completeness.
+
+== 11.1. Risks
+
+[semantic-anchor: risk.state-explosion]
+[semantic-anchor: risk.operational-complexity]
+[semantic-anchor: risk.technology-compatibility]
+[semantic-anchor: risk.event-loss]
+[semantic-anchor: risk.performance-bottleneck]
+[semantic-anchor: risk.learning-curve-too-steep]
+
+The following risks have been identified for the Event Processing Lab project. Each risk uses the format: Because <cause>, <event> may occur, leading to <impact>.
+
+Include::11-risks-and-technical-debt/RISK-001-state-explosion.adoc[leveloffset=+1]
+
+Include::11-risks-and-technical-debt/RISK-002-operational-complexity.adoc[leveloffset=+1]
+
+Include::11-risks-and-technical-debt/RISK-003-technology-compatibility.adoc[leveloffset=+1]
+
+Include::11-risks-and-technical-debt/RISK-004-event-loss.adoc[leveloffset=+1]
+
+Include::11-risks-and-technical-debt/RISK-005-performance-bottleneck.adoc[leveloffset=+1]
+
+Include::11-risks-and-technical-debt/RISK-006-learning-curve-too-steep.adoc[leveloffset=+1]
+
+== 11.2. Technical Debt
+
+The following technical debt items have been identified. Technical debt represents work that should be done to improve the system but has been deferred for various reasons.
+
+[cols="1,2,3,4,5,6", options="header"]
+|===
+| ID
+| Description
+| Module
+| Impact
+| Priority
+| Resolution
+
+| TD-001
+| Flink modules not tested with actual Flink cluster
+| flink-basic, flink-cep
+| Testing gap
+| Medium
+| Add integration tests with real Flink cluster
+
+| TD-002
+| Esper version compatibility not validated
+| esper-cep
+| Runtime risk
+| Medium
+| Test with target Esper version in CI pipeline
+
+| TD-003
+| No Docker Compose configuration
+| root
+| Deployment gap
+| Low
+| Add docker-compose.yml for complete local setup
+
+| TD-004
+| No performance benchmarks
+| all
+| Documentation gap
+| Low
+| Add benchmark results to documentation
+
+| TD-005
+| Limited error handling in some modules
+| kafka-consumer, flink-basic
+| Reliability gap
+| Medium
+| Add comprehensive error handling
+
+| TD-006
+| No end-to-end integration tests
+| root
+| Testing gap
+| Medium
+| Add end-to-end test scenarios
+
+| TD-007
+| Incomplete module documentation
+| all
+| Documentation gap
+| Low
+| Add README files for each module
+
+| TD-008
+| Hardcoded configuration in some places
+| event-producer, kafka-consumer
+| Maintainability gap
+| Medium
+| Externalize all configuration
+
+| TD-009
+| No monitoring integration
+| all
+| Observability gap
+| Low
+| Add metrics collection and monitoring
+
+| TD-010
+| Limited validation in event model
+| event-model
+| Reliability gap
+| Medium
+| Add comprehensive validation
+|===
+
+=== Technical Debt Prioritization
+
+[cols="1,2,3,4", options="header"]
+|===
+| Priority
+| Items
+| Rationale
+| Target Resolution
+
+| High
+| TD-001, TD-005, TD-006
+| Critical for reliability and testing
+| Next sprint
+
+| Medium
+| TD-002, TD-008, TD-010
+| Important for stability
+| Next 2 sprints
+
+| Low
+| TD-003, TD-004, TD-007, TD-009
+| Nice-to-have improvements
+| Future sprints
+|===
+
+=== Technical Debt Details
+
+Include::11-risks-and-technical-debt/TD-001-flink-integration-testing.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-002-esper-version-validation.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-003-docker-compose-configuration.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-004-performance-benchmarks.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-005-comprehensive-error-handling.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-006-end-to-end-integration-tests.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-007-module-documentation.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-008-externalized-configuration.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-009-monitoring-integration.adoc[leveloffset=+2]
+
+Include::11-risks-and-technical-debt/TD-010-event-validation.adoc[leveloffset=+2]
+
+== 11.3. Risk vs. Technical Debt
+
+[cols="1,2,3,4", options="header"]
+|===
+| Category
+| Count
+| High Priority
+| Medium Priority
+
+| Risks
+| 6
+| 1 (RISK-001)
+| 4 (RISK-002, RISK-003, RISK-004, RISK-006)
+
+| Technical Debt
+| 10
+| 0
+| 3 (TD-001, TD-005, TD-006)
+|===
+
+=== Risk and Debt Summary
+
+* **Total Risks**: 6 identified, 1 high priority, 5 medium priority
+* **Total Technical Debt**: 10 items, 3 high priority, 3 medium priority, 4 low priority
+* **Overall Risk Level**: Medium (manageable with current mitigations)
+* **Overall Debt Level**: Medium (should be addressed but not blocking)
+
+== Traceability
+
+* Refines: xref:DOC-108-crosscutting-concepts.adoc[Cross-Cutting Concepts]
+* Related to: xref:DOC-101-introduction-and-goals.adoc[Introduction and Goals]
+* Contains: xref:08-crosscutting-concepts.adoc[Threat Model]
+* Addressed by: xref:roadmap.adoc[Project Roadmap]
+
+== Assumptions
+
+* All identified risks are accurately assessed
+* Mitigation options are feasible and effective
+* Technical debt items are properly prioritized
+* Risk and debt levels are appropriate for a learning project
+
+== Open Questions
+
+* Are there additional risks we should identify?
+* Is the risk assessment accurate?
+* Should we add more technical debt items?
+* How do we track risk mitigation and debt resolution?
+
+== Review Notes
+
+This chapter needs review to ensure all risks and technical debt items are properly identified and assessed. The mitigations should be validated for effectiveness, and the prioritization should be confirmed.

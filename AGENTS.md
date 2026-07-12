@@ -22,37 +22,102 @@ The Event Processing Lab is a **learning project** designed to compare Kafka, Es
 
 This project follows the **arc42** architecture documentation template with extensions from the **docs-as-code-toolkit/architecture-knowledge-toolkit**.
 
-### Required Documentation
+The documentation structure follows the architecture-knowledge-toolkit pattern with:
+- YAML front matter for metadata and traceability relations
+- AsciiDoc format with explicit cross-references
+- Draft/proposed status with reviewed:false for AI-assisted content
+- Explicit traceability between documentation elements
+- Semantic anchors for cross-referencing
 
-1. **arc42 Architecture Document** (`src/docs/architecture.adoc`)
-   - Follow the arc42 template structure
-   - Include PlantUML diagrams for all contexts, building blocks, and runtime scenarios
-   - Use C4-PlantUML for building block diagrams
+### Required Documentation Structure
 
-2. **ADRs (Architecture Decision Records)** (`src/docs/adr/`)
-   - Follow Nygard ADR format
-   - Include Pugh Matrix for decision analysis
-   - Reference quality goals and risks
-   - Use semantic anchors: `[semantic-anchor: decision.*]`
+```
+src/docs/
+├── arc42/                          # arc42 architecture documentation
+│   ├── 01-introduction-and-goals.adoc
+│   ├── 02-architecture-constraints.adoc
+│   ├── 03-system-scope-and-context.adoc
+│   ├── 04-solution-strategy.adoc
+│   ├── 05-building-block-view.adoc
+│   ├── 06-runtime-view.adoc
+│   ├── 07-deployment-view.adoc
+│   ├── 08-crosscutting-concepts.adoc
+│   ├── 09-architecture-decisions/   # ADRs (Architecture Decision Records)
+│   │   ├── ADR-001.adoc            # Use Kafka as Event Backbone
+│   │   ├── ADR-002.adoc            # Use JSON Serialization
+│   │   ├── ADR-003.adoc            # Plain Java over Spring Boot
+│   │   └── ADR-004.adoc            # Separate Implementations
+│   ├── 10-quality-requirements/     # Quality scenarios
+│   │   ├── QS-001.adoc through QS-015.adoc
+│   ├── 11-risks-and-technical-debt/
+│   │   ├── RISK-001.adoc through RISK-006.adoc
+│   │   └── TD-001.adoc through TD-010.adoc
+│   └── 12-glossary.adoc
+├── arc42.adoc                      # Entry point for assembled documentation
+├── canvas/                         # Business and architecture canvases
+│   ├── architecture-inception-canvas.adoc
+│   ├── architecture-communication-canvas.adoc
+│   ├── business-model-canvas.adoc
+│   ├── techstack-canvas.adoc
+│   └── value-proposition-canvas.adoc
+├── fragments/                      # Reusable documentation fragments
+│   ├── architecture/
+│   │   ├── adr-template.adoc
+│   │   ├── quality-attributes.adoc
+│   │   ├── quality-scenario-template.adoc
+│   │   └── risk-assessment-template.adoc
+│   └── product/
+│       ├── event-types.adoc
+│       └── technology-comparison.adoc
+├── questions-and-answers.adoc
+├── roadmap.adoc
+└── vision-mission.adoc
+```
 
-3. **Quality Scenarios** (`src/docs/architecture.adoc` Chapter 10)
-   - Follow six-part quality attribute scenario form
-   - Include literal figures for response measures
-   - Cross-reference Chapter 1.2 quality goals
-   - Use semantic anchors: `[semantic-anchor: quality.*]`
+### ADR Format (Nygard with Pugh Matrix)
 
-4. **Risk Documentation** (`src/docs/architecture.adoc` Chapter 11)
-   - STRIDE threat model in Chapter 8.1
-   - Risks with probability, impact, priority
-   - Mitigation references to Chapter 8 or quality scenarios
-   - Use semantic anchors: `[semantic-anchor: risk.*]`
+Each ADR follows the Nygard format with Pugh Matrix analysis:
+- YAML front matter with metadata (id, type, title, status, owner, created, reviewed, summary, tags, relations)
+- Context section describing the problem
+- Decision section with chosen solution
+- Alternatives considered with pros/cons
+- Consequences section with positive and negative outcomes
+- Pugh Matrix for decision analysis
+- Explicit traceability relations to other documentation elements
+- Semantic anchors for cross-referencing
 
-5. **Runtime Scenarios** (`src/docs/architecture.adoc` Chapter 6)
-   - Include happy path and error/recovery scenarios
-   - Each building block appears in at least one scenario
-   - Use semantic anchors: `[semantic-anchor: scenario.*]`
+### Quality Scenarios (Six-Part Form)
 
-### Semantic Anchors
+Each quality scenario follows the six-part quality attribute scenario form:
+1. **Source**: The stakeholder or system element that originates the stimulus
+2. **Stimulus**: The event or condition that triggers the scenario
+3. **Artifact**: The system element that is affected
+4. **Environment**: The conditions under which the scenario occurs
+5. **Response**: The expected behavior of the system
+6. **Response Measure**: The measurable criterion with literal figures
+
+### Risk Documentation
+
+Each risk includes:
+- YAML front matter with metadata
+- Risk statement in the form: "Because <cause>, <event> may occur, leading to <impact>"
+- Assessment table with likelihood, impact, priority, timeframe, confidence
+- Mitigation options
+- Traceability relations to other documentation elements
+- Semantic anchors
+
+### Technical Debt Documentation
+
+Each technical debt item includes:
+- YAML front matter with metadata
+- Statement describing the debt
+- Details (module, impact, priority, type)
+- Resolution description
+- Acceptance criteria
+- Traceability relations
+- Semantic anchors
+
+## Semantic Anchors
 
 Use semantic anchors extensively for cross-referencing across documentation and code:
 
@@ -90,6 +155,9 @@ Use semantic anchors extensively for cross-referencing across documentation and 
 [semantic-anchor: risk.state-explosion]
 [semantic-anchor: risk.operational-complexity]
 [semantic-anchor: risk.technology-compatibility]
+[semantic-anchor: risk.event-loss]
+[semantic-anchor: risk.performance-bottleneck]
+[semantic-anchor: risk.learning-curve-too-steep]
 ```
 
 ## Cross-Cutting Concepts (arc42 Chapter 8)
@@ -266,23 +334,6 @@ event-processing-lab/
    - Decision: Maintain separate implementations for comparison
    - Consequences: Allows direct comparison, but may lead to some code duplication
 
-## Documentation Structure
-
-```
-event-processing-lab/
-├── AGENTS.md                      # This file
-├── README.md                      # Project overview
-├── src/
-│   └── docs/
-│       ├── architecture.adoc      # arc42 architecture document
-│       └── adr/
-│           ├── ADR-001.md        # Kafka as event backbone
-│           ├── ADR-002.md        # JSON serialization
-│           ├── ADR-003.md        # Plain Java over Spring
-│           └── ADR-004.md        # Separate implementations
-└── (module directories)
-```
-
 ## Agent Behavior
 
 When working on this project:
@@ -306,3 +357,17 @@ When working on this project:
 6. **Ensure** all runtime scenarios are implemented across technologies
 
 7. **Document** architectural decisions and their consequences
+8. **Follow** the architecture-knowledge-toolkit structure and conventions
+9. **Use** YAML front matter in all documentation files
+10. **Include** explicit traceability relations in all documentation
+11. **Mark** AI-assisted content with reviewed:false and appropriate status
+
+## Documentation References
+
+- [arc42 Template](https://arc42.org/)
+- [docs-as-code-toolkit](https://github.com/arc42/docs-as-code-toolkit)
+- [architecture-knowledge-toolkit](https://github.com/arc42/docs-as-code-toolkit/tree/main/architecture-knowledge-toolkit)
+
+### Project Architecture Documentation
+
+The complete architecture documentation for this project is available in `src/docs/arc42.adoc`, which serves as the entry point for the assembled architecture documentation following the arc42 template and architecture-knowledge-toolkit conventions.

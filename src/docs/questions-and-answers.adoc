@@ -1,0 +1,232 @@
+---
+id: questions-and-answers
+type: Document
+title: Questions and Answers
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Open and answered questions about the Event Processing Lab
+.tags:
+  - qa
+  - questions
+  - answers
+  - knowledge-base
+relations:
+  - type: addresses
+    target: DOC-101-introduction-and-goals
+    status: proposed
+    rationale: Q&A clarifies project goals and scope
+    reviewed: false
+---
+[[questions-and-answers]]
+= Questions and Answers
+
+[semantic-anchor: event-processing-lab]
+
+== Purpose
+
+This document captures questions that have arisen during the project and their answers. It serves as a knowledge base for the team and future reference.
+
+== Open Questions
+
+=== Architecture
+
+[cols="1,3,1", options="header"]
+|===
+| ID
+| Question
+| Priority
+
+| Q-ARCH-001
+| Should we add a shared testing utility module for common test patterns?
+| Medium
+
+| Q-ARCH-002
+| How do we handle cross-module dependencies without introducing tight coupling?
+| Medium
+
+| Q-ARCH-003
+| Should we standardize logging formats across all modules?
+| Low
+|===
+
+=== Technology
+
+[cols="1,3,1", options="header"]
+|===
+| ID
+| Question
+| Priority
+
+| Q-TECH-001
+| Which version of Flink CEP should we target for the learning scenarios?
+| Medium
+
+| Q-TECH-002
+| Should we include Kafka Streams as an additional comparison technology?
+| Low
+
+| Q-TECH-003
+| How do we handle version compatibility between Kafka and Flink?
+| Medium
+|===
+
+=== Quality
+
+[cols="1,3,1", options="header"]
+|===
+| ID
+| Question
+| Priority
+
+| Q-QUAL-001
+| How do we measure and validate the learnability of the project?
+| High
+
+| Q-QUAL-002
+| Should we add automated quality scenario testing?
+| Medium
+|===
+
+=== Deployment
+
+[cols="1,3,1", options="header"]
+|===
+| ID
+| Question
+| Priority
+
+| Q-DEPLOY-001
+| Should we provide Docker images for all modules?
+| Medium
+
+| Q-DEPLOY-002
+| How do we handle configuration for different environments?
+| Medium
+|===
+
+== Answered Questions
+
+=== Project Scope
+
+[cols="1,3,2", options="header"]
+|===
+| ID
+| Question
+| Answer
+
+| Q-SCOPE-001
+| Why did we choose the order lifecycle use case?
+| It provides a clear, relatable business scenario with well-defined events and workflows that can be implemented across all technologies
+
+| Q-SCOPE-002
+| Why are we comparing these specific technologies?
+| They represent different approaches to event processing: message broker (Kafka), lightweight CEP (Esper), distributed processing (Flink), and pattern detection library (Flink CEP)
+
+| Q-SCOPE-003
+| Why is this a learning project rather than a production system?
+| The focus is on understanding architectural trade-offs and technology capabilities, not on production-grade features like fault tolerance, security, and scalability at enterprise scale
+|===
+
+=== Technology Decisions
+
+[cols="1,3,2", options="header"]
+|===
+| ID
+| Question
+| Answer
+
+| Q-TECH-004
+| Why did we choose Kafka as the event backbone?
+| Kafka provides high throughput, fault tolerance, scalability, and excellent ecosystem support. Pugh Matrix analysis showed it scored highest among alternatives (RabbitMQ, Pulsar, NATS)
+
+| Q-TECH-005
+| Why JSON serialization instead of binary formats?
+| JSON is human-readable, easy to debug, and widely supported. For a learning project, readability and ease of use are more important than serialization efficiency
+
+| Q-TECH-006
+| Why plain Java over Spring Boot?
+| To focus on core concepts without framework overhead. Spring Boot adds complexity that obscures the underlying technology capabilities
+
+| Q-TECH-007
+| Why separate Esper and Flink implementations?
+| To enable direct comparison without abstraction leakage. Shared interfaces are in the event-model module, but processing logic remains separate
+|===
+
+=== Architecture
+
+[cols="1,3,2", options="header"]
+|===
+| ID
+| Question
+| Answer
+
+| Q-ARCH-004
+| Why arc42 for architecture documentation?
+| arc42 provides a comprehensive, structured approach to architecture documentation that covers all important aspects. The architecture-knowledge-toolkit extends it with additional best practices
+
+| Q-ARCH-005
+| Why semantic anchors?
+| Semantic anchors enable precise cross-referencing across documentation and code, making the documentation more navigable and maintainable
+
+| Q-ARCH-006
+| Why YAML front matter in documentation files?
+| YAML front matter provides metadata and traceability relations in a structured, machine-readable format that supports tooling and validation
+|===
+
+=== Quality
+
+[cols="1,3,2", options="header"]
+|===
+| ID
+| Question
+| Answer
+
+| Q-QUAL-003
+| How do we ensure the project remains understandable?
+| Through clear architecture documentation, consistent coding patterns, semantic anchors, and focused examples that demonstrate one concept at a time
+
+| Q-QUAL-004
+| How do we measure learnability?
+| Through time-to-first-success metrics, user feedback, and the ability of learners to explain concepts and implement new scenarios independently
+
+| Q-QUAL-005
+| How do we handle the trade-off between simplicity and completeness?
+| We prioritize learning value over production completeness, focusing on clear, focused examples that demonstrate core concepts
+|===
+
+== Knowledge Gaps
+
+[cols="1,3,1", options="header"]
+|===
+| ID
+| Knowledge Gap
+| Priority
+
+| KG-001
+| Performance characteristics under high load for each technology
+| Medium
+
+| KG-002
+| State management overhead comparison between Esper and Flink
+| Medium
+
+| KG-003
+| Operational complexity in production environments
+| Low
+
+| KG-004
+| Learning curve measurement for each technology
+| Medium
+|===
+
+== Traceability
+
+* Related to: xref:vision-mission.adoc[Vision and Mission]
+* Related to: xref:DOC-101-introduction-and-goals.adoc[Introduction and Goals]
+* Addressed by: xref:roadmap.adoc[Project Roadmap]
+
+== Review Notes
+
+This document is AI-assisted and must be reviewed for accuracy and completeness. Questions should be organized and prioritized. Answers should be validated for correctness.

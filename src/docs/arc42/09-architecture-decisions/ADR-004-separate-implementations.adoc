@@ -1,0 +1,180 @@
+---
+id: ADR-004-separate-implementations
+type: ArchitectureDecision
+title: Separate Esper and Flink Implementations
+decision: Maintain separate implementations for Esper and Flink to enable direct comparison
+status: accepted
+created: 2026-07-02
+author: Integration Architecture Team
+tags:
+  - esper
+  - flink
+  - comparison
+  - architecture
+relations:
+  - type: refines
+    target: ADR-002-use-json-serialization
+    status: proposed
+    rationale: JSON serialization allows all implementations to consume the same events
+    reviewed: false
+reviewed: false
+---
+[[adr-004-separate-implementations]]
+= ADR-004: Separate Esper and Flink Implementations
+
+[semantic-anchor: decision.separate-implementations]
+
+== Status
+
+[.status-accepted]
+Accepted
+
+== Context
+
+The Event Processing Lab needs to decide how to structure the implementations of the different event processing technologies (Esper CEP, Flink Basic, Flink CEP). The main approaches are:
+
+* Shared codebase with abstraction layer
+* Separate implementations with direct technology access
+* Hybrid approach with some shared components
+
+This decision impacts:
+
+* Direct comparison capability
+* Code duplication
+* Maintenance effort
+* Learning clarity
+* Architectural consistency
+
+== Decision
+
+*Maintain separate implementations for Esper and Flink to enable direct comparison.*
+
+== Decision Drivers
+
+[cols="1,1,2", options="header"]
+|===
+| Driver
+| Importance
+| Notes
+
+| Direct Comparison
+| High
+| Must be able to compare technologies side-by-side
+
+| Learning Clarity
+| High
+| Each technology's approach should be clearly visible
+
+| Implementation Purity
+| High
+| Avoid abstraction leakage between technologies
+
+| Code Reuse
+| Medium
+| Some shared utilities are acceptable
+
+| Maintenance Effort
+| Medium
+| Balance between reuse and clarity
+
+| Consistency
+| Medium
+| Consistent patterns across implementations where possible
+
+|===
+
+== Alternatives Considered
+
+=== 1. Separate Implementations [.selected]#✅ Selected#
+
+*Pros:*
+- Direct comparison of technologies without abstraction interference
+- Each technology can be implemented using its native patterns and best practices
+- Clear demonstration of each technology's unique capabilities
+- No abstraction leakage or "lowest common denominator" effect
+- Better for learning each technology's true nature
+
+*Cons:*
+- Some code duplication (event consumption, basic utilities)
+- More maintenance overhead
+- Potential for inconsistent patterns across modules
+
+*Implementation:* Each technology in its own module with minimal shared code
+
+=== 2. Shared Abstraction Layer
+
+*Pros:*
+- Maximum code reuse
+- Consistent interfaces across technologies
+- Less total code to maintain
+- Easier to swap implementations
+
+*Cons:*
+- Abstraction may hide important technology differences
+- Lowest common denominator approach limits capabilities
+- Harder to see each technology's unique features
+- Abstraction leakage is inevitable
+
+*Implementation:* Common interface with technology-specific implementations
+
+=== 3. Hybrid Approach
+
+*Pros:*
+- Some reuse for common functionality
+- Still allows technology-specific optimizations
+- Balance between reuse and clarity
+
+*Cons:*
+- More complex architecture
+- Decisions about what to share vs. separate can be difficult
+- May still have abstraction issues
+
+*Implementation:* Shared utilities, separate processing logic
+
+== Consequences
+
+=== Positive Consequences
+
+. *Direct Comparison*: Each technology can be evaluated on its own merits without abstraction interference.
+. *Technology Authenticity*: Each implementation uses the technology's native patterns and best practices.
+. *Clear Demonstration*: Unique capabilities of each technology are clearly visible.
+. *Learning Effectiveness*: Students can understand each technology's true approach and philosophy.
+. *Architecture Clarity*: No hidden abstractions or conceptual gaps.
+
+=== Negative Consequences
+
+. *Code Duplication*: Common functionality (Kafka consumption, logging) may be duplicated.
+. *Maintenance Overhead*: More modules to maintain and keep consistent.
+. *Potential Inconsistency*: Different patterns and approaches across modules.
+. *Larger Codebase*: More total code to understand and navigate.
+
+== Related Decisions
+
+* xref:ADR-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone] [semantic-anchor: decision.kafka-as-event-backbone]
+* xref:ADR-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration] [semantic-anchor: decision.json-serialization]
+* xref:ADR-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java] [semantic-anchor: decision.plain-java-over-spring]
+
+== Related Components
+
+* xref:../05-building-block-view.adoc#event-model[Event Model] [semantic-anchor: component.event-model]
+* xref:../05-building-block-view.adoc#esper-cep[Esper CEP] [semantic-anchor: component.esper-cep]
+* xref:../05-building-block-view.adoc#flink-basic[Flink Basic] [semantic-anchor: component.flink-basic]
+* xref:../05-building-block-view.adoc#flink-cep[Flink CEP] [semantic-anchor: component.flink-cep]
+
+== Related Technologies
+
+* https://www.espertech.com/esper/[Esper CEP Engine] [semantic-anchor: technology.esper]
+* https://flink.apache.org/[Apache Flink] [semantic-anchor: technology.flink]
+* https://nightlies.apache.org/flink/flink-docs-stable/docs/libs/cep/[Flink CEP Documentation] [semantic-anchor: technology.flink-cep]
+
+== Related Quality Goals
+
+* xref:../01-introduction-and-goals.adoc#learnability[Learnability] [semantic-anchor: quality.learnability]
+* xref:../01-introduction-and-goals.adoc#understandability[Understandability] [semantic-anchor: quality.understandability]
+* xref:../01-introduction-and-goals.adoc#scalability[Scalability] [semantic-anchor: quality.scalability]
+
+== Related Scenarios
+
+* xref:../06-runtime-view.adoc#order-creation-flow[Order Creation Flow] [semantic-anchor: scenario.order-creation]
+* xref:../06-runtime-view.adoc#payment-processing-flow[Payment Processing Flow] [semantic-anchor: scenario.payment-processing]
+* xref:../06-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection] [semantic-anchor: scenario.payment-timeout]

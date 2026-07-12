@@ -1,0 +1,160 @@
+---
+id: DOC-000-arc42
+type: DocumentSet
+title: Event Processing Lab - Architecture Documentation
+description: Complete arc42 architecture documentation for the Event Processing Lab project
+status: draft
+owner: Integration Architecture Team
+created: 2026-07-02
+reviewed: false
+tags:
+  - arc42
+  - architecture
+  - event-processing-lab
+relations:
+  - type: refines
+    target: DOC-101-introduction-and-goals
+    status: proposed
+    rationale: arc42 entry point refines the introduction and goals chapter
+    reviewed: false
+  - type: refines
+    target: DOC-102-architecture-constraints
+    status: proposed
+    rationale: arc42 entry point refines the architecture constraints chapter
+    reviewed: false
+  - type: refines
+    target: DOC-103-system-scope-and-context
+    status: proposed
+    rationale: arc42 entry point refines the system scope and context chapter
+    reviewed: false
+  - type: refines
+    target: DOC-401-solution-strategy
+    status: proposed
+    rationale: arc42 entry point refines the solution strategy chapter
+    reviewed: false
+  - type: refines
+    target: DOC-501-building-block-view
+    status: proposed
+    rationale: arc42 entry point refines the building block view chapter
+    reviewed: false
+  - type: refines
+    target: DOC-601-runtime-view
+    status: proposed
+    rationale: arc42 entry point refines the runtime view chapter
+    reviewed: false
+  - type: refines
+    target: DOC-107-deployment-view
+    status: proposed
+    rationale: arc42 entry point refines the deployment view chapter
+    reviewed: false
+  - type: refines
+    target: DOC-108-crosscutting-concepts
+    status: proposed
+    rationale: arc42 entry point refines the crosscutting concepts chapter
+    reviewed: false
+  - type: refines
+    target: DOC-109-architecture-decisions
+    status: proposed
+    rationale: arc42 entry point refines the architecture decisions chapter
+    reviewed: false
+  - type: refines
+    target: DOC-110-quality-requirements
+    status: proposed
+    rationale: arc42 entry point refines the quality requirements chapter
+    reviewed: false
+  - type: refines
+    target: DOC-111-risks-and-technical-debt
+    status: proposed
+    rationale: arc42 entry point refines the risks and technical debt chapter
+    reviewed: false
+---
+[[arc42]]
+= Event Processing Lab - Architecture Documentation
+:author: Integration Architecture Team
+:revdate: 2026-07-03
+:version: 1.0.0-SNAPSHOT
+:imagesdir: images
+
+[semantic-anchor: event-processing-lab]
+
+This document provides the complete architecture documentation for the Event Processing Lab project, organized according to the arc42 template and following the docs-as-code-toolkit/architecture-knowledge-toolkit conventions.
+
+== Architecture Documentation Structure
+
+This architecture documentation follows the arc42 template structure:
+
+[cols="1,2,1", options="header"]
+|===
+| Chapter | Title | Description
+
+| 1 | xref:01-introduction-and-goals.adoc[Introduction and Goals] | Project purpose, quality goals, stakeholders
+
+| 2 | xref:02-architecture-constraints.adoc[Architecture Constraints] | Technical and organizational constraints
+
+| 3 | xref:03-system-scope-and-context.adoc[System Scope and Context] | Business context, system overview, responsibilities
+
+| 4 | xref:04-solution-strategy.adoc[Solution Strategy] | Architectural approach, technology stack, quality mapping
+
+| 5 | xref:05-building-block-view.adoc[Building Block View] | Module structure, component details, diagrams
+
+| 6 | xref:06-runtime-view.adoc[Runtime View] | Runtime scenarios, error handling scenarios
+
+| 7 | xref:07-deployment-view.adoc[Deployment View] | Development and production environments
+
+| 8 | xref:08-crosscutting-concepts.adoc[Cross-Cutting Concepts] | Threat model, security, testing, observability, error handling
+
+| 9 | xref:09-architecture-decisions.adoc[Architecture Decisions] | ADR index and decision records
+
+| 10 | xref:10-quality-requirements.adoc[Quality Requirements] | Quality tree and measurable quality scenarios
+
+| 11 | xref:11-risks-and-technical-debt.adoc[Risks and Technical Debt] | Risk assessment and technical debt tracking
+
+|===
+
+include::01-introduction-and-goals.adoc[]
+
+include::02-architecture-constraints.adoc[]
+
+include::03-system-scope-and-context.adoc[]
+
+include::04-solution-strategy.adoc[]
+
+include::05-building-block-view.adoc[]
+
+include::06-runtime-view.adoc[]
+
+include::07-deployment-view.adoc[]
+
+include::08-crosscutting-concepts.adoc[]
+
+include::09-architecture-decisions.adoc[]
+
+include::10-quality-requirements.adoc[]
+
+include::11-risks-and-technical-debt.adoc[]
+
+== Additional Documentation
+
+* xref:../vision-mission.adoc[Vision and Mission]
+* xref:../roadmap.adoc[Project Roadmap]
+* xref:../questions-and-answers.adoc[Questions and Answers]
+
+== Documentation Metadata
+
+[cols="1,2", options="header"]
+|===
+| Property | Value
+
+| Documentation Template | arc42
+| Toolkit | docs-as-code-toolkit/architecture-knowledge-toolkit
+| Status | Draft
+| Reviewed | false
+| Last Updated | 2026-07-03
+| Next Review | 2026-08-03
+
+|===
+
+---
+*Document Status: Draft*
+*Last Updated: 2026-07-03*
+*Next Review: 2026-08-03*
