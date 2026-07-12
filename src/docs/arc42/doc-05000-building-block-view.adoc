@@ -36,12 +36,12 @@ The project follows a modular architecture with clear separation of concerns:
 skinparam monochrome true
 
 package "Event Processing Lab" {
-    [event-model] as EventModel [semantic-anchor: component.event-model]
-    [event-producer] as EventProducer [semantic-anchor: component.event-producer]
-    [kafka-consumer] as KafkaConsumer [semantic-anchor: component.kafka-consumer]
-    [esper-cep] as EsperCep [semantic-anchor: component.esper-cep]
-    [flink-basic] as FlinkBasic [semantic-anchor: component.flink-basic]
-    [flink-cep] as FlinkCep [semantic-anchor: component.flink-cep]
+    [event-model] as EventModel
+    [event-producer] as EventProducer
+    [kafka-consumer] as KafkaConsumer
+    [esper-cep] as EsperCep
+    [flink-basic] as FlinkBasic
+    [flink-cep] as FlinkCep
 }
 
 EventModel --> EventProducer : "depends on"
