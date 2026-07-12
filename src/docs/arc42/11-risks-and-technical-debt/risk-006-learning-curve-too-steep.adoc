@@ -79,15 +79,15 @@ The risk is currently mitigated through comprehensive documentation. The learnin
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
+| xref:adr-004-separate-implementations[ADR-004]
 | Separate implementations require learning multiple approaches
 
 | `addresses`
-| xref:../10-quality-requirements/qs-003-hands-on-experience.adoc[QS-003]
+| xref:qs-003-hands-on-experience[QS-003]
 | Learning curve affects time to first run
 
 | `addresses`
-| xref:../10-quality-requirements/qs-001-technology-comparison-effectiveness.adoc[QS-001]
+| xref:qs-001-technology-comparison-effectiveness[QS-001]
 | Learning curve affects comparison effectiveness
 |===
 

@@ -241,14 +241,14 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 == Related Decisions
 
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
-* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations]
+* xref:adr-002-use-json-serialization[ADR-002: Use JSON Serialization for First Iteration]
+* xref:adr-004-separate-implementations[ADR-004: Separate Esper and Flink Implementations]
 
 == Related Components
 
-* xref:doc-05000-building-block-view.adoc#event-model[Event Model]
-* xref:doc-05000-building-block-view.adoc#event-producer[Event Producer]
-* xref:doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
+* xref:event-model[Event Model]
+* xref:event-producer[Event Producer]
+* xref:kafka-consumer[Kafka Consumer]
 
 == Related Technologies
 
@@ -257,12 +257,12 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 == Related Quality Goals
 
-* xref:doc-01000-introduction-and-goals.adoc#learnability[Learnability]
-* xref:doc-01000-introduction-and-goals.adoc#understandability[Understandability]
-* xref:doc-01000-introduction-and-goals.adoc#scalability[Scalability]
+* xref:learnability[Learnability]
+* xref:understandability[Understandability]
+* xref:scalability[Scalability]
 
 == Related Scenarios
 
-* xref:doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow]
-* xref:doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow]
-* xref:doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection]
+* xref:order-creation-flow[Order Creation Flow]
+* xref:payment-processing-flow[Payment Processing Flow]
+* xref:payment-timeout-detection[Payment Timeout Detection]

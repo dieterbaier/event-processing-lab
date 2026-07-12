@@ -56,11 +56,11 @@ Externalize all configuration to configuration files or environment variables, f
 | Rationale
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
+| xref:event-producer[event-producer]
 | Event producer needs externalized configuration
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
+| xref:kafka-consumer[kafka-consumer]
 | Kafka consumer needs externalized configuration
 
 | `addresses`
@@ -68,11 +68,11 @@ Externalize all configuration to configuration files or environment variables, f
 | Externalized configuration improves modifiability
 
 | `relates_to`
-| xref:risk-002-operational-complexity.adoc[RISK-002]
+| xref:risk-002-operational-complexity[RISK-002]
 | Externalized configuration can reduce operational complexity
 
 | `relates_to`
-| xref:../doc-07000-deployment-view.adoc[Deployment View]
+| xref:deployment-view[Deployment View]
 | Deployment requires flexible configuration
 |===
 

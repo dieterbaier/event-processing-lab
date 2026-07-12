@@ -79,7 +79,7 @@ The risk is currently monitored. For a learning project, the performance impact 
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/adr-002-use-json-serialization.adoc[ADR-002]
+| xref:adr-002-use-json-serialization[ADR-002]
 | JSON serialization decision affects performance
 
 | `addresses`
@@ -91,7 +91,7 @@ The risk is currently monitored. For a learning project, the performance impact 
 | Performance bottleneck affects scalability
 
 | `addresses`
-| xref:../10-quality-requirements/qs-007-throughput-achievement.adoc[QS-007]
+| xref:qs-007-throughput-achievement[QS-007]
 | Performance affects throughput achievement
 |===
 

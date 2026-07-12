@@ -89,15 +89,15 @@ The risk is currently mitigated through careful version selection. Compatibility
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| xref:adr-001-use-kafka-as-event-backbone[ADR-001]
 | Kafka version compatibility is critical
 
 | `relates_to`
-| xref:risk-002-operational-complexity.adoc[RISK-002]
+| xref:risk-002-operational-complexity[RISK-002]
 | Compatibility issues increase operational complexity
 
 | `addresses`
-| xref:../doc-04000-solution-strategy.adoc[Technology Stack]
+| xref:solution-strategy[Technology Stack]
 | Version compatibility is part of technology selection
 |===
 

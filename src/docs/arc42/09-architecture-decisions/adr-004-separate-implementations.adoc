@@ -150,16 +150,16 @@ This decision impacts:
 
 == Related Decisions
 
-* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
-* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java]
+* xref:adr-001-use-kafka-as-event-backbone[ADR-001: Use Kafka as Event Backbone]
+* xref:adr-002-use-json-serialization[ADR-002: Use JSON Serialization for First Iteration]
+* xref:adr-003-keep-spring-boot-optional[ADR-003: Keep Spring Boot Optional, Use Plain Java]
 
 == Related Components
 
-* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
-* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
-* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
-* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
+* xref:event-model[Event Model]
+* xref:esper-cep[Esper CEP]
+* xref:flink-basic[Flink Basic]
+* xref:flink-cep[Flink CEP]
 
 == Related Technologies
 
@@ -169,12 +169,12 @@ This decision impacts:
 
 == Related Quality Goals
 
-* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
-* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
-* xref:../doc-01000-introduction-and-goals.adoc#scalability[Scalability]
+* xref:learnability[Learnability]
+* xref:understandability[Understandability]
+* xref:scalability[Scalability]
 
 == Related Scenarios
 
-* xref:../doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow]
-* xref:../doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow]
-* xref:../doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection]
+* xref:order-creation-flow[Order Creation Flow]
+* xref:payment-processing-flow[Payment Processing Flow]
+* xref:payment-timeout-detection[Payment Timeout Detection]

@@ -418,12 +418,6 @@ All logs include:
 | Not benchmarked
 |===
 
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:doc-11000-risks-and-technical-debt.adoc[Risks and Technical Debt]
-* Implements:
-
 == Review Notes
 
 This chapter is AI-assisted and must be reviewed for accuracy and completeness. All cross-cutting concepts should be validated against the implementation.

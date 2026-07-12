@@ -192,13 +192,6 @@ The Event Processing Lab system consists of:
 
 The business context is described in the System Scope and Business Goals sections of this chapter.
 
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
-* Informs: xref:doc-04000-solution-strategy.adoc[Solution Strategy]
-* Informs: xref:doc-05000-building-block-view.adoc[Building Block View]
-
 == Review Notes
 
 This chapter is AI-assisted and must be reviewed for accuracy and completeness. System boundaries should be validated with stakeholders. Context diagram should be created as PlantUML.

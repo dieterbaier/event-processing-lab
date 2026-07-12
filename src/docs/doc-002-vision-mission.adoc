@@ -121,7 +121,7 @@ The Event Processing Lab uniquely provides:
 
 == Traceability
 
-* Informs: xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Informs: xref:introduction-and-goals[Introduction and Goals]
 
 == Review Notes
 

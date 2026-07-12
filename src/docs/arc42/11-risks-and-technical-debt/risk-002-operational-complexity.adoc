@@ -90,19 +90,19 @@ The risk is currently mitigated through documentation and simplification. Operat
 | Rationale
 
 | `depends_on`
-| xref:../09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| xref:adr-001-use-kafka-as-event-backbone[ADR-001]
 | Kafka adds operational complexity
 
 | `mitigates`
-| xref:../09-architecture-decisions/adr-003-keep-spring-boot-optional.adoc[ADR-003]
+| xref:adr-003-keep-spring-boot-optional[ADR-003]
 | Plain Java reduces framework complexity
 
 | `addresses`
-| xref:../10-quality-requirements/qs-003-hands-on-experience.adoc[QS-003]
+| xref:qs-003-hands-on-experience[QS-003]
 | Complexity may affect time to first run
 
 | `relates_to`
-| xref:../doc-08000-crosscutting-concepts.adoc[Threat Model T-002]
+| xref:crosscutting-concepts[Threat Model T-002]
 | Related to unauthorized access threat
 |===
 

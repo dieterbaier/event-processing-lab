@@ -347,12 +347,6 @@ volumes:
 | Single instance of each component, no redundancy
 |===
 
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:doc-05000-building-block-view.adoc[Building Block View]
-* Related to: xref:doc-03000-system-scope-and-context.adoc[System Scope and Context]
-
 == Review Notes
 
 This chapter is AI-assisted and must be reviewed for accuracy and completeness. Deployment view should be validated with actual deployment. PlantUML deployment diagram should be added.

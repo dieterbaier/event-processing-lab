@@ -66,15 +66,15 @@ Add comprehensive validation to the event model, including field validation, bus
 | Rationale
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#event-model[event-model]
+| xref:event-model[event-model]
 | Event model needs comprehensive validation
 
 | `addresses`
-| xref:../10-quality-requirements/qs-014-issue-identification.adoc[QS-014]
+| xref:qs-014-issue-identification[QS-014]
 | Better validation improves issue identification
 
 | `relates_to`
-| xref:risk-004-event-loss.adoc[RISK-004]
+| xref:risk-004-event-loss[RISK-004]
 | Better validation reduces event loss risk from malformed events
 
 | `relates_to`

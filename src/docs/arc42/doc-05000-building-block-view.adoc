@@ -63,6 +63,7 @@ FlinkBasic --> FlinkCep : "optional dependency"
 
 == Level-2: Module Details
 
+[[event-model]]
 === Event Model Module
 
 [cols="1,2", options="header"]
@@ -130,6 +131,7 @@ Event <|-- ShipmentStarted
 @enduml
 ----
 
+[[event-producer]]
 === Event Producer Module
 
 [cols="1,2", options="header"]
@@ -184,6 +186,7 @@ OrderEventProducer --> EventFactory : "uses"
 @enduml
 ----
 
+[[kafka-consumer]]
 === Kafka Consumer Module
 
 [cols="1,2", options="header"]
@@ -208,6 +211,7 @@ OrderEventProducer --> EventFactory : "uses"
 
 |===
 
+[[esper-cep]]
 === Esper CEP Module
 
 [cols="1,2", options="header"]
@@ -252,6 +256,7 @@ EsperCepEngine --> EventSerializer : "uses"
 @enduml
 ----
 
+[[flink-basic]]
 === Flink Basic Module
 
 [cols="1,2", options="header"]
@@ -276,6 +281,7 @@ EsperCepEngine --> EventSerializer : "uses"
 
 |===
 
+[[flink-cep]]
 === Flink CEP Module
 
 [cols="1,2", options="header"]
@@ -299,12 +305,6 @@ EsperCepEngine --> EventSerializer : "uses"
 | Pattern-based, time-aware, stateful
 
 |===
-
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:doc-03000-system-scope-and-context.adoc[System Scope and Context]
-* Appears in: xref:doc-06000-runtime-view.adoc[Runtime View] scenarios
 
 == Review Notes
 

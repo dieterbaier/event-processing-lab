@@ -223,9 +223,9 @@ This document captures questions that have arisen during the project and their a
 
 == Traceability
 
-* Related to: xref:doc-002-vision-mission.adoc[Vision and Mission]
-* Related to: xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals]
-* Addressed by: xref:doc-004-roadmap.adoc[Project Roadmap]
+* Related to: Vision and Mission
+* Related to: xref:introduction-and-goals[Introduction and Goals]
+* Addressed by: Project Roadmap
 
 == Review Notes
 

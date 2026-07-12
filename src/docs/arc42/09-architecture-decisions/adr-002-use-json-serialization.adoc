@@ -270,17 +270,17 @@ This migration would be documented in a new ADR and would maintain backward comp
 
 == Related Decisions
 
-* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
-* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java]
+* xref:adr-001-use-kafka-as-event-backbone[ADR-001: Use Kafka as Event Backbone]
+* xref:adr-003-keep-spring-boot-optional[ADR-003: Keep Spring Boot Optional, Use Plain Java]
 
 == Related Components
 
-* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
-* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer]
-* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
-* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
-* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
-* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
+* xref:event-model[Event Model]
+* xref:event-producer[Event Producer]
+* xref:kafka-consumer[Kafka Consumer]
+* xref:esper-cep[Esper CEP]
+* xref:flink-basic[Flink Basic]
+* xref:flink-cep[Flink CEP]
 
 == Related Technologies
 
@@ -290,9 +290,9 @@ This migration would be documented in a new ADR and would maintain backward comp
 
 == Related Quality Goals
 
-* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
-* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
-* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability]
+* xref:learnability[Learnability]
+* xref:understandability[Understandability]
+* xref:modifiability[Modifiability]
 
 == Related Scenarios
 

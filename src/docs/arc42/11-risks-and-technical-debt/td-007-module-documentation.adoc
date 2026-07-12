@@ -56,27 +56,27 @@ Add README files for each module that explain the module's purpose, configuratio
 | Rationale
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#event-model[event-model]
+| xref:event-model[event-model]
 | Event model module needs documentation
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
+| xref:event-producer[event-producer]
 | Event producer module needs documentation
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
+| xref:kafka-consumer[kafka-consumer]
 | Kafka consumer module needs documentation
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#esper-cep[esper-cep]
+| xref:esper-cep[esper-cep]
 | Esper CEP module needs documentation
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
+| xref:flink-basic[flink-basic]
 | Flink basic module needs documentation
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-cep[flink-cep]
+| xref:flink-cep[flink-cep]
 | Flink CEP module needs documentation
 
 | `addresses`
@@ -84,7 +84,7 @@ Add README files for each module that explain the module's purpose, configuratio
 | Module documentation improves understandability
 
 | `relates_to`
-| xref:../doc-08000-crosscutting-concepts.adoc[Documentation]
+| xref:crosscutting-concepts[Documentation]
 | Documentation is a cross-cutting concern
 |===
 

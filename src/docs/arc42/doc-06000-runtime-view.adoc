@@ -28,6 +28,7 @@ The following runtime scenarios demonstrate the system behavior across different
 
 == Runtime Scenarios
 
+[[order-creation-flow]]
 === Order Creation Flow
 
 [plantuml,scenario-order-creation,png]
@@ -71,6 +72,7 @@ FlinkCep -> FlinkCep : Detect OrderCreated pattern
 - (Event generation)
 - All consumer modules (processing)
 
+[[payment-processing-flow]]
 === Payment Processing Flow
 
 [plantuml,scenario-payment-processing,png]
@@ -117,6 +119,7 @@ FlinkCep -> FlinkCep : Detect payment processing pattern
 - (Stream processing)
 - (Pattern detection)
 
+[[payment-timeout-detection]]
 === Payment Timeout Detection
 
 [plantuml,scenario-payment-timeout,png]
@@ -211,12 +214,6 @@ FlinkCep -> FlinkCep : Emit timeout detection result
 *Handling:* Fail fast, log detailed error
 *Impact:* Engine fails to start
 *Recovery:* Fix EPL syntax, restart engine
-
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:doc-05000-building-block-view.adoc[Building Block View]
-* Implements: All components in runtime scenarios
 
 == Review Notes
 

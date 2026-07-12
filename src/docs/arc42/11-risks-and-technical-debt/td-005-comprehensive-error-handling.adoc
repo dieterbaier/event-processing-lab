@@ -61,23 +61,23 @@ Add comprehensive error handling with appropriate recovery mechanisms, graceful 
 | Rationale
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
+| xref:kafka-consumer[kafka-consumer]
 | Kafka consumer needs error handling
 
 | `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
+| xref:flink-basic[flink-basic]
 | Flink basic needs error handling
 
 | `addresses`
-| xref:../10-quality-requirements/qs-014-issue-identification.adoc[QS-014]
+| xref:qs-014-issue-identification[QS-014]
 | Better error handling improves issue identification
 
 | `relates_to`
-| xref:risk-004-event-loss.adoc[RISK-004]
+| xref:risk-004-event-loss[RISK-004]
 | Better error handling reduces event loss risk
 
 | `relates_to`
-| xref:../doc-08000-crosscutting-concepts.adoc[Error Handling]
+| xref:crosscutting-concepts[Error Handling]
 | Error handling is a cross-cutting concept
 |===
 

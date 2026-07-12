@@ -40,29 +40,29 @@ The following Architecture Decision Records (ADRs) define the architectural appr
 | Status
 | Semantic Anchor
 
-| xref:09-architecture-decisions/adr-001-use-kafka-as-event-backbone.adoc[ADR-001]
+| xref:adr-001-use-kafka-as-event-backbone[ADR-001]
 | Use Kafka as Event Backbone
 | Accepted
 |
 
-| xref:09-architecture-decisions/adr-002-use-json-serialization.adoc[ADR-002]
+| xref:adr-002-use-json-serialization[ADR-002]
 | Use JSON Serialization for First Iteration
 | Accepted
 |
 
-| xref:09-architecture-decisions/adr-003-keep-spring-boot-optional.adoc[ADR-003]
+| xref:adr-003-keep-spring-boot-optional[ADR-003]
 | Keep Spring Boot Optional, Use Plain Java
 | Accepted
 |
 
-| xref:09-architecture-decisions/adr-004-separate-implementations.adoc[ADR-004]
+| xref:adr-004-separate-implementations[ADR-004]
 | Separate Esper and Flink Implementations
 | Accepted
 |
 
 |===
 
-For detailed information on each ADR, see xref:doc-09000-architecture-decisions.adoc[Architecture Decisions].
+For detailed information on each ADR, see xref:architecture-decisions[Architecture Decisions].
 
 == Technology Stack
 
@@ -154,7 +154,7 @@ The comparison matrix summarizes how each technology stack behaves along the
 project's comparison dimensions. The current values are a *preliminary,
 reviewable assessment* (`reviewed: false`); they are hypotheses to be confirmed
 by running the shared use case and measuring the quality scenarios in
-xref:doc-10000-quality-requirements.adoc[Chapter 10]. See the README section
+xref:quality-requirements[Chapter 10]. See the README section
 "Running a use case to evaluate the Comparison Matrix" for how to reproduce the
 observations.
 
@@ -187,14 +187,8 @@ observations.
   potential, and integration complexity.
 
 Each dimension is exercised by the runtime scenarios in
-xref:doc-06000-runtime-view.adoc[Chapter 6] and measured by the quality
-scenarios in xref:doc-10000-quality-requirements.adoc[Chapter 10].
-
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
-* Implements: All ADRs in xref:doc-09000-architecture-decisions.adoc[Architecture Decisions]
+xref:runtime-view[Chapter 6] and measured by the quality
+scenarios in xref:quality-requirements[Chapter 10].
 
 == Review Notes
 

@@ -50,27 +50,27 @@ The top 5 quality goals that drive architecture decisions:
 | Measurement
 
 | 1
-| Learnability
+| [[learnability]]Learnability
 | Enable quick understanding of each technology's capabilities and concepts
 | Time to first successful scenario, user feedback scores
 
 | 2
-| Understandability
+| [[understandability]]Understandability
 | Keep code and architecture simple, clear, and well-documented
 | Code readability, documentation clarity assessments
 
 | 3
-| Scalability
+| [[scalability]]Scalability
 | Demonstrate how each technology scales with increasing load
 | Throughput under load, latency percentiles, resource utilization
 
 | 4
-| Modifiability
+| [[modifiability]]Modifiability
 | Allow easy experimentation with different configurations and scenarios
 | Time to implement changes, number of files affected
 
 | 5
-| Observability
+| [[observability]]Observability
 | Include logging and metrics for understanding system behavior
 | Time to detect issues, time to diagnose issues
 |===
@@ -141,12 +141,6 @@ Additional quality characteristics addressed in Chapter 10:
 * Performance optimization for production
 * Binary serialization formats (Avro, Protobuf) in first iteration
 * Spring Boot integration (optional, not required)
-
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Refines: xref:doc-002-vision-mission.adoc[Vision and Mission]
-* Addressed by: xref:doc-004-roadmap.adoc[Project Roadmap]
 
 == Review Notes
 

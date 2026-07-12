@@ -136,12 +136,6 @@ relations:
 | Docker, Gradle, Java ecosystem compatibility
 |===
 
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
-* Informs: xref:doc-04000-solution-strategy.adoc[Solution Strategy]
-
 == Review Notes
 
 This chapter is AI-assisted and must be reviewed for accuracy and completeness. Constraints should be validated with the project context. Additional constraints may emerge as the project progresses.
