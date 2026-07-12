@@ -27,7 +27,8 @@ dependencies {
     implementation "org.apache.flink:flink-connector-kafka_2.12:${flinkVersion}"
     
     // Flink CEP Library [semantic-anchor: technology.flink-cep]
-    implementation "org.apache.flink:flink-cep:${flinkCepVersion}"
+    // Same Flink release and Scala suffix as flink-core/streaming above.
+    implementation "org.apache.flink:flink-cep_2.12:${flinkVersion}"
     
     // JSON Processing [semantic-anchor: decision.json-serialization]
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"

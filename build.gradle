@@ -43,8 +43,9 @@ ext {
     esperVersion = '7.1.0'
     
     // Flink dependencies [semantic-anchor: technology.flink]
+    // Keep every Flink artifact (core, streaming, connector, CEP) on one release
+    // so nothing mixes releases on the runtime classpath.
     flinkVersion = '1.14.6'
-    flinkCepVersion = '1.15.0'
     
     // Testing dependencies
     junitVersion = '5.10.0'
