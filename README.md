@@ -42,72 +42,50 @@ The project implements an order processing system with the following events:
 
 ```
 event-processing-lab/
-├── AGENTS.md                      # Agent instructions and project guidelines
+├── AGENTS.md                      # Thin agent contract routing to the toolkit
 ├── README.md                      # This file
-├── settings.gradle                # Gradle multi-module configuration
+├── build.sh                       # docs-toolbox task runner (validate/generate/build)
 ├── build.gradle                   # Root build configuration
+├── settings.gradle                # Gradle multi-module configuration
 ├── gradle.properties              # Gradle properties
+├── metamodel/                     # Vendored artifact/relation schemas (contracts)
+├── templates/                     # Vendored ADR/quality-scenario/risk templates
+├── scripts/                       # Vendored validator + agent-adapter generators
+├── adapters/                      # Generated agent adapters (codex, vibe, copilot, cursor)
+├── .github/
+│   ├── copilot-instructions.md    # GitHub Copilot entry point
+│   └── workflows/                 # CI (validate + tests) and GitHub Pages publish
 ├── src/
 │   └── docs/
-│       ├── arc42/                 # arc42 architecture documentation
-│       │   ├── 01-introduction-and-goals.adoc
-│       │   ├── 02-architecture-constraints.adoc
-│       │   ├── 03-system-scope-and-context.adoc
-│       │   ├── 04-solution-strategy.adoc
-│       │   ├── 05-building-block-view.adoc
-│       │   ├── 06-runtime-view.adoc
-│       │   ├── 07-deployment-view.adoc
-│       │   ├── 08-crosscutting-concepts.adoc
-│       │   ├── 09-architecture-decisions/
-│       │   │   ├── ADR-001-use-kafka-as-event-backbone.adoc     # Use Kafka as Event Backbone
-│       │   │   ├── ADR-002-use-json-serialization.adoc     # Use JSON Serialization
-│       │   │   ├── ADR-003-keep-spring-boot-optional.adoc     # Plain Java over Spring Boot
-│       │   │   └── ADR-004-separate-implementations.adoc     # Separate Implementations
-│       │   ├── 10-quality-requirements/
-│       │   │   ├── QS-001.adoc through QS-015.adoc
-│       │   ├── 11-risks-and-technical-debt/
-│       │   │   ├── RISK-001.adoc through RISK-006.adoc
-│       │   │   └── TD-001.adoc through TD-010.adoc
-│       │   └── 12-glossary.adoc
-│       ├── arc42.adoc              # Entry point for architecture documentation
-│       ├── canvas/                 # Business and architecture canvases
-│       ├── fragments/              # Reusable documentation fragments
-│       ├── roadmap.adoc
-│       ├── vision-mission.adoc
-│       └── questions-and-answers.adoc
-└── modules/
-    ├── event-model/              # [semantic-anchor: component.event-model]
-    │   └── src/main/java/com/example/eventmodel/
-    │       ├── OrderCreated.java
-    │       ├── PaymentReceived.java
-    │       ├── PaymentFailed.java
-    │       ├── OrderCancelled.java
-    │       ├── ShipmentStarted.java
-    │       └── EventType.java
-    │
-    ├── event-producer/            # [semantic-anchor: component.event-producer]
-    │   └── src/main/java/com/example/eventproducer/
-    │       └── OrderEventProducer.java
-    │
-    ├── kafka-consumer/            # [semantic-anchor: component.kafka-consumer]
-    │   └── src/main/java/com/example/kafkaconsumer/
-    │       └── OrderEventConsumer.java
-    │
-    ├── esper-cep/                 # [semantic-anchor: component.esper-cep]
-    │   └── src/main/java/com/example/espercep/
-    │       ├── EsperEngine.java
-    │       ├── PaymentTimeoutRule.java
-    │       └── OrderProcessingRules.java
-    │
-    ├── flink-basic/               # [semantic-anchor: component.flink-basic]
-    │   └── src/main/java/com/example/flinkbasic/
-    │       ├── FlinkStreamProcessor.java
-    │       └── OrderEventProcessor.java
-    │
-    └── flink-cep/                 # [semantic-anchor: component.flink-cep]
-        └── src/main/java/com/example/flinkcep/
-            ├── FlinkCepProcessor.java
-            └── PaymentPatternDetector.java
+│       ├── doc-001-arc42.adoc     # arc42 entry point (assembled documentation)
+│       ├── doc-002-vision-mission.adoc
+│       ├── doc-004-roadmap.adoc
+│       ├── doc-005-questions-and-answers.adoc
+│       └── arc42/                 # arc42 chapter sources (+ per-chapter detail dirs)
+│           ├── doc-01000-introduction-and-goals.adoc
+│           ├── doc-02000-architecture-constraints.adoc
+│           ├── doc-03000-system-scope-and-context.adoc
+│           ├── doc-04000-solution-strategy.adoc
+│           ├── doc-05000-building-block-view.adoc
+│           ├── doc-06000-runtime-view.adoc
+│           ├── doc-07000-deployment-view.adoc
+│           ├── doc-08000-crosscutting-concepts.adoc
+│           ├── doc-09000-architecture-decisions.adoc
+│           ├── 09-architecture-decisions/    # adr-001 … adr-004-*.adoc
+│           ├── doc-10000-quality-requirements.adoc
+│           ├── 10-quality-requirements/      # qs-001 … qs-015-*.adoc
+│           ├── doc-11000-risks-and-technical-debt.adoc
+│           └── 11-risks-and-technical-debt/  # risk-001 … risk-006, td-005 … td-010
+├── event-model/                   # [semantic-anchor: component.event-model]
+├── event-producer/                # [semantic-anchor: component.event-producer]
+├── kafka-consumer/                # [semantic-anchor: component.kafka-consumer]
+├── esper-cep/                     # [semantic-anchor: component.esper-cep]
+├── flink-basic/                   # [semantic-anchor: component.flink-basic]
+└── flink-cep/                     # [semantic-anchor: component.flink-cep]
+
+Each module holds its Java sources under src/main/java/com/example/<module>/.
+Derived documentation output lives under src/docs/**/generated/ and build/ and
+is not committed (regenerate with ./build.sh).
 ```
 
 ## Technologies
@@ -123,10 +101,27 @@ event-processing-lab/
 
 The complete architecture documentation following the arc42 template and docs-as-code-toolkit conventions is available in the `src/docs/` directory:
 
-* xref:src/docs/arc42.adoc[arc42 Architecture Documentation] - Main entry point
-* xref:src/docs/arc42/09-architecture-decisions.adoc[Architecture Decisions] - ADR index and detailed decision records
-* xref:src/docs/arc42/10-quality-requirements.adoc[Quality Requirements] - Quality tree and measurable scenarios
-* xref:src/docs/arc42/11-risks-and-technical-debt.adoc[Risks and Technical Debt] - Risk assessment and technical debt tracking
+* link:src/docs/doc-001-arc42.adoc[arc42 Architecture Documentation] - Main entry point
+* link:src/docs/arc42/doc-09000-architecture-decisions.adoc[Architecture Decisions] - ADR index and detailed decision records
+* link:src/docs/arc42/doc-10000-quality-requirements.adoc[Quality Requirements] - Quality tree and measurable scenarios
+* link:src/docs/arc42/doc-11000-risks-and-technical-debt.adoc[Risks and Technical Debt] - Risk assessment and technical debt tracking
+
+### Validating and building the documentation
+
+The architecture docs are validated, generated, and rendered with the
+`docs-as-code-toolkit/architecture-knowledge-toolkit` tooling, run through the
+pinned `docs-toolbox` container image via `./build.sh`:
+
+```bash
+./build.sh validate    # validate artifact metadata and relations
+./build.sh generate    # regenerate derived fragments and indexes
+./build.sh build       # render build/architecture/index.html
+```
+
+Set `DOCS_TOOLBOX_LOCAL=1` to run against the host toolchain instead. CI
+(`.github/workflows/ci.yml`) validates every pull request; on `main`, the
+documentation is rendered and published to GitHub Pages
+(`.github/workflows/pages.yml`).
 
 ## Quality Goals
 
@@ -326,17 +321,13 @@ kafka.bootstrap.servers=localhost:9092
 
 ## Architecture Documentation
 
-For detailed architecture documentation, see link:src/docs/arc42.adoc[arc42 Architecture Documentation].
+For detailed architecture documentation, see link:src/docs/doc-001-arc42.adoc[arc42 Architecture Documentation].
 
 The architecture documentation follows the arc42 template with architecture-knowledge-toolkit extensions and includes:
-- link:src/docs/vision-mission.adoc[Vision and Mission]
-- link:src/docs/roadmap.adoc[Project Roadmap]
-- link:src/docs/canvas/architecture-inception-canvas.adoc[Architecture Inception Canvas]
-- link:src/docs/canvas/business-model-canvas.adoc[Business Model Canvas]
-- link:src/docs/canvas/value-proposition-canvas.adoc[Value Proposition Canvas]
-- link:src/docs/canvas/techstack-canvas.adoc[TechStack Canvas]
-- link:src/docs/canvas/architecture-communication-canvas.adoc[Architecture Communication Canvas]
-- All 12 arc42 chapters under link:src/docs/arc42/[src/docs/arc42/]
+- link:src/docs/doc-002-vision-mission.adoc[Vision and Mission]
+- link:src/docs/doc-004-roadmap.adoc[Project Roadmap]
+- link:src/docs/doc-005-questions-and-answers.adoc[Questions and Answers]
+- The arc42 chapters under link:src/docs/arc42/[src/docs/arc42/], including 15 quality scenarios, 6 risks, and 6 technical-debt items
 
 ## Semantic Anchors
 
