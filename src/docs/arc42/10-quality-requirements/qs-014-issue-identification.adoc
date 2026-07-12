@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-014-issue-identification]]
-== QS-014-issue-identification: Issue Identification
+== QS-014: Issue Identification
 
 
 

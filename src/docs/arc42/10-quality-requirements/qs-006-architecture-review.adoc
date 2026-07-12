@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-006-architecture-review]]
-== QS-006-architecture-review: Architecture Review Effectiveness
+== QS-006: Architecture Review Effectiveness
 
 
 

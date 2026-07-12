@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-007-throughput-achievement]]
-== QS-007-throughput-achievement: Throughput Achievement
+== QS-007: Throughput Achievement
 
 
 

@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-009-pattern-complexity-handling]]
-== QS-009-pattern-complexity-handling: Pattern Complexity Handling
+== QS-009: Pattern Complexity Handling
 
 
 

@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-005-debugging-effectiveness]]
-== QS-005-debugging-effectiveness: Debugging Effectiveness
+== QS-005: Debugging Effectiveness
 
 
 

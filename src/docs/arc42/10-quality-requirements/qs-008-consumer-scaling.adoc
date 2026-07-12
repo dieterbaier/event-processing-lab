@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-008-consumer-scaling]]
-== QS-008-consumer-scaling: Consumer Scaling
+== QS-008: Consumer Scaling
 
 
 

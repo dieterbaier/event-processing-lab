@@ -25,69 +25,58 @@ relations:
     reviewed: false
 ---
 [[td-010-event-validation]]
-= TD-010: Event Model Validation
+== TD-010: Event Model Validation
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This technical debt item is AI-assisted. It identifies work needed for review and does not decide acceptance.
 
-== Technical Debt Statement
+=== Technical Debt Statement
 
 Because there is limited validation in the event model, **malformed or invalid events may be processed incorrectly**, leading to data quality issues and processing errors.
 
-== Details
+=== Details
 
 * **Module**: event-model
 * **Impact**: Reliability gap - may process invalid events
 * **Priority**: Medium
 * **Type**: Reliability gap
 
-== Resolution
+=== Resolution
 
 Add comprehensive validation to the event model, including field validation, business rule validation, and schema validation.
 
-== Acceptance Criteria
+=== Acceptance Criteria
 
 * All event types have comprehensive validation
 * Validation includes field constraints, required fields, and business rules
 * Validation errors are informative and actionable
 * Validation is performed at appropriate boundaries (serialization, deserialization, processing)
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/td-010-event-validation-impact.adoc[leveloffset=+2]
 
-| `affects`
-| xref:event-model[event-model]
-| Event model needs comprehensive validation
+=== Traceability
 
-| `addresses`
-| xref:qs-014-issue-identification[QS-014]
-| Better validation improves issue identification
+include::generated/td-010-event-validation-attributes.adoc[]
 
-| `relates_to`
-| xref:risk-004-event-loss[RISK-004]
-| Better validation reduces event loss risk from malformed events
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-| `relates_to`
-|
-| JSON serialization may have validation requirements
-|===
-
-== Open Questions
+include::generated/td-010-event-validation-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * What validation library should we use?
 * Should validation be at the schema level, business rule level, or both?
 * How do we handle validation errors (reject, correct, log)?
 
-== Review Notes
+=== Review Notes
 
 This technical debt item can be marked reviewed only after the implementation plan and acceptance criteria are confirmed by the accountable owner. The resolution approach should be evaluated for feasibility and effectiveness.

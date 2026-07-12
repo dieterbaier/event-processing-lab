@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-013-monitoring-effectiveness]]
-== QS-013-monitoring-effectiveness: Monitoring Effectiveness
+== QS-013: Monitoring Effectiveness
 
 
 

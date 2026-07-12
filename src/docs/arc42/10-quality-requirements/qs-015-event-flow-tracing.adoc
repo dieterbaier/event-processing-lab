@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-015-event-flow-tracing]]
-== QS-015-event-flow-tracing: Event Flow Tracing
+== QS-015: Event Flow Tracing
 
 
 

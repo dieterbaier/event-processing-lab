@@ -31,21 +31,21 @@ relations:
     reviewed: false
 ---
 [[risk-003-technology-compatibility]]
-= RISK-003: Technology Compatibility Issues
+== RISK-003: Technology Compatibility Issues
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This risk is AI-assisted. It identifies a concern for review and does not decide risk acceptance.
 
-== Risk Statement
+=== Risk Statement
 
 Because the project uses multiple technologies with their own version requirements and dependencies, **technology compatibility issues may arise**, leading to integration problems and version conflicts.
 
-== Assessment
+=== Assessment
 
 [cols="1,3", options="header"]
 |===
@@ -68,7 +68,7 @@ Because the project uses multiple technologies with their own version requiremen
 | Medium
 |===
 
-== Mitigation Options
+=== Mitigation Options
 
 * Use stable, well-tested versions of all technologies
 * Test integration early and regularly
@@ -76,37 +76,30 @@ Because the project uses multiple technologies with their own version requiremen
 * Document known version compatibilities
 * Use dependency management tools effectively
 
-== Decision or Acceptance
+=== Decision or Acceptance
 
 The risk is currently mitigated through careful version selection. Compatibility testing should be part of the CI/CD pipeline.
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/risk-003-technology-compatibility-impact.adoc[leveloffset=+2]
 
-| `depends_on`
-| xref:adr-001-use-kafka-as-event-backbone[ADR-001]
-| Kafka version compatibility is critical
+=== Traceability
 
-| `relates_to`
-| xref:risk-002-operational-complexity[RISK-002]
-| Compatibility issues increase operational complexity
+include::generated/risk-003-technology-compatibility-attributes.adoc[]
 
-| `addresses`
-| xref:solution-strategy[Technology Stack]
-| Version compatibility is part of technology selection
-|===
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-== Open Questions
+include::generated/risk-003-technology-compatibility-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * How do we handle version conflicts between technologies?
 * Should we use dependency management tools like Maven BOM or Gradle platforms?
 * How do we test compatibility in CI/CD?
 
-== Review Notes
+=== Review Notes
 
 State this risk can be marked reviewed only after the assessment and mitigation path are confirmed by the accountable owner. The mitigation options should be evaluated for effectiveness and feasibility.

@@ -16,21 +16,21 @@ tags:
 relations: []
 ---
 [[risk-001-state-explosion]]
-= RISK-001: State Explosion in CEP Engines
+== RISK-001: State Explosion in CEP Engines
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This risk is AI-assisted. It identifies a concern for review and does not decide risk acceptance.
 
-== Risk Statement
+=== Risk Statement
 
 Because complex event pattern matching requires maintaining state for partial matches, **state explosion may occur in CEP engines**, leading to memory exhaustion and system instability.
 
-== Assessment
+=== Assessment
 
 [cols="1,3", options="header"]
 |===
@@ -53,7 +53,7 @@ Because complex event pattern matching requires maintaining state for partial ma
 | Medium
 |===
 
-== Mitigation Options
+=== Mitigation Options
 
 * Limit window sizes in CEP rules to bound state growth
 * Use efficient pattern definitions that minimize state requirements
@@ -63,37 +63,30 @@ Because complex event pattern matching requires maintaining state for partial ma
 * Use time-based state expiration for long-running patterns
 * Limit the number of concurrent patterns in development mode
 
-== Decision or Acceptance
+=== Decision or Acceptance
 
 The risk is currently mitigated through implementation best practices. State size monitoring should be added for production use. For the learning purposes of this project, the risk is acceptable with proper guidance and configuration.
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/risk-001-state-explosion-impact.adoc[leveloffset=+2]
 
-| `depends_on`
-| xref:adr-004-separate-implementations[ADR-004]
-| State explosion is a concern for CEP engines
+=== Traceability
 
-| `addresses`
-| xref:qs-009-pattern-complexity-handling[QS-009]
-| Pattern complexity may contribute to state growth
+include::generated/risk-001-state-explosion-attributes.adoc[]
 
-| `relates_to`
-| xref:crosscutting-concepts[Threat Model T-001]
-| Related to denial of service threat
-|===
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-== Open Questions
+include::generated/risk-001-state-explosion-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * Should we implement state monitoring in the CEP modules?
 * What are appropriate window sizes for learning scenarios?
 * How do we detect and alert on state growth?
 
-== Review Notes
+=== Review Notes
 
 State this risk can be marked reviewed only after the assessment and mitigation path are confirmed by the accountable owner. The mitigation options should be evaluated for effectiveness and feasibility.

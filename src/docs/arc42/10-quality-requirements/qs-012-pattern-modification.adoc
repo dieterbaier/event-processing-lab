@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-012-pattern-modification]]
-== QS-012-pattern-modification: Pattern Modification
+== QS-012: Pattern Modification
 
 
 

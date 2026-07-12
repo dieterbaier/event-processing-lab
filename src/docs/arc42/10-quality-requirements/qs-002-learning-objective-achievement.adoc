@@ -18,7 +18,7 @@ relations:
     reviewed: false
 ---
 [[qs-002-learning-objective-achievement]]
-== QS-002-learning-objective-achievement: Learning Objective Achievement
+== QS-002: Learning Objective Achievement
 
 
 

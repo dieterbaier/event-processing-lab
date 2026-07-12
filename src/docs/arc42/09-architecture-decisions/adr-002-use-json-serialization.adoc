@@ -2,10 +2,10 @@
 id: ADR-002-use-json-serialization
 type: ADR
 title: Use JSON Serialization for First Iteration
-decision: Use JSON format for event serialization in the initial implementation
+summary: Use JSON format for event serialization in the initial implementation
 status: accepted
 created: 2026-07-02
-author: Integration Architecture Team
+owner: Integration Architecture Team
 tags:
   - serialization
   - json
@@ -20,16 +20,16 @@ relations:
 reviewed: false
 ---
 [[adr-002-use-json-serialization]]
-= ADR-002: Use JSON Serialization for First Iteration
+== ADR-002: Use JSON Serialization for First Iteration
 
 
 
-== Status
+=== Status
 
 [.status-accepted]
 Accepted
 
-== Context
+=== Context
 
 The Event Processing Lab needs a serialization format for events transmitted through the Kafka event backbone. The serialization format must:
 
@@ -39,11 +39,11 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 * Be extensible for future event types
 * Work well with Kafka's message format
 
-== Decision
+=== Decision
 
 *Use JSON (JavaScript Object Notation) as the serialization format for the first iteration of the Event Processing Lab.*
 
-== Decision Drivers
+=== Decision Drivers
 
 [cols="1,1,2", options="header"]
 |===
@@ -85,9 +85,9 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 |===
 
-== Alternatives Considered
+=== Alternatives Considered
 
-=== 1. JSON [.selected]#✅ Selected#
+==== 1. JSON [.selected]#✅ Selected#
 
 *Pros:* Human-readable, easy to debug, widely supported, schema-flexible, language-agnostic
 
@@ -95,7 +95,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 *Libraries:* Jackson, Gson, JSON-B (Java), native support in most languages
 
-=== 2. Apache Avro
+==== 2. Apache Avro
 
 *Pros:* Compact binary format, schema evolution support, built-in validation, efficient serialization
 
@@ -103,7 +103,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 *Libraries:* Avro Java library, Confluent Schema Registry
 
-=== 3. Protocol Buffers (Protobuf)
+==== 3. Protocol Buffers (Protobuf)
 
 *Pros:* Compact binary format, very fast serialization/deserialization, strong typing
 
@@ -111,7 +111,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 *Libraries:* protobuf-java, good ecosystem
 
-=== 4. Apache Thrift
+==== 4. Apache Thrift
 
 *Pros:* Binary format, schema evolution, multiple language support
 
@@ -119,7 +119,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 *Libraries:* Thrift Java library
 
-=== 5. Java Serialization
+==== 5. Java Serialization
 
 *Pros:* Native Java support, simple to implement
 
@@ -127,7 +127,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 *Libraries:* Built into Java
 
-== Pugh Matrix Analysis
+=== Pugh Matrix Analysis
 
 [cols="1,1,1,1,1,1,1", options="header"]
 |===
@@ -213,9 +213,9 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 |===
 
-== Consequences
+=== Consequences
 
-=== Positive Consequences
+==== Positive Consequences
 
 . *Human Readability*: JSON events can be easily read and understood by humans, making debugging and learning much easier.
 . *Universal Support*: JSON is supported by virtually all programming languages and technologies, ensuring compatibility across all processing engines.
@@ -224,7 +224,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 . *Schema Flexibility*: JSON allows for easy addition of new fields and event types without requiring schema updates.
 . *Integration Simplicity*: Most Kafka clients and processing engines have built-in or easy JSON support.
 
-=== Negative Consequences
+==== Negative Consequences
 
 . *Message Size*: JSON is more verbose than binary formats, resulting in larger message sizes and potentially lower throughput.
 . *Parsing Performance*: JSON parsing is slower than binary serialization, which may impact performance at very high throughput.
@@ -232,7 +232,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 . *No Type Safety*: JSON doesn't preserve type information, requiring careful handling in consuming applications.
 . *Schema Evolution Complexity*: While flexible, managing schema changes across multiple consumers can become complex without a schema registry.
 
-== Risk Mitigations
+=== Risk Mitigations
 
 [cols="1,2,1", options="header"]
 |===
@@ -258,7 +258,7 @@ The Event Processing Lab needs a serialization format for events transmitted thr
 
 |===
 
-== Future Considerations
+=== Future Considerations
 
 For production scenarios or high-throughput requirements, consider migrating to:
 
@@ -268,91 +268,22 @@ For production scenarios or high-throughput requirements, consider migrating to:
 
 This migration would be documented in a new ADR and would maintain backward compatibility where possible.
 
-== Related Decisions
+=== Impact
 
-* xref:adr-001-use-kafka-as-event-backbone[ADR-001: Use Kafka as Event Backbone]
-* xref:adr-003-keep-spring-boot-optional[ADR-003: Keep Spring Boot Optional, Use Plain Java]
+include::generated/adr-002-use-json-serialization-impact.adoc[leveloffset=+2]
 
-== Related Components
+=== Traceability
 
-* xref:event-model[Event Model]
-* xref:event-producer[Event Producer]
-* xref:kafka-consumer[Kafka Consumer]
-* xref:esper-cep[Esper CEP]
-* xref:flink-basic[Flink Basic]
-* xref:flink-cep[Flink CEP]
+include::generated/adr-002-use-json-serialization-attributes.adoc[]
 
-== Related Technologies
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-* https://www.json.org/[JSON]
-* https://github.com/FasterXML/jackson[Jackson] - JSON library for Java
-* https://github.com/google/gson[Gson] - Alternative JSON library
+// Generated traceability fragment. Relations are maintained only in YAML front matter.
+include::generated/adr-002-use-json-serialization-traceability.adoc[leveloffset=+2]
 
-== Related Quality Goals
+=== Review Notes
 
-* xref:learnability[Learnability]
-* xref:understandability[Understandability]
-* xref:modifiability[Modifiability]
-
-== Related Scenarios
-
-* All runtime scenarios benefit from JSON's human readability for debugging
-
-== Implementation Details
-
-All events will follow a consistent JSON structure:
-
-[source,json]
-----
-{
-  "eventId": "unique-uuid",
-  "eventType": "OrderCreated|PaymentReceived|PaymentFailed|OrderCancelled|ShipmentStarted",
-  "timestamp": "2026-07-02T10:30:00Z",
-  "version": "1.0",
-  "payload": {
-    // Event-specific fields
-  }
-}
-----
-
-=== Event-Specific Payloads
-
-==== OrderCreated
-[source,json]
-----
-{
-  "eventId": "550e8400-e29b-41d4-a716-446655440000",
-  "eventType": "OrderCreated",
-  "timestamp": "2026-07-02T10:30:00Z",
-  "version": "1.0",
-  "payload": {
-    "orderId": "ORD-12345",
-    "customerId": "CUST-67890",
-    "orderItems": [
-      {"productId": "PROD-001", "quantity": 2, "unitPrice": 19.99},
-      {"productId": "PROD-002", "quantity": 1, "unitPrice": 29.99}
-    ],
-    "totalAmount": 69.97,
-    "currency": "USD"
-  }
-}
-----
-
-==== PaymentReceived
-[source,json]
-----
-{
-  "eventId": "550e8400-e29b-41d4-a716-446655440001",
-  "eventType": "PaymentReceived",
-  "timestamp": "2026-07-02T10:35:00Z",
-  "version": "1.0",
-  "payload": {
-    "orderId": "ORD-12345",
-    "paymentId": "PAY-54321",
-    "amount": 69.97,
-    "currency": "USD",
-    "paymentMethod": "CreditCard",
-    "transactionId": "TXN-98765"
-  }
-}
-----
+State what must be confirmed before this ADR can be marked reviewed or accepted.
