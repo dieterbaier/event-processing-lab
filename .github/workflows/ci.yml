@@ -1,0 +1,58 @@
+name: CI
+
+# Validate the architecture documentation and build/test the Java modules on
+# every pull request (and on pushes to main). Architecture tasks run inside the
+# pinned docs-as-code-toolkit/docs-toolbox image via ./build.sh, so CI and local
+# runs share one reproducible toolchain.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  architecture:
+    name: Architecture docs (validate, generate, adapters)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ./build.sh runs each task in the pinned docs-toolbox container (Docker is
+      # available on ubuntu-latest); the image is pulled once and reused.
+      - name: Validate artifact metadata and relations
+        run: ./build.sh validate
+
+      - name: Generate derived fragments (must be reproducible)
+        run: ./build.sh generate
+
+      - name: Check agent adapters are up to date
+        run: ./build.sh check-adapters
+
+  java:
+    name: Java build and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # The gradle-wrapper jar is not committed, so provision Gradle explicitly
+      # instead of relying on ./gradlew.
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.5'
+
+      - name: Build and test
+        run: gradle build --no-daemon

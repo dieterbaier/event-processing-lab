@@ -1,0 +1,51 @@
+name: Publish architecture docs
+
+# Render the arc42 architecture documentation and publish it to GitHub Pages
+# whenever main changes. The HTML is generated inside the pinned docs-toolbox
+# image via ./build.sh build (Asciidoctor + PlantUML + Graphviz), then deployed
+# with the official Pages actions.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment; do not cancel an in-progress run so a
+# publish always finishes.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build architecture HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Runs generate + Asciidoctor render inside the pinned docs-toolbox image.
+      # Output is written to build/architecture/ on the workspace.
+      - name: Build architecture documentation
+        run: ./build.sh build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/architecture
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
