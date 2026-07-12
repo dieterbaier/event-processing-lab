@@ -218,8 +218,8 @@ Include::11-risks-and-technical-debt/TD-010-event-validation.adoc[leveloffset=+2
 
 == Traceability
 
-* Refines: xref:DOC-08000-crosscutting-concepts.adoc[Cross-Cutting Concepts]
-* Related to: xref:DOC-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Refines: xref:doc-08000-crosscutting-concepts.adoc[Cross-Cutting Concepts]
+* Related to: xref:doc-01000-introduction-and-goals.adoc[Introduction and Goals]
 * Contains: xref:doc-08000-crosscutting-concepts.adoc[Threat Model]
 * Addressed by: xref:doc-004-roadmap.adoc[Project Roadmap]
 

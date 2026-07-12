@@ -86,8 +86,6 @@ The Event Processing Lab provides:
 
 == Value Proposition
 
-[semantic-anchor: canvas.value-proposition-canvas]
-
 The Event Processing Lab uniquely provides:
 
 * **Multi-Technology Comparison**: Single project covering Kafka, Esper, Flink, and Flink CEP
@@ -123,9 +121,7 @@ The Event Processing Lab uniquely provides:
 
 == Traceability
 
-* Informs: xref:DOC-01000-introduction-and-goals.adoc[Introduction and Goals]
-* Related to: xref:canvas/business-model-canvas.adoc[Business Model Canvas]
-* Related to: xref:canvas/value-proposition-canvas.adoc[Value Proposition Canvas]
+* Informs: xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals]
 
 == Review Notes
 

@@ -1,0 +1,71 @@
+---
+id: QS-006-architecture-review
+type: QualityScenario
+title: Architecture Review Effectiveness
+status: proposed
+owner: architecture
+created: 2026-07-12
+reviewed: false
+summary: Architecture Review Effectiveness quality scenario for the Event Processing Lab.
+tags:
+  - quality
+  - understandability
+relations:
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Concretizes the understandability quality goal.
+    reviewed: false
+---
+[[qs-006-architecture-review]]
+== QS-006-architecture-review: Architecture Review Effectiveness
+
+[semantic-anchor: quality.understandability]
+
+=== Status
+
+Proposed. AI-assisted; the response measure is a reviewable target.
+
+=== Scenario
+
+[cols="1,3", options="header"]
+|===
+| Element | Description
+| Source | Reviewer
+| Stimulus | Reviews an architecture change such as a new ADR
+| Environment | Pull request review
+| Artifact | ADRs and traceability metadata
+| Response | The reviewer assesses impact using the explicit relations
+| Response Measure | All affected artifacts identified from metadata for at least 90% of changes
+|===
+
+=== Rationale
+
+Explicit traceability makes architecture review evidence-based.
+
+=== Assumptions
+
+* Values are initial targets for a single-node learning setup and must be reviewed.
+
+=== Impact
+
+include::generated/qs-006-architecture-review-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qs-006-architecture-review-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qs-006-architecture-review-traceability.adoc[leveloffset=+2]
+
+=== Open Questions
+
+* Is the target measure appropriate for the learning scope?
+
+=== Review Notes
+
+Mark reviewed only after the measure, environment, and stakeholder value are confirmed.

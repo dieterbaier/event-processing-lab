@@ -316,9 +316,8 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Traceability
 
-* Informs: xref:DOC-01000-introduction-and-goals.adoc[Introduction and Goals]
+* Informs: xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals]
 * Related to: xref:doc-002-vision-mission.adoc[Vision and Mission]
-* Related to: xref:canvas/architecture-inception-canvas.adoc[Architecture Inception Canvas]
 
 == Review Notes
 

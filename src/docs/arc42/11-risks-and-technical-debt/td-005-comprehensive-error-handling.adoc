@@ -69,7 +69,7 @@ Add comprehensive error handling with appropriate recovery mechanisms, graceful 
 | Flink basic needs error handling
 
 | `addresses`
-| xref:../10-quality-requirements/QS-014-issue-identification.adoc[QS-014]
+| xref:../10-quality-requirements/qs-014-issue-identification.adoc[QS-014]
 | Better error handling improves issue identification
 
 | `relates_to`

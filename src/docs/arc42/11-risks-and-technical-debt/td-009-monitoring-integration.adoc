@@ -80,7 +80,7 @@ Add metrics collection and monitoring integration using a standard metrics libra
 | Monitoring integration is essential for observability
 
 | `relates_to`
-| xref:../10-quality-requirements/QS-013-monitoring-effectiveness.adoc[QS-013]
+| xref:../10-quality-requirements/qs-013-monitoring-effectiveness.adoc[QS-013]
 | Monitoring integration addresses monitoring effectiveness
 
 | `relates_to`

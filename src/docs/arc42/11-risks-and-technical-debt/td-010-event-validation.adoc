@@ -70,7 +70,7 @@ Add comprehensive validation to the event model, including field validation, bus
 | Event model needs comprehensive validation
 
 | `addresses`
-| xref:../10-quality-requirements/QS-014-issue-identification.adoc[QS-014]
+| xref:../10-quality-requirements/qs-014-issue-identification.adoc[QS-014]
 | Better validation improves issue identification
 
 | `relates_to`

@@ -99,10 +99,6 @@ The risk is currently mitigated through careful version selection. Compatibility
 | `addresses`
 | xref:../doc-04000-solution-strategy.adoc[Technology Stack]
 | Version compatibility is part of technology selection
-
-| `relates_to`
-| xref:canvas/techstack-canvas.adoc[TechStack Canvas]
-| Documented technology versions
 |===
 
 == Open Questions

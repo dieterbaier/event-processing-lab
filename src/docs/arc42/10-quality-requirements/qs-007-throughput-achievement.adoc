@@ -1,0 +1,71 @@
+---
+id: QS-007-throughput-achievement
+type: QualityScenario
+title: Throughput Achievement
+status: proposed
+owner: architecture
+created: 2026-07-12
+reviewed: false
+summary: Throughput Achievement quality scenario for the Event Processing Lab.
+tags:
+  - quality
+  - scalability
+relations:
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Concretizes the scalability quality goal.
+    reviewed: false
+---
+[[qs-007-throughput-achievement]]
+== QS-007-throughput-achievement: Throughput Achievement
+
+[semantic-anchor: quality.scalability]
+
+=== Status
+
+Proposed. AI-assisted; the response measure is a reviewable target.
+
+=== Scenario
+
+[cols="1,3", options="header"]
+|===
+| Element | Description
+| Source | Event producer acting as load generator
+| Stimulus | Emits a sustained stream of events
+| Environment | Single-node local Kafka with default configuration
+| Artifact | Kafka consumer and processing modules
+| Response | Events are processed without unbounded consumer lag
+| Response Measure | Sustains at least 1,000 events/sec with consumer lag remaining bounded
+|===
+
+=== Rationale
+
+Throughput behavior is a key dimension of the technology comparison.
+
+=== Assumptions
+
+* Values are initial targets for a single-node learning setup and must be reviewed.
+
+=== Impact
+
+include::generated/qs-007-throughput-achievement-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qs-007-throughput-achievement-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qs-007-throughput-achievement-traceability.adoc[leveloffset=+2]
+
+=== Open Questions
+
+* Is the target measure appropriate for the learning scope?
+
+=== Review Notes
+
+Mark reviewed only after the measure, environment, and stakeholder value are confirmed.

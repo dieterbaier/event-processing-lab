@@ -63,9 +63,6 @@ The Event Processing Lab is a **learning platform** that demonstrates event proc
 
 === Business Goals
 
-[semantic-anchor: canvas.business-model-canvas]
-[semantic-anchor: canvas.value-proposition-canvas]
-
 [cols="1,3", options="header"]
 |===
 | Goal
@@ -193,7 +190,7 @@ The Event Processing Lab system consists of:
 
 == 3.5. Business Context Diagram
 
-See xref:canvas/business-model-canvas.adoc[Business Model Canvas] for detailed business context.
+The business context is described in the System Scope and Business Goals sections of this chapter.
 
 == Traceability
 

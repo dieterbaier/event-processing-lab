@@ -80,7 +80,7 @@ The risk is currently mitigated through implementation best practices. State siz
 | State explosion is a concern for CEP engines
 
 | `addresses`
-| xref:../10-quality-requirements/QS-009-pattern-complexity-handling.adoc[QS-009]
+| xref:../10-quality-requirements/qs-009-pattern-complexity-handling.adoc[QS-009]
 | Pattern complexity may contribute to state growth
 
 | `relates_to`

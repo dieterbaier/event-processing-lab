@@ -83,16 +83,12 @@ The risk is currently mitigated through comprehensive documentation. The learnin
 | Separate implementations require learning multiple approaches
 
 | `addresses`
-| xref:../10-quality-requirements/QS-003-hands-on-experience.adoc[QS-003]
+| xref:../10-quality-requirements/qs-003-hands-on-experience.adoc[QS-003]
 | Learning curve affects time to first run
 
 | `addresses`
-| xref:../10-quality-requirements/QS-001-technology-comparison-effectiveness.adoc[QS-001]
+| xref:../10-quality-requirements/qs-001-technology-comparison-effectiveness.adoc[QS-001]
 | Learning curve affects comparison effectiveness
-
-| `relates_to`
-| xref:canvas/value-proposition-canvas.adoc[Value Proposition Canvas]
-| Related to project value proposition
 |===
 
 == Open Questions

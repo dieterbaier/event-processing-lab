@@ -76,7 +76,7 @@ Add end-to-end test scenarios that verify the complete event processing flow fro
 | Flink CEP is part of end-to-end flow
 
 | `addresses`
-| xref:../10-quality-requirements/QS-001-technology-comparison-effectiveness.adoc[QS-001]
+| xref:../10-quality-requirements/qs-001-technology-comparison-effectiveness.adoc[QS-001]
 | End-to-end tests needed for technology comparison
 
 | `relates_to`

@@ -165,35 +165,35 @@ See individual quality scenario files in the xref:10-quality-requirements/[10-qu
 
 == Quality Scenario Details
 
-Include::10-quality-requirements/QS-001-technology-comparison-effectiveness.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-001-technology-comparison-effectiveness.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-002-learning-objective-achievement.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-002-learning-objective-achievement.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-003-hands-on-experience.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-003-hands-on-experience.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-004-architecture-comprehension.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-004-architecture-comprehension.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-005-debugging-effectiveness.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-005-debugging-effectiveness.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-006-architecture-review.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-006-architecture-review.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-007-throughput-achievement.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-007-throughput-achievement.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-008-consumer-scaling.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-008-consumer-scaling.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-009-pattern-complexity-handling.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-009-pattern-complexity-handling.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-010-new-event-type-addition.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-010-new-event-type-addition.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-011-serialization-change.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-011-serialization-change.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-012-pattern-modification.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-012-pattern-modification.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-013-monitoring-effectiveness.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-013-monitoring-effectiveness.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-014-issue-identification.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-014-issue-identification.adoc[leveloffset=+1]
 
-Include::10-quality-requirements/QS-015-event-flow-tracing.adoc[leveloffset=+1]
+include::10-quality-requirements/qs-015-event-flow-tracing.adoc[leveloffset=+1]
 
 == Traceability
 
