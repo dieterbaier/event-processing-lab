@@ -13,7 +13,7 @@ summary: Project vision, mission, and strategic goals for the Event Processing L
   - strategy
   - project
 relations:
-  - type: informs
+  - type: relates_to
     target: DOC-101-introduction-and-goals
     status: proposed
     rationale: Vision and mission inform project goals

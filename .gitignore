@@ -24,6 +24,13 @@ build/
 dist/
 *.log
 
+# Derived documentation output (architecture-knowledge-toolkit)
+# Generated fragments, indexes, and traceability views are reproducible from
+# reviewed source artifacts and must not be committed as source content.
+**/generated/
+target/
+out/
+
 # IDE
 .vscode/
 .idea/

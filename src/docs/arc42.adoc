@@ -137,7 +137,7 @@ include::11-risks-and-technical-debt.adoc[]
 
 * xref:../vision-mission.adoc[Vision and Mission]
 * xref:../roadmap.adoc[Project Roadmap]
-* xref:../questions-and-answers.adoc[Questions and Answers]
+* xref:../doc-005-questions-and-answers.adoc[Questions and Answers]
 
 == Documentation Metadata
 

@@ -1,373 +1,137 @@
-# Event Processing Lab - Agent Instructions
+# Project Agent Instructions
 
-[semantic-anchor: event-processing-lab]
-
-This document provides instructions for AI agents working on the Event Processing Lab project.
+This project (`event-processing-lab`) uses the
+architecture-knowledge-toolkit for architecture work and
+software-development-lifecycle tasks that are not described more specifically
+in this repository.
 
 ## Project Context
 
-The Event Processing Lab is a **learning project** designed to compare Kafka, Esper, Apache Flink, and Flink CEP from the perspective of an integration architect. It focuses on understanding the architectural trade-offs, scalability characteristics, operational complexity, state handling, and rule complexity of each technology.
-
-[semantic-anchor: quality.learnability]
-[semantic-anchor: quality.understandability]
-
-## Primary Goals
-
-1. **Learning Value**: Enable hands-on comparison of event processing technologies
-2. **Understandability**: Keep code and architecture simple and well-documented
-3. **Modifiability**: Allow easy experimentation with different configurations
-4. **Observability**: Include logging and metrics for understanding behavior
-
-## Architecture Documentation Standards
-
-This project follows the **arc42** architecture documentation template with extensions from the **docs-as-code-toolkit/architecture-knowledge-toolkit**.
-
-The documentation structure follows the architecture-knowledge-toolkit pattern with:
-- YAML front matter for metadata and traceability relations
-- AsciiDoc format with explicit cross-references
-- Draft/proposed status with reviewed:false for AI-assisted content
-- Explicit traceability between documentation elements
-- Semantic anchors for cross-referencing
-
-### Required Documentation Structure
-
-```
-src/docs/
-├── arc42/                          # arc42 architecture documentation
-│   ├── 01-introduction-and-goals.adoc
-│   ├── 02-architecture-constraints.adoc
-│   ├── 03-system-scope-and-context.adoc
-│   ├── 04-solution-strategy.adoc
-│   ├── 05-building-block-view.adoc
-│   ├── 06-runtime-view.adoc
-│   ├── 07-deployment-view.adoc
-│   ├── 08-crosscutting-concepts.adoc
-│   ├── 09-architecture-decisions/   # ADRs (Architecture Decision Records)
-│   │   ├── ADR-001.adoc            # Use Kafka as Event Backbone
-│   │   ├── ADR-002.adoc            # Use JSON Serialization
-│   │   ├── ADR-003.adoc            # Plain Java over Spring Boot
-│   │   └── ADR-004.adoc            # Separate Implementations
-│   ├── 10-quality-requirements/     # Quality scenarios
-│   │   ├── QS-001.adoc through QS-015.adoc
-│   ├── 11-risks-and-technical-debt/
-│   │   ├── RISK-001.adoc through RISK-006.adoc
-│   │   └── TD-001.adoc through TD-010.adoc
-│   └── 12-glossary.adoc
-├── arc42.adoc                      # Entry point for assembled documentation
-├── canvas/                         # Business and architecture canvases
-│   ├── architecture-inception-canvas.adoc
-│   ├── architecture-communication-canvas.adoc
-│   ├── business-model-canvas.adoc
-│   ├── techstack-canvas.adoc
-│   └── value-proposition-canvas.adoc
-├── fragments/                      # Reusable documentation fragments
-│   ├── architecture/
-│   │   ├── adr-template.adoc
-│   │   ├── quality-attributes.adoc
-│   │   ├── quality-scenario-template.adoc
-│   │   └── risk-assessment-template.adoc
-│   └── product/
-│       ├── event-types.adoc
-│       └── technology-comparison.adoc
-├── questions-and-answers.adoc
-├── roadmap.adoc
-└── vision-mission.adoc
-```
-
-### ADR Format (Nygard with Pugh Matrix)
-
-Each ADR follows the Nygard format with Pugh Matrix analysis:
-- YAML front matter with metadata (id, type, title, status, owner, created, reviewed, summary, tags, relations)
-- Context section describing the problem
-- Decision section with chosen solution
-- Alternatives considered with pros/cons
-- Consequences section with positive and negative outcomes
-- Pugh Matrix for decision analysis
-- Explicit traceability relations to other documentation elements
-- Semantic anchors for cross-referencing
-
-### Quality Scenarios (Six-Part Form)
-
-Each quality scenario follows the six-part quality attribute scenario form:
-1. **Source**: The stakeholder or system element that originates the stimulus
-2. **Stimulus**: The event or condition that triggers the scenario
-3. **Artifact**: The system element that is affected
-4. **Environment**: The conditions under which the scenario occurs
-5. **Response**: The expected behavior of the system
-6. **Response Measure**: The measurable criterion with literal figures
-
-### Risk Documentation
-
-Each risk includes:
-- YAML front matter with metadata
-- Risk statement in the form: "Because <cause>, <event> may occur, leading to <impact>"
-- Assessment table with likelihood, impact, priority, timeframe, confidence
-- Mitigation options
-- Traceability relations to other documentation elements
-- Semantic anchors
-
-### Technical Debt Documentation
-
-Each technical debt item includes:
-- YAML front matter with metadata
-- Statement describing the debt
-- Details (module, impact, priority, type)
-- Resolution description
-- Acceptance criteria
-- Traceability relations
-- Semantic anchors
-
-## Semantic Anchors
-
-Use semantic anchors extensively for cross-referencing across documentation and code:
-
-```
-[semantic-anchor: event-processing-lab]
-[semantic-anchor: component.event-model]
-[semantic-anchor: component.event-producer]
-[semantic-anchor: component.kafka-consumer]
-[semantic-anchor: component.esper-cep]
-[semantic-anchor: component.flink-basic]
-[semantic-anchor: component.flink-cep]
-
-[semantic-anchor: technology.kafka]
-[semantic-anchor: technology.esper]
-[semantic-anchor: technology.flink]
-[semantic-anchor: technology.flink-cep]
-
-[semantic-anchor: decision.kafka-as-event-backbone]
-[semantic-anchor: decision.json-serialization]
-[semantic-anchor: decision.plain-java-over-spring]
-[semantic-anchor: decision.separate-implementations]
-
-[semantic-anchor: quality.scalability]
-[semantic-anchor: quality.understandability]
-[semantic-anchor: quality.learnability]
-[semantic-anchor: quality.modifiability]
-[semantic-anchor: quality.observability]
-
-[semantic-anchor: scenario.order-creation]
-[semantic-anchor: scenario.payment-processing]
-[semantic-anchor: scenario.payment-timeout]
-[semantic-anchor: scenario.order-cancellation]
-[semantic-anchor: scenario.shipment-start]
-
-[semantic-anchor: risk.state-explosion]
-[semantic-anchor: risk.operational-complexity]
-[semantic-anchor: risk.technology-compatibility]
-[semantic-anchor: risk.event-loss]
-[semantic-anchor: risk.performance-bottleneck]
-[semantic-anchor: risk.learning-curve-too-steep]
-```
-
-## Cross-Cutting Concepts (arc42 Chapter 8)
-
-### 8.1 Threat Model
-- STRIDE methodology
-- Each threat gets a unique ID (T-001, T-002, ...)
-- Threat IDs are referenced by mitigations
-
-### 8.2 Security
-- Every mitigation references T-IDs it closes
-
-### 8.3 Test
-- Testing pyramid approach
-- Tests trace to Use Cases and Business Rules
-
-### 8.4 Observability
-- Logging, metrics, traces, audit trails
-- Cross-reference with quality scenarios
-
-### 8.5 Error Handling
-- Retry, circuit breaker, fallback, recovery strategies
-
-## Quality Goals (arc42 Chapter 1.2)
-
-List only top 3-5 quality goals that drive architecture decisions:
-
-1. **Learnability** [semantic-anchor: quality.learnability]
-   - Enable quick understanding of each technology's capabilities
-   - Provide clear examples and comparisons
-
-2. **Understandability** [semantic-anchor: quality.understandability]
-   - Simple, well-documented code
-   - Clear architecture diagrams
-
-3. **Scalability** [semantic-anchor: quality.scalability]
-   - Demonstrate how each technology scales
-   - Show throughput and latency characteristics
-
-4. **Modifiability** [semantic-anchor: quality.modifiability]
-   - Easy to experiment with different configurations
-   - Flexible architecture for comparisons
-
-5. **Observability** [semantic-anchor: quality.observability]
-   - Logging for understanding behavior
-   - Metrics for performance measurement
-
-Chapter 10 may elaborate on additional quality characteristics, each marked as either concretising a Chapter 1.2 goal or as derived.
-
-## Traceability Contract
-
-- Every Chapter 1.2 quality goal maps to a named approach in Chapter 4
-- External systems in Chapter 3 (context) match Chapter 5 Level-1 building blocks
-- Every Chapter 5 building block appears in at least one Chapter 6 runtime scenario
-- Chapter 6 includes at least one error/recovery scenario
-- Chapter 9 carries an in-document ADR index
-- Each Chapter 5 building block states responsibility, interface, and source location
-- Every Chapter 1.2 quality goal maps to quality scenarios in Chapter 10
-- Each Chapter 10 scenario cross-links to Chapter 1.2 goal it concretises
-
-## Documentation Workflow
-
-### Phase 1: Analysis
-1. Analyze the use case
-2. Identify quality attributes
-3. Identify architectural risks
-4. Identify ADR candidates
-5. Create initial architecture documentation
-
-### Phase 2: Implementation
-1. Create code based on documented architecture
-2. Ensure tests trace to use cases
-3. Maintain documentation as code evolves
-
-### Phase 3: Validation
-1. Verify all traceability requirements are met
-2. Ensure all building blocks appear in runtime scenarios
-3. Validate ADR decisions are implemented correctly
-
-## Coding Standards
-
-### Technology Stack
-- Java 21
-- Gradle (multi-module)
-- Kafka as event backbone [semantic-anchor: technology.kafka]
-- JSON serialization (first iteration) [semantic-anchor: decision.json-serialization]
-- Plain Java preferred over Spring Boot [semantic-anchor: decision.plain-java-over-spring]
-
-### Module Structure
-```
-event-processing-lab/
-├── event-model/           [semantic-anchor: component.event-model]
-├── event-producer/        [semantic-anchor: component.event-producer]
-├── kafka-consumer/        [semantic-anchor: component.kafka-consumer]
-├── esper-cep/             [semantic-anchor: component.esper-cep]
-├── flink-basic/           [semantic-anchor: component.flink-basic]
-└── flink-cep/             [semantic-anchor: component.flink-cep]
-```
-
-### Code Quality
-- Follow SOLID principles
-- DRY, KISS
-- Ubiquitous Language from Domain-Driven Design
-- Use semantic anchors in code comments where appropriate
-
-## Use Case: Order Lifecycle
-
-[semantic-anchor: scenario.order-creation]
-[semantic-anchor: scenario.payment-processing]
-[semantic-anchor: scenario.payment-timeout]
-[semantic-anchor: scenario.order-cancellation]
-[semantic-anchor: scenario.shipment-start]
-
-### Event Types
-- `OrderCreated`
-- `PaymentReceived`
-- `PaymentFailed`
-- `OrderCancelled`
-- `ShipmentStarted`
-
-### Learning Goals by Technology
-
-#### Kafka [semantic-anchor: technology.kafka]
-- Event transport and event backbone capabilities
-- Partitioning and ordering guarantees
-- Consumer group behavior
-- Scalability characteristics
-
-#### Esper [semantic-anchor: technology.esper]
-- Lightweight CEP engine capabilities
-- Rule definition and complexity
-- State handling
-- Performance characteristics
-
-#### Flink [semantic-anchor: technology.flink]
-- Distributed stream processing
-- State management
-- Checkpointing
-- Scalability
-
-#### Flink CEP [semantic-anchor: technology.flink-cep]
-- Pattern detection on top of Flink
-- Comparison with Esper
-- State handling differences
-- Complexity trade-offs
-
-## Comparison Dimensions
-
-1. **Scalability**: How each technology scales with increasing event volume
-2. **Operational Complexity**: Deployment, monitoring, maintenance requirements
-3. **State Handling**: How state is managed and persisted
-4. **Rule Complexity**: Complexity of defining and maintaining rules/patterns
-5. **Architectural Trade-offs**: Pros and cons of each approach
-
-## Required ADRs
-
-1. **ADR-001: Use Kafka as Event Backbone** [semantic-anchor: decision.kafka-as-event-backbone]
-   - Status: Accepted
-   - Decision: Use Apache Kafka as the central event transport mechanism
-   - Consequences: Provides high throughput, fault tolerance, and scalability
-
-2. **ADR-002: Use JSON Serialization for First Iteration** [semantic-anchor: decision.json-serialization]
-   - Status: Accepted
-   - Decision: Use JSON for event serialization in the initial implementation
-   - Consequences: Human-readable, easy to debug, but less efficient than binary formats
-
-3. **ADR-003: Keep Spring Boot Optional, Use Plain Java** [semantic-anchor: decision.plain-java-over-spring]
-   - Status: Accepted
-   - Decision: Prefer plain Java implementations where simpler
-   - Consequences: Reduces dependencies, keeps examples focused on core concepts
-
-4. **ADR-004: Separate Esper and Flink Implementations** [semantic-anchor: decision.separate-implementations]
-   - Status: Accepted
-   - Decision: Maintain separate implementations for comparison
-   - Consequences: Allows direct comparison, but may lead to some code duplication
-
-## Agent Behavior
-
-When working on this project:
-
-1. **Always** follow the analysis-first approach:
-   - Analyze use case before coding
-   - Identify quality attributes
-   - Identify risks
-   - Identify ADR candidates
-   - Create/update documentation
-   - Then implement code
-
-2. **Always** use semantic anchors for cross-referencing
-
-3. **Always** maintain traceability between documentation elements
-
-4. **Always** keep code minimal and focused on learning value
-
-5. **Prefer** learning value over production completeness
-
-6. **Ensure** all runtime scenarios are implemented across technologies
-
-7. **Document** architectural decisions and their consequences
-8. **Follow** the architecture-knowledge-toolkit structure and conventions
-9. **Use** YAML front matter in all documentation files
-10. **Include** explicit traceability relations in all documentation
-11. **Mark** AI-assisted content with reviewed:false and appropriate status
-
-## Documentation References
-
-- [arc42 Template](https://arc42.org/)
-- [docs-as-code-toolkit](https://github.com/arc42/docs-as-code-toolkit)
-- [architecture-knowledge-toolkit](https://github.com/arc42/docs-as-code-toolkit/tree/main/architecture-knowledge-toolkit)
-
-### Project Architecture Documentation
-
-The complete architecture documentation for this project is available in `src/docs/arc42.adoc`, which serves as the entry point for the assembled architecture documentation following the arc42 template and architecture-knowledge-toolkit conventions.
+The Event Processing Lab is a learning project that compares Kafka, Esper,
+Apache Flink, and Flink CEP from an integration architect's perspective. It is a
+Java 21, Gradle multi-module codebase (`event-model`, `event-producer`,
+`kafka-consumer`, `esper-cep`, `flink-basic`, `flink-cep`).
+
+The authoritative product and architecture knowledge lives in `src/docs/`
+(arc42 sources, ADRs, quality scenarios, risks and technical debt, vision and
+mission, roadmap, open questions). Read the reviewed source documents there for
+project-specific goals, decisions, event types, and comparison dimensions. Do
+not restate that content here.
+
+## Contract Order
+
+Apply instructions in this order:
+
+1. User instruction
+2. This project `AGENTS.md`
+3. Relevant toolkit skill, for example `skills/bootstrap-project/SKILL.md`,
+   `skills/implement-issue-workflow/SKILL.md`, `skills/commit-message/SKILL.md`,
+   `skills/pr-review/SKILL.md`, `skills/slice-issues/SKILL.md`,
+   `skills/post-merge-sync/SKILL.md`, `skills/adr/SKILL.md`,
+   `skills/quality-scenario/SKILL.md`, or `skills/risk/SKILL.md`
+4. Toolkit `general-semantic-contracts.md`
+
+Use the toolkit for:
+
+- product clarification
+- arc42 documentation
+- ADRs
+- quality scenarios
+- risks and technical debt
+- runtime scenarios
+- traceability metadata
+- templates
+- validation
+- generated include fragments
+- issue slicing
+- issue implementation workflow
+- commit messages
+- pull request reviews
+- post-merge synchronization
+- traceability reviews
+
+If an SDLC task is requested and this repository does not describe the task
+explicitly, look up the corresponding toolkit skill or contract before acting.
+Do not invent a project-local workflow when the toolkit provides one.
+
+Toolkit source of truth:
+
+https://github.com/docs-as-code-toolkit/architecture-knowledge-toolkit
+
+Preferred lookup order for the toolkit:
+
+1. `$ARCHITECTURE_KNOWLEDGE_TOOLKIT` if it is set.
+2. Otherwise the nearest local `architecture-knowledge-toolkit` checkout found by
+   searching upward from this project directory:
+   `../architecture-knowledge-toolkit`, then the same directory name in each
+   parent directory up to the filesystem root. Do not assume the toolkit is a
+   direct sibling; this project may live outside the toolkit's parent folder.
+3. Otherwise a project-local recorded toolkit reference such as a submodule,
+   vendored copy, or pinned path.
+4. Otherwise the public repository above, preferably at a stable release tag or
+   commit SHA, for example
+   `docs-as-code-toolkit/architecture-knowledge-toolkit@v1.2.3`.
+
+Use the public repository as the fallback source for missing contracts, skills,
+templates, schemas, validators, and generators only after the local lookup
+fails.
+
+Before architecture or SDLC workflow work:
+
+- inspect existing `src/docs/`, `metamodel/`, `templates/`, `scripts/`, and `skills/`
+- use reviewed source files as architecture context; do not use derived output
+  such as `generated/`, `build/`, `dist/`, `target/`, `out/`, rendered
+  HTML/PDF, generated indexes, traceability views, or assembled documentation
+  as evidence
+- verify that referenced toolkit skill paths exist before copying or linking
+  them into project guidance
+- inspect the toolkit skills before issue implementation, commit message,
+  pull request review, issue slicing, post-merge synchronization, ADR,
+  quality scenario, risk, or traceability-review work when local instructions
+  are missing
+- preserve stable artifact IDs
+- use AsciiDoc as the default documentation format
+- mark AI-created architecture content as `draft` or `proposed`
+- set `reviewed: false` unless human acceptance is already recorded
+- do not manually maintain generated fragments when a generator exists
+- copy missing toolkit templates, schemas, validators, and generator scripts from the toolkit instead of inventing alternatives
+
+## Reference, Don't Copy
+
+Treat the architecture-knowledge-toolkit as the single source of truth for
+architecture skills, contracts, and features. Do not copy toolkit
+`skills/**/SKILL.md`, `features/`, or contract text into this repository;
+resolve them from the toolkit through the lookup order above. Only executable
+tooling that must run here — metamodel schemas under `metamodel/`, templates
+under `templates/`, and validator/generator scripts under `scripts/` — is copied
+or vendored and kept in sync with the toolkit.
+
+Any local `skills/**/SKILL.md` or task contract covers project-specific work
+only. Local skills and contracts extend the toolkit — their bodies read the
+toolkit baseline first, then add the project-specific steps — or explicitly
+override a specific toolkit rule; they never silently duplicate toolkit rules.
+
+## Agent Adapters
+
+Keep runtime-specific integration under `adapters/<agent>/` and generate the
+thin routing wrappers instead of hand-writing them:
+
+- The generic generator lives at `scripts/build-agent-adapters.js` and
+  `scripts/check-agent-adapters.js` (copied from the toolkit's
+  `templates/scripts/`, not the toolkit's own `scripts/build-agent-adapters.js`,
+  which is wired to the toolkit itself).
+- The generator derives the project name (from `AGENT_ADAPTER_PROJECT`, an
+  optional `adapters/agent-adapters.config.json` `project` field, or the
+  repository directory name) and names the Cursor rule
+  `adapters/cursor/rules/<project>.mdc`.
+- Run `node scripts/build-agent-adapters.js` to generate
+  `adapters/codex/AGENTS.md`, `adapters/vibe/AGENTS.md`,
+  `adapters/github-copilot/copilot-instructions.md`, and the Cursor rule that
+  route agents to this file, `general-semantic-contracts.md`, and the relevant
+  skills.
+- The generator auto-detects routing: with local `skills/**/SKILL.md` it lists
+  them and delegates the rest to the toolkit; with none it routes to the toolkit.
+- Keep `.github/copilot-instructions.md` as an entry point only that points to
+  `adapters/github-copilot/copilot-instructions.md`.
+- Put OpenAI skill UI metadata under `adapters/openai/<skill-name>/openai.yaml`.
+- Run `node scripts/check-agent-adapters.js` in CI to fail on stale adapters.

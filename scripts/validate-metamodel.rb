@@ -11,7 +11,7 @@ require 'yaml'
 class MetamodelValidator
   REQUIRED_FIELDS = %w[id type title status created].freeze
 
-  Artifact = Struct.new(:path, :metadata, keyword_init: true)
+  Artifact = Struct.new(:path, :metadata, :document_id, keyword_init: true)
 
   attr_reader :errors, :warnings, :root, :docs_dir
 
@@ -34,6 +34,8 @@ class MetamodelValidator
 
     artifacts = scan_artifacts
     validate_artifacts(artifacts)
+    validate_filename_matches_id(artifacts)
+    validate_decimal_classification(artifacts)
     validate_unique_ids(artifacts)
     validate_relations(artifacts, relation_types, relation_keys)
     detect_bidirectional_relations(artifacts)
@@ -87,7 +89,12 @@ class MetamodelValidator
       artifact_path = Pathname.new(path)
       next if generated_path?(artifact_path)
 
-      Artifact.new(path: artifact_path, metadata: read_front_matter(artifact_path))
+      metadata = read_front_matter(artifact_path)
+      Artifact.new(
+        path: artifact_path,
+        metadata: metadata,
+        document_id: document_id_for(artifact_path, metadata)
+      )
     end.compact
   end
 
@@ -112,7 +119,7 @@ class MetamodelValidator
     by_id = Hash.new { |hash, key| hash[key] = [] }
 
     artifacts.each do |artifact|
-      id = artifact.metadata && artifact.metadata['id']
+      id = artifact.document_id
       by_id[id] << artifact if id
     end
 
@@ -124,8 +131,48 @@ class MetamodelValidator
     end
   end
 
+  def validate_filename_matches_id(artifacts)
+    artifacts.each do |artifact|
+      id = artifact.document_id
+      next unless id
+
+      expected = "#{normalized_id(id)}.adoc"
+      actual = artifact.path.basename.to_s
+      next if actual == expected
+
+      @warnings << "#{relative(artifact.path)} filename should be '#{expected}' to match artifact id '#{id}'"
+    end
+  end
+
+  def validate_decimal_classification(artifacts)
+    artifacts.each do |artifact|
+      id = artifact.document_id
+      next unless id&.start_with?('DOC-')
+
+      arc42_relative = arc42_relative_path(artifact.path)
+      next unless arc42_relative
+
+      parts = arc42_relative.each_filename.to_a
+      if parts.length == 1
+        expected_chapter = chapter_from_root_filename(parts.first)
+        next unless expected_chapter
+
+        expected_prefix = "DOC-#{expected_chapter}000-"
+        next if id.start_with?(expected_prefix)
+
+        @warnings << "#{relative(artifact.path)} artifact id should start with '#{expected_prefix}' for arc42 chapter #{expected_chapter}"
+      elsif parts.first =~ /\A(\d{2})-/
+        chapter = Regexp.last_match(1)
+        expected_prefix = "DOC-#{chapter}"
+        next if id =~ /\ADOC-#{chapter}\d{3}-/ && !id.start_with?("DOC-#{chapter}000-")
+
+        @warnings << "#{relative(artifact.path)} artifact id should start with '#{expected_prefix}' plus a three-digit local sequence greater than 000"
+      end
+    end
+  end
+
   def validate_relations(artifacts, relation_types, relation_keys)
-    known_ids = artifacts.map { |artifact| artifact.metadata && artifact.metadata['id'] }.compact.to_set
+    known_ids = artifacts.map(&:document_id).compact.to_set
 
     artifacts.each do |artifact|
       metadata = artifact.metadata
@@ -203,10 +250,7 @@ class MetamodelValidator
 
   def read_front_matter(path)
     text = path.read
-    unless text.start_with?("---\n")
-      @errors << "#{relative(path)} missing YAML front matter"
-      return nil
-    end
+    return nil unless text.start_with?("---\n")
 
     parts = text.split(/^---\s*$/, 3)
     if parts.length < 3
@@ -226,12 +270,49 @@ class MetamodelValidator
     nil
   end
 
+  def document_id_for(path, metadata)
+    return metadata['id'] if metadata && metadata['id']
+
+    path.each_line.first(20).each do |line|
+      return Regexp.last_match(1).strip if line =~ /^:id:\s*(.+?)\s*$/
+    end
+    nil
+  end
+
   def load_yaml(path)
     YAML.safe_load(path.read, permitted_classes: [Date], aliases: false)
   end
 
   def blank?(value)
     value.nil? || (value.respond_to?(:empty?) && value.empty?)
+  end
+
+  def normalized_id(id)
+    id.to_s
+      .downcase
+      .gsub(/[^a-z0-9]+/, '-')
+      .gsub(/\A-+|-+\z/, '')
+  end
+
+  def arc42_relative_path(path)
+    expanded = path.expand_path
+    @docs_paths.each do |docs_path|
+      base = docs_path.directory? ? docs_path : docs_path.dirname
+      arc42 = base.basename.to_s == 'arc42' ? base : base.join('arc42')
+      next unless expanded.to_s.start_with?("#{arc42.expand_path}/")
+
+      return expanded.relative_path_from(arc42.expand_path)
+    end
+    nil
+  rescue ArgumentError
+    nil
+  end
+
+  def chapter_from_root_filename(filename)
+    return Regexp.last_match(1) if filename =~ /\Adoc-(\d{2})000-/
+    return Regexp.last_match(1) if filename =~ /\Adoc-(\d{2})\d{3}-/
+
+    nil
   end
 
   def relative(path)
@@ -375,23 +456,24 @@ end
 class ArtifactIndexGenerator
   INDEX_DEFINITIONS = {
     'ADR' => {
-      output: '09-architecture-decisions/generated/adr-index.adoc',
+      output: '09-architecture-decisions/generated/doc-09001-adr-index.adoc',
       anchor: 'adr-index',
       title: 'ADR Index',
-      cols: '1,2,1,3',
-      columns: %w[ADR Title Status Notes],
+      cols: '1,2,1,2,3',
+      columns: ['ADR', 'Title', 'Status', 'Derived from', 'Notes'],
       row: lambda do |artifact, helper|
         metadata = artifact.metadata
         [
           helper.artifact_link(artifact, label: helper.short_id(metadata['id'])),
           helper.cell(metadata['title']),
           helper.cell(metadata['status']),
+          helper.derived_from_cell(metadata['derived_from']),
           helper.cell(metadata['summary'])
         ]
       end
     },
     'QualityScenario' => {
-      output: '10-quality-requirements/generated/quality-scenarios.adoc',
+      output: '10-quality-requirements/generated/doc-10001-quality-scenarios.adoc',
       anchor: 'quality-scenarios',
       title: 'Quality Scenarios',
       cols: '1,1,2,2,2,2,2,2',
@@ -411,7 +493,7 @@ class ArtifactIndexGenerator
       end
     },
     'Risk' => {
-      output: '11-risks-and-technical-debt/generated/risks.adoc',
+      output: '11-risks-and-technical-debt/generated/doc-11001-risks.adoc',
       anchor: 'risks',
       title: 'Risks',
       cols: '1,3,1,1,1,3',
@@ -492,7 +574,7 @@ class OpenQuestionsIndexGenerator
   def initialize(root:, docs_dir:, questions_path: nil)
     @root = Pathname.new(root).expand_path
     @docs_dir = output_base(docs_dir)
-    @questions_path = Pathname.new(questions_path || @root.join('src/docs/questions-and-answers.adoc')).expand_path
+    @questions_path = Pathname.new(questions_path || @root.join('src/docs/doc-005-questions-and-answers.adoc')).expand_path
     @output_paths = []
   end
 
@@ -511,7 +593,7 @@ class OpenQuestionsIndexGenerator
     lines << '[[open-questions]]'
     lines << '== Open Questions'
     lines << ''
-    lines << '// Generated from questions-and-answers.adoc. Do not edit manually.'
+    lines << '// Generated from doc-005-questions-and-answers.adoc. Do not edit manually.'
     lines << ''
 
     if questions.empty?
@@ -605,7 +687,7 @@ class TraceabilityFragmentGenerator
 
     lines = []
     lines << "[[generated-traceability-#{anchor_for(artifact.path)}]]"
-    lines << '== Traceability'
+    lines << '== Matrix'
     lines << ''
     lines << '// Generated from architecture artifact metadata. Do not edit manually.'
     lines << ''
@@ -668,9 +750,258 @@ class TraceabilityFragmentGenerator
   end
 end
 
+class ImpactFragmentGenerator
+  attr_reader :output_paths
+
+  def initialize(root:, docs_dir:)
+    @root = Pathname.new(root).expand_path
+    @output_paths = []
+  end
+
+  def write(artifacts)
+    artifacts_by_id = artifacts.each_with_object({}) do |artifact, index|
+      index[artifact.metadata['id']] = artifact if artifact.metadata
+    end
+
+    @output_paths = artifacts.map do |artifact|
+      output_path = impact_output_path(artifact)
+      content = render(artifact, artifacts_by_id, output_path)
+      FileUtils.mkdir_p(output_path.dirname)
+      output_path.write(content)
+      output_path
+    end
+  end
+
+  def render(artifact, artifacts_by_id, output_path)
+    metadata = artifact.metadata
+    outgoing = Array(metadata['relations'])
+    helper = ArtifactRenderHelper.new(output_path, artifacts_by_id.values)
+
+    lines = []
+    lines << "[[generated-impact-#{anchor_for(artifact.path)}]]"
+    lines << '== Matrix'
+    lines << ''
+    lines << '// Generated from architecture artifact metadata. Do not edit manually.'
+    lines << ''
+    lines << '[cols="1,1,3", options="header"]'
+    lines << '|==='
+    lines << '| Artifact | Impact | Rationale'
+    lines << ''
+
+    if outgoing.empty?
+      lines << '| -'
+      lines << '| -'
+      lines << '| No outgoing impact relations recorded in metadata.'
+      lines << ''
+    else
+      outgoing.sort_by { |relation| [relation['type'].to_s, relation['target'].to_s] }.each do |relation|
+        lines << "| #{helper.artifact_ref(relation['target'], artifacts_by_id)}"
+        lines << "| #{helper.cell(relation['type'])}"
+        lines << "| #{helper.cell(relation['rationale'])}"
+        lines << ''
+      end
+    end
+
+    lines << '|==='
+    lines << ''
+    lines.join("\n")
+  end
+
+  private
+
+  def anchor_for(path)
+    normalized_anchor(path.basename(path.extname).to_s)
+  end
+
+  def normalized_anchor(value)
+    value.to_s
+         .downcase
+         .sub(/\A[0-9]+[-_ ]+/, '')
+         .gsub(/[^a-z0-9]+/, '-')
+         .gsub(/\A-+|-+\z/, '')
+  end
+
+  def impact_output_path(artifact)
+    artifact.path.dirname.join('generated', "#{anchor_for(artifact.path)}-impact.adoc")
+  end
+end
+
+class MetadataAttributeFragmentGenerator
+  attr_reader :output_paths
+
+  def initialize(root:, docs_dir:)
+    @root = Pathname.new(root).expand_path
+    @output_paths = []
+  end
+
+  def write(artifacts)
+    @output_paths = artifacts.map do |artifact|
+      output_path = attributes_output_path(artifact)
+      content = render(artifact)
+      FileUtils.mkdir_p(output_path.dirname)
+      output_path.write(content)
+      output_path
+    end
+  end
+
+  def render(artifact)
+    metadata = artifact.metadata
+    attributes = {
+      'artifact_id' => metadata['id'],
+      'artifact_type' => metadata['type'],
+      'artifact_title' => metadata['title'],
+      'artifact_status' => metadata['status'],
+      'artifact_owner' => metadata['owner'],
+      'artifact_created' => metadata['created'],
+      'artifact_updated' => metadata['updated'],
+      'artifact_summary' => metadata['summary'],
+      'derived_from_description' => derived_from_description(metadata['derived_from'])
+    }
+
+    lines = []
+    lines << "// Generated from architecture artifact metadata for #{metadata['id']}. Do not edit manually."
+    attributes.each do |name, value|
+      next if blank?(value)
+
+      lines << ":#{name}: #{attribute_value(value)}"
+    end
+    lines << ''
+    lines.join("\n")
+  end
+
+  private
+
+  def derived_from_description(entries)
+    origins = Array(entries).compact
+    return nil if origins.empty?
+
+    origins.map do |entry|
+      entry.is_a?(Hash) ? entry['description'] : entry
+    end.compact.join('; ')
+  end
+
+  def attribute_value(value)
+    value.to_s.strip.gsub(/\s+/, ' ')
+  end
+
+  def blank?(value)
+    value.nil? || (value.respond_to?(:empty?) && value.empty?)
+  end
+
+  def anchor_for(path)
+    normalized_anchor(path.basename(path.extname).to_s)
+  end
+
+  def normalized_anchor(value)
+    value.to_s
+         .downcase
+         .sub(/\A[0-9]+[-_ ]+/, '')
+         .gsub(/[^a-z0-9]+/, '-')
+         .gsub(/\A-+|-+\z/, '')
+  end
+
+  def attributes_output_path(artifact)
+    artifact.path.dirname.join('generated', "#{anchor_for(artifact.path)}-attributes.adoc")
+  end
+end
+
+class ChapterIncludeFragmentGenerator
+  attr_reader :output_paths
+
+  def initialize(root:, docs_dir:)
+    @root = Pathname.new(root).expand_path
+    @docs_dir = output_base(docs_dir)
+    @output_paths = []
+  end
+
+  def write(artifacts)
+    @output_paths = chapter_groups(artifacts).map do |chapter, details|
+      output_path = include_output_path(chapter)
+      content = render(chapter, details, output_path)
+      FileUtils.mkdir_p(output_path.dirname)
+      output_path.write(content)
+      output_path
+    end
+  end
+
+  def render(chapter, details, output_path = include_output_path(chapter))
+    sorted = details.sort_by { |artifact| artifact.metadata['id'].to_s }
+
+    lines = []
+    lines << "// Generated from arc42 chapter metadata for #{chapter.metadata['id']}. Do not edit manually."
+    lines << ''
+
+    sorted.each do |artifact|
+      target = artifact.path.expand_path.relative_path_from(output_path.dirname).to_s
+      lines << ''
+      lines << "include::#{target}[]"
+      lines << ''
+    end
+
+    lines.join("\n")
+  end
+
+  private
+
+  def chapter_groups(artifacts)
+    metadata_artifacts = artifacts.select(&:metadata)
+    chapters = metadata_artifacts.select { |artifact| chapter_artifact?(artifact) }
+    details_by_chapter = metadata_artifacts
+                         .reject { |artifact| chapter_artifact?(artifact) }
+                         .reject { |artifact| chapter_number_for(artifact.path).nil? }
+                         .group_by { |artifact| chapter_number_for(artifact.path) }
+
+    chapters.each_with_object({}) do |chapter, groups|
+      chapter_number = chapter_number_for(chapter.path)
+      next unless chapter_number
+
+      details = details_by_chapter.fetch(chapter_number, [])
+      groups[chapter] = details unless details.empty?
+    end
+  end
+
+  def chapter_artifact?(artifact)
+    relative = arc42_relative_path(artifact.path)
+    return false unless relative
+
+    parts = relative.each_filename.to_a
+    # Chapter overview documents live directly below arc42; nested files are
+    # detail documents grouped by their numbered chapter directory.
+    parts.length == 1 && parts.first =~ /\Adoc-\d{2}000-.*\.adoc\z/
+  end
+
+  def chapter_number_for(path)
+    relative = arc42_relative_path(path)
+    return nil unless relative
+
+    parts = relative.each_filename.to_a
+    if parts.length == 1 && parts.first =~ /\Adoc-(\d{2})000-/
+      Regexp.last_match(1)
+    elsif parts.first =~ /\A(\d{2})-/
+      Regexp.last_match(1)
+    end
+  end
+
+  def arc42_relative_path(path)
+    expanded = path.expand_path
+    return expanded.relative_path_from(@docs_dir) if expanded.to_s.start_with?("#{@docs_dir}/")
+
+    nil
+  rescue ArgumentError
+    nil
+  end
+
+  def include_output_path(chapter)
+    @docs_dir.join('generated', "#{chapter.path.basename(chapter.path.extname)}-includes.adoc")
+  end
+end
+
 def output_base(docs_dir)
   targets = Array(docs_dir).map { |path| Pathname.new(path).expand_path }
-  targets.find(&:directory?) || targets.first.dirname
+  directory = targets.find(&:directory?)
+  return directory.join('arc42') if directory && directory.basename.to_s == 'docs' && directory.join('arc42').directory?
+
+  directory || targets.first.dirname
 end
 
 class ArtifactRenderHelper
@@ -699,6 +1030,13 @@ class ArtifactRenderHelper
     matches.map { |relation| artifact_ref(relation['target']) }.join(" +\n")
   end
 
+  def derived_from_cell(entries)
+    origins = Array(entries).compact
+    return '-' if origins.empty?
+
+    origins.map { |entry| derived_from_entry(entry) }.join(" +\n")
+  end
+
   def definition_table_fields(artifact)
     body = artifact.path.read.split(/^---\s*$/, 3).last.to_s
     fields = {}
@@ -720,6 +1058,34 @@ class ArtifactRenderHelper
   end
 
   private
+
+  def derived_from_entry(entry)
+    return cell(entry) unless entry.is_a?(Hash)
+
+    description = entry['description'].to_s.strip
+    label = description.empty? ? derived_from_fallback_label(entry) : description
+
+    if present?(entry['target'])
+      target = artifact_ref(entry['target'])
+      description.empty? ? target : "#{cell(label)} (#{target})"
+    elsif present?(entry['anchor'])
+      "xref:#{cell(entry['anchor'])}[#{cell(label)}]"
+    elsif present?(entry['uri'])
+      "link:#{cell(entry['uri'])}[#{cell(label)}]"
+    elsif present?(entry['path'])
+      "#{cell(label)} (`#{cell(entry['path'])}`)"
+    else
+      cell(label)
+    end
+  end
+
+  def derived_from_fallback_label(entry)
+    entry.values.compact.map(&:to_s).find { |value| !value.strip.empty? }.to_s
+  end
+
+  def present?(value)
+    value.respond_to?(:empty?) ? !value.empty? : !value.nil?
+  end
 
   def anchor_for(path)
     normalized_anchor(path.basename(path.extname).to_s)
@@ -759,21 +1125,31 @@ class DocumentationGenerator
 
   def write(artifacts)
     written = []
+    metadata_artifacts = artifacts.select(&:metadata)
     matrix = TraceabilityMatrixGenerator.new(
       root: @root,
       docs_dir: @docs_dir,
       output_path: @matrix_output_path
     )
-    written << matrix.write(artifacts)
+    written << matrix.write(metadata_artifacts)
 
     artifact_indexes = ArtifactIndexGenerator.new(root: @root, docs_dir: @docs_dir)
-    written.concat(artifact_indexes.write(artifacts))
+    written.concat(artifact_indexes.write(metadata_artifacts))
 
     open_questions = OpenQuestionsIndexGenerator.new(root: @root, docs_dir: @docs_dir)
     written.concat(open_questions.write)
 
+    chapter_includes = ChapterIncludeFragmentGenerator.new(root: @root, docs_dir: @docs_dir)
+    written.concat(chapter_includes.write(metadata_artifacts))
+
+    metadata_attributes = MetadataAttributeFragmentGenerator.new(root: @root, docs_dir: @docs_dir)
+    written.concat(metadata_attributes.write(metadata_artifacts))
+
+    impact = ImpactFragmentGenerator.new(root: @root, docs_dir: @docs_dir)
+    written.concat(impact.write(metadata_artifacts))
+
     traceability = TraceabilityFragmentGenerator.new(root: @root, docs_dir: @docs_dir)
-    written.concat(traceability.write(artifacts))
+    written.concat(traceability.write(metadata_artifacts))
 
     written
   end
@@ -783,8 +1159,7 @@ end
 if $PROGRAM_NAME == __FILE__
   root = Pathname.new(__dir__).join('..').expand_path
   default_docs_targets = [
-    root.join('src/docs/arc42.adoc'),
-    root.join('src/docs/arc42')
+    root.join('src/docs')
   ]
   options = {
     docs_dir: default_docs_targets,
@@ -827,7 +1202,7 @@ if $PROGRAM_NAME == __FILE__
       output_base = first_docs_target.directory? ? first_docs_target : first_docs_target.dirname
       output_base.join('generated/traceability-matrix.adoc')
     else
-      root.join('src/docs/arc42/generated/traceability-matrix.adoc')
+      root.join('src/docs/generated/traceability-matrix.adoc')
     end
     generator = DocumentationGenerator.new(
       root: root,

@@ -1,6 +1,0 @@
-[[open-questions]]
-== Open Questions
-
-// Generated from questions-and-answers.adoc. Do not edit manually.
-
-No open questions recorded.

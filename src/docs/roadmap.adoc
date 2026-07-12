@@ -13,7 +13,7 @@ summary: Development phases and milestones for the Event Processing Lab
   - milestones
   - planning
 relations:
-  - type: informs
+  - type: relates_to
     target: DOC-101-introduction-and-goals
     status: proposed
     rationale: Roadmap shows how goals will be achieved
