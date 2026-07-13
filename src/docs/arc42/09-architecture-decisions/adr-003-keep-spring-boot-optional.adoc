@@ -12,6 +12,46 @@ tags:
   - simplicity
   - learning
 relations:
+  - type: relates_to
+    target: ADR-004-separate-implementations
+    status: proposed
+    rationale: Plain Java keeps the separate implementations focused.
+    reviewed: false
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Plain Java model without framework coupling.
+    reviewed: false
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Plain Java producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Plain Java consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Plain Java Esper integration.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Plain Java Flink job.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Plain Java Flink CEP job.
+    reviewed: false
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Supports the learnability, understandability and modifiability goals.
+    reviewed: false
   - type: refines
     target: ADR-001-use-kafka-as-event-backbone
     status: proposed

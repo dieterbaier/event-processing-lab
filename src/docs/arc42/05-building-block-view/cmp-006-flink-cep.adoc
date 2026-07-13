@@ -1,0 +1,64 @@
+---
+id: CMP-006-flink-cep
+type: Component
+title: Flink CEP
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Pattern detection with the Flink CEP library.
+tags:
+  - building-block
+  - component
+  - flink-cep
+relations:
+  - type: depends_on
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Uses the shared event model and serialization.
+    reviewed: false
+  - type: depends_on
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Builds on the Flink runtime and shared utilities.
+    reviewed: false
+---
+[[flink-cep]]
+== Flink CEP Module
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Pattern detection with Flink CEP library
+
+| Responsibilities
+| Pattern definition, matching, complex event detection
+
+| Technology
+| Flink CEP, Kafka Connector
+
+| Patterns
+| Order creation, payment processing, timeout, cancellation, complete flows
+
+| Quality
+| Pattern-based, time-aware, stateful
+
+|===
+
+=== Impact
+
+include::generated/cmp-006-flink-cep-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/cmp-006-flink-cep-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/cmp-006-flink-cep-traceability.adoc[leveloffset=+2]

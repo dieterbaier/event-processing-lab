@@ -13,6 +13,16 @@ tags:
   - reliability
   - event-model
 relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Validation belongs in the event model.
+    reviewed: false
+  - type: relates_to
+    target: QS-014-issue-identification
+    status: proposed
+    rationale: Validation supports issue identification.
+    reviewed: false
   - type: mitigates
     target: RISK-004-event-loss
     status: proposed

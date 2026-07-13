@@ -13,7 +13,22 @@ tags:
   - cep
   - performance
   - memory
-relations: []
+relations:
+  - type: depends_on
+    target: ADR-004-separate-implementations
+    status: proposed
+    rationale: Separate CEP implementations each carry pattern state.
+    reviewed: false
+  - type: relates_to
+    target: QS-009-pattern-complexity-handling
+    status: proposed
+    rationale: State growth threatens the pattern-complexity scenario.
+    reviewed: false
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Related to the threat model T-001.
+    reviewed: false
 ---
 [[risk-001-state-explosion]]
 == RISK-001: State Explosion in CEP Engines

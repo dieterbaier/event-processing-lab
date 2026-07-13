@@ -12,6 +12,41 @@ tags:
   - event-format
   - data
 relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: JSON serialization is defined in the event model.
+    reviewed: false
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Producer serializes events as JSON.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Consumer deserializes JSON events.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Esper consumes JSON events.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Flink consumes JSON events.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Flink CEP consumes JSON events.
+    reviewed: false
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Supports the learnability, understandability and modifiability goals.
+    reviewed: false
   - type: refines
     target: ADR-003-keep-spring-boot-optional
     status: proposed

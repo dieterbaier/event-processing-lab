@@ -14,6 +14,16 @@ tags:
   - onboarding
   - complexity
 relations:
+  - type: relates_to
+    target: QS-001-technology-comparison-effectiveness
+    status: proposed
+    rationale: A steep curve threatens comparison effectiveness.
+    reviewed: false
+  - type: relates_to
+    target: QS-003-hands-on-experience
+    status: proposed
+    rationale: A steep curve threatens hands-on experience.
+    reviewed: false
   - type: depends_on
     target: ADR-004-separate-implementations
     status: proposed

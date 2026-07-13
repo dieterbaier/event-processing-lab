@@ -1,0 +1,79 @@
+---
+id: CMP-004-esper-cep
+type: Component
+title: Esper CEP
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Complex event processing with the Esper engine.
+tags:
+  - building-block
+  - component
+  - esper-cep
+relations:
+  - type: depends_on
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Uses the shared event model and serialization.
+    reviewed: false
+---
+[[esper-cep]]
+== Esper CEP Module
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Complex Event Processing with Esper
+
+| Responsibilities
+| EPL rule definition, pattern detection, event correlation
+
+| Technology
+| Esper 8.7.0, Kafka Consumer
+
+| Patterns
+| Order creation, payment processing, timeout detection, complete flows
+
+| Quality
+| Rule-based, declarative, efficient
+
+|===
+
+[plantuml,esper-cep,png]
+----
+@startuml
+skinparam monochrome true
+
+class EsperCepEngine {
+    +EPSPStatementManager epService
+    +KafkaConsumer kafkaConsumer
+    +registerEventTypes()
+    +registerEplStatements()
+    +processEsperResults()
+}
+
+EsperCepEngine --> Kafka : "consumes from"
+EsperCepEngine --> Esper : "uses"
+EsperCepEngine --> EventSerializer : "uses"
+
+@enduml
+----
+
+=== Impact
+
+include::generated/cmp-004-esper-cep-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/cmp-004-esper-cep-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/cmp-004-esper-cep-traceability.adoc[leveloffset=+2]

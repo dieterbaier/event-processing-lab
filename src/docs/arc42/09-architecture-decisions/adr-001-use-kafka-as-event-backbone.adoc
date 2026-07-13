@@ -12,6 +12,31 @@ tags:
   - infrastructure
   - core
 relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Kafka transport shapes the shared event model.
+    reviewed: false
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: The producer publishes to the Kafka backbone.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: The consumer reads from the Kafka backbone.
+    reviewed: false
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Supports the learnability, understandability and scalability goals.
+    reviewed: false
+  - type: relates_to
+    target: DOC-06000-runtime-view
+    status: proposed
+    rationale: Backs the order-creation, payment-processing and payment-timeout flows.
+    reviewed: false
   - type: refines
     target: ADR-002-use-json-serialization
     status: proposed

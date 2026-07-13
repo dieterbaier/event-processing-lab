@@ -14,6 +14,16 @@ tags:
   - maintenance
   - complexity
 relations:
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Related to the threat model T-002.
+    reviewed: false
+  - type: relates_to
+    target: QS-003-hands-on-experience
+    status: proposed
+    rationale: Operational complexity affects hands-on experience.
+    reviewed: false
   - type: depends_on
     target: ADR-001-use-kafka-as-event-backbone
     status: proposed

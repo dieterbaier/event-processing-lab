@@ -13,6 +13,26 @@ tags:
   - reliability
   - robustness
 relations:
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Error handling gap in the consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Error handling gap in the Flink job.
+    reviewed: false
+  - type: relates_to
+    target: QS-014-issue-identification
+    status: proposed
+    rationale: Better error handling supports issue identification.
+    reviewed: false
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Elaborates the error-handling concept.
+    reviewed: false
   - type: mitigates
     target: RISK-004-event-loss
     status: proposed

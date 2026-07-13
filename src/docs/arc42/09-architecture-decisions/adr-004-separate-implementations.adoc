@@ -12,6 +12,36 @@ tags:
   - comparison
   - architecture
 relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Shared model reused by each separate implementation.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Esper is a separate implementation.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Flink basic is a separate implementation.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Flink CEP is a separate implementation.
+    reviewed: false
+  - type: addresses
+    target: DOC-01000-introduction-and-goals
+    status: proposed
+    rationale: Supports the learnability, understandability and scalability goals.
+    reviewed: false
+  - type: relates_to
+    target: DOC-06000-runtime-view
+    status: proposed
+    rationale: Each implementation covers the same runtime flows.
+    reviewed: false
   - type: refines
     target: ADR-002-use-json-serialization
     status: proposed

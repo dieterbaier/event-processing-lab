@@ -14,6 +14,11 @@ tags:
   - data-integrity
   - kafka
 relations:
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Related to error handling in the crosscutting concepts.
+    reviewed: false
   - type: depends_on
     target: ADR-001-use-kafka-as-event-backbone
     status: proposed

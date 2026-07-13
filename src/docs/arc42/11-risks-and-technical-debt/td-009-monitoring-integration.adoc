@@ -12,7 +12,42 @@ tags:
   - monitoring
   - observability
   - metrics
-relations: []
+relations:
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Monitoring hooks missing in the producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Monitoring hooks missing in the consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Monitoring hooks missing in Esper.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Monitoring hooks missing in Flink.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Monitoring hooks missing in Flink CEP.
+    reviewed: false
+  - type: relates_to
+    target: QS-013-monitoring-effectiveness
+    status: proposed
+    rationale: Monitoring underpins the monitoring-effectiveness scenario.
+    reviewed: false
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Elaborates the observability concept.
+    reviewed: false
 ---
 [[td-009-monitoring-integration]]
 == TD-009: Monitoring Integration

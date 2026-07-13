@@ -14,6 +14,11 @@ tags:
   - dependencies
   - integration
 relations:
+  - type: relates_to
+    target: DOC-04000-solution-strategy
+    status: proposed
+    rationale: Version compatibility is part of technology selection.
+    reviewed: false
   - type: depends_on
     target: ADR-001-use-kafka-as-event-backbone
     status: proposed

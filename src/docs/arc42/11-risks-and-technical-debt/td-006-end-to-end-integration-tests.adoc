@@ -12,7 +12,42 @@ tags:
   - testing
   - integration
   - end-to-end
-relations: []
+relations:
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: End-to-end tests exercise the producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: End-to-end tests exercise the consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: End-to-end tests exercise Esper.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: End-to-end tests exercise Flink.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: End-to-end tests exercise Flink CEP.
+    reviewed: false
+  - type: relates_to
+    target: QS-001-technology-comparison-effectiveness
+    status: proposed
+    rationale: Tests underpin a fair comparison.
+    reviewed: false
+  - type: relates_to
+    target: DOC-06000-runtime-view
+    status: proposed
+    rationale: Tests validate the runtime scenarios.
+    reviewed: false
 ---
 [[td-006-end-to-end-integration-tests]]
 == TD-006: End-to-End Integration Tests

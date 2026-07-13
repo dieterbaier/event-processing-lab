@@ -14,6 +14,11 @@ tags:
   - parsing
   - bottleneck
 relations:
+  - type: relates_to
+    target: QS-007-throughput-achievement
+    status: proposed
+    rationale: Bottlenecks threaten the throughput scenario.
+    reviewed: false
   - type: depends_on
     target: ADR-002-use-json-serialization
     status: proposed

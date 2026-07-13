@@ -12,7 +12,42 @@ tags:
   - documentation
   - modules
   - readability
-relations: []
+relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Module docs missing for event-model.
+    reviewed: false
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Module docs missing for event-producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Module docs missing for kafka-consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Module docs missing for esper-cep.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Module docs missing for flink-basic.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Module docs missing for flink-cep.
+    reviewed: false
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Documentation is a crosscutting concern.
+    reviewed: false
 ---
 [[td-007-module-documentation]]
 == TD-007: Module Documentation

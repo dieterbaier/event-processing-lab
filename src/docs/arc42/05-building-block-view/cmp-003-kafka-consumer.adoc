@@ -1,0 +1,59 @@
+---
+id: CMP-003-kafka-consumer
+type: Component
+title: Kafka Consumer
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Baseline event consumption directly from Kafka.
+tags:
+  - building-block
+  - component
+  - kafka-consumer
+relations:
+  - type: depends_on
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Uses the shared event model and serialization.
+    reviewed: false
+---
+[[kafka-consumer]]
+== Kafka Consumer Module
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Basic event consumption from Kafka
+
+| Responsibilities
+| Kafka consumption, event processing, simple correlation
+
+| Technology
+| Kafka Consumer API
+
+| Configuration
+| Bootstrap servers, topic, group ID
+
+| Quality
+| Simple, educational, observable
+
+|===
+
+=== Impact
+
+include::generated/cmp-003-kafka-consumer-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/cmp-003-kafka-consumer-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/cmp-003-kafka-consumer-traceability.adoc[leveloffset=+2]

@@ -12,7 +12,27 @@ tags:
   - configuration
   - maintainability
   - flexibility
-relations: []
+relations:
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Producer configuration should be externalized.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Consumer configuration should be externalized.
+    reviewed: false
+  - type: mitigates
+    target: RISK-002-operational-complexity
+    status: proposed
+    rationale: Externalized config reduces operational complexity.
+    reviewed: false
+  - type: relates_to
+    target: DOC-07000-deployment-view
+    status: proposed
+    rationale: Configuration is a deployment concern.
+    reviewed: false
 ---
 [[td-008-externalized-configuration]]
 == TD-008: Externalized Configuration
