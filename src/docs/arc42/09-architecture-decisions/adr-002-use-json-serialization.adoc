@@ -43,9 +43,19 @@ relations:
     rationale: Flink CEP consumes JSON events.
     reviewed: false
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-001-learnability
     status: proposed
-    rationale: Supports the learnability, understandability and modifiability goals.
+    rationale: Human-readable JSON aids learnability.
+    reviewed: false
+  - type: addresses
+    target: QG-002-understandability
+    status: proposed
+    rationale: Readable payloads aid understandability.
+    reviewed: false
+  - type: addresses
+    target: QG-004-modifiability
+    status: proposed
+    rationale: Serialization behind an interface aids modifiability.
     reviewed: false
   - type: refines
     target: ADR-003-keep-spring-boot-optional

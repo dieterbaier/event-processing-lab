@@ -12,7 +12,7 @@ tags:
   - observability
 relations:
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-005-observability
     status: proposed
     rationale: Concretizes the observability quality goal.
     reviewed: false

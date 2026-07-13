@@ -1,0 +1,66 @@
+---
+id: SCN-002-payment-processing-flow
+type: Concept
+title: Payment Processing Flow
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Runtime scenario correlating a PaymentReceived event with its order across all technologies.
+tags:
+  - runtime-scenario
+  - payment-processing
+relations: []
+---
+[[payment-processing-flow]]
+== Payment Processing Flow
+
+[plantuml,scenario-payment-processing,png]
+----
+@startuml
+skinparam monochrome true
+
+participant Kafka as "Kafka"
+participant Consumer as "Kafka Consumer"
+participant Esper as "Esper CEP"
+participant Flink as "Flink Basic"
+participant FlinkCep as "Flink CEP"
+
+Kafka -> Consumer : Deliver OrderCreated event
+Kafka -> Consumer : Deliver PaymentReceived event
+Kafka -> Esper : Deliver OrderCreated event
+Kafka -> Esper : Deliver PaymentReceived event
+Kafka -> Flink : Deliver OrderCreated event
+Kafka -> Flink : Deliver PaymentReceived event
+Kafka -> FlinkCep : Deliver OrderCreated event
+Kafka -> FlinkCep : Deliver PaymentReceived event
+
+Consumer -> Consumer : Correlate payment with order
+Esper -> Esper : Detect payment processing pattern
+Flink -> Flink : Join streams or use state
+FlinkCep -> FlinkCep : Detect payment processing pattern
+
+@enduml
+----
+
+*Steps:*
+
+. OrderCreated event is processed by all consumers
+. PaymentReceived event is published to the same Kafka topic
+. Consumers receive PaymentReceived event and correlate it with the original order
+. Different correlation approaches: Kafka Consumer (manual, cached events), Esper (EPL pattern matching), Flink Basic (keyed state), Flink CEP (pattern detection)
+
+=== Impact
+
+include::generated/scn-002-payment-processing-flow-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/scn-002-payment-processing-flow-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/scn-002-payment-processing-flow-traceability.adoc[leveloffset=+2]

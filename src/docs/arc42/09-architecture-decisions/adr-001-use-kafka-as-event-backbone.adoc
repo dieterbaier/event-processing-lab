@@ -28,14 +28,34 @@ relations:
     rationale: The consumer reads from the Kafka backbone.
     reviewed: false
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-001-learnability
     status: proposed
-    rationale: Supports the learnability, understandability and scalability goals.
+    rationale: Hands-on Kafka comparison supports learnability.
+    reviewed: false
+  - type: addresses
+    target: QG-002-understandability
+    status: proposed
+    rationale: A single clear backbone aids understandability.
+    reviewed: false
+  - type: addresses
+    target: QG-003-scalability
+    status: proposed
+    rationale: Kafka underpins the scalability comparison.
     reviewed: false
   - type: relates_to
-    target: DOC-06000-runtime-view
+    target: SCN-001-order-creation-flow
     status: proposed
-    rationale: Backs the order-creation, payment-processing and payment-timeout flows.
+    rationale: Backs the order-creation flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-002-payment-processing-flow
+    status: proposed
+    rationale: Backs the payment-processing flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-003-payment-timeout-detection
+    status: proposed
+    rationale: Backs the payment-timeout detection flow.
     reviewed: false
   - type: refines
     target: ADR-002-use-json-serialization

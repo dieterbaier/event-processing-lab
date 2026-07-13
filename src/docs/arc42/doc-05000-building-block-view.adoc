@@ -56,4 +56,4 @@ FlinkBasic --> FlinkCep : "optional dependency"
 
 == Level-2: Module Details
 
-include::generated/doc-05000-building-block-view-includes.adoc[]
+include::generated/doc-05000-building-block-view-includes.adoc[leveloffset=+1]

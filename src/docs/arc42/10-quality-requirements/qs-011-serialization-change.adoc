@@ -12,7 +12,7 @@ tags:
   - modifiability
 relations:
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-004-modifiability
     status: proposed
     rationale: Concretizes the modifiability quality goal.
     reviewed: false

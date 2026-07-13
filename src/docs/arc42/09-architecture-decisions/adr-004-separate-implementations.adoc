@@ -33,14 +33,34 @@ relations:
     rationale: Flink CEP is a separate implementation.
     reviewed: false
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-001-learnability
     status: proposed
-    rationale: Supports the learnability, understandability and scalability goals.
+    rationale: Side-by-side implementations aid learnability.
+    reviewed: false
+  - type: addresses
+    target: QG-002-understandability
+    status: proposed
+    rationale: Focused modules aid understandability.
+    reviewed: false
+  - type: addresses
+    target: QG-003-scalability
+    status: proposed
+    rationale: Independent scaling aids the scalability comparison.
     reviewed: false
   - type: relates_to
-    target: DOC-06000-runtime-view
+    target: SCN-001-order-creation-flow
     status: proposed
-    rationale: Each implementation covers the same runtime flows.
+    rationale: Backs the order-creation flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-002-payment-processing-flow
+    status: proposed
+    rationale: Backs the payment-processing flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-003-payment-timeout-detection
+    status: proposed
+    rationale: Backs the payment-timeout detection flow.
     reviewed: false
   - type: refines
     target: ADR-002-use-json-serialization

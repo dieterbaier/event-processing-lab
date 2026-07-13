@@ -1,0 +1,38 @@
+---
+id: SCN-004-order-cancellation-flow
+type: Concept
+title: Order Cancellation Flow
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Runtime scenario handling an OrderCancelled event across all technologies.
+tags:
+  - runtime-scenario
+  - order-cancellation
+relations: []
+---
+[[order-cancellation-flow]]
+== Order Cancellation Flow
+
+*Steps:*
+
+. OrderCreated event is processed
+. OrderCancelled event is published (due to customer request or timeout)
+. Consumers receive OrderCancelled event and process it accordingly
+. Different handling: Kafka Consumer (logging + cache cleanup), Esper (cancellation pattern), Flink Basic (stateful cancellation), Flink CEP (cancellation pattern matching)
+
+=== Impact
+
+include::generated/scn-004-order-cancellation-flow-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/scn-004-order-cancellation-flow-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/scn-004-order-cancellation-flow-traceability.adoc[leveloffset=+2]

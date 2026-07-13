@@ -1,0 +1,38 @@
+---
+id: SCN-005-shipment-start-flow
+type: Concept
+title: Shipment Start Flow
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Runtime scenario correlating a ShipmentStarted event with the prior order and payment.
+tags:
+  - runtime-scenario
+  - shipment-start
+relations: []
+---
+[[shipment-start-flow]]
+== Shipment Start Flow
+
+*Steps:*
+
+. OrderCreated and PaymentReceived events are processed
+. ShipmentStarted event is published
+. Consumers receive ShipmentStarted event
+. Correlation with previous events: Kafka Consumer (manual, cached order + payment), Esper (order-to-shipment pattern), Flink Basic (stateful validation that shipment follows payment), Flink CEP (complete-flow pattern)
+
+=== Impact
+
+include::generated/scn-005-shipment-start-flow-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/scn-005-shipment-start-flow-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/scn-005-shipment-start-flow-traceability.adoc[leveloffset=+2]

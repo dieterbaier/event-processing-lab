@@ -48,9 +48,19 @@ relations:
     rationale: Plain Java Flink CEP job.
     reviewed: false
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-001-learnability
     status: proposed
-    rationale: Supports the learnability, understandability and modifiability goals.
+    rationale: Framework-free code aids learnability.
+    reviewed: false
+  - type: addresses
+    target: QG-002-understandability
+    status: proposed
+    rationale: Less magic aids understandability.
+    reviewed: false
+  - type: addresses
+    target: QG-004-modifiability
+    status: proposed
+    rationale: Minimal coupling aids modifiability.
     reviewed: false
   - type: refines
     target: ADR-001-use-kafka-as-event-backbone
