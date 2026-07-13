@@ -1,0 +1,67 @@
+---
+id: SCN-003-payment-timeout-detection
+type: Concept
+title: Payment Timeout Detection
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Runtime scenario detecting a missing payment within the timeout window (failure/recovery path).
+tags:
+  - runtime-scenario
+  - payment-timeout
+relations: []
+---
+[[payment-timeout-detection]]
+== Payment Timeout Detection
+
+[plantuml,scenario-payment-timeout,png]
+----
+@startuml
+skinparam monochrome true
+
+participant Clock as "Timer"
+participant Kafka as "Kafka"
+participant Esper as "Esper CEP"
+participant Flink as "Flink Basic"
+participant FlinkCep as "Flink CEP"
+
+Kafka -> Esper : Deliver OrderCreated event
+Kafka -> Flink : Deliver OrderCreated event
+Kafka -> FlinkCep : Deliver OrderCreated event
+
+Clock -> Esper : Timer ticks (1 minute intervals)
+Clock -> Flink : Watermarks advance
+Clock -> FlinkCep : Watermarks advance
+
+Esper -> Esper : Check for missing PaymentReceived
+Flink -> Flink : Window expires without PaymentReceived
+FlinkCep -> FlinkCep : Pattern timeout triggers
+
+Esper -> Esper : Fire timeout detection rule
+Flink -> Flink : Emit timeout detection result
+FlinkCep -> FlinkCep : Emit timeout detection result
+
+@enduml
+----
+
+*Steps:*
+
+. OrderCreated event is received
+. No PaymentReceived event is received within the timeout period (5 minutes)
+. Each technology detects the timeout differently: Esper (timer-based EPL with NOT EXISTS), Flink Basic (window + state checking), Flink CEP (pattern with time constraints and NOT NEXT)
+
+=== Impact
+
+include::generated/scn-003-payment-timeout-detection-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/scn-003-payment-timeout-detection-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/scn-003-payment-timeout-detection-traceability.adoc[leveloffset=+2]

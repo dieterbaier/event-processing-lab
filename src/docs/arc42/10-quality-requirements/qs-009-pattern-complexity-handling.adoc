@@ -12,13 +12,13 @@ tags:
   - scalability
 relations:
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-003-scalability
     status: proposed
     rationale: Concretizes the scalability quality goal.
     reviewed: false
 ---
 [[qs-009-pattern-complexity-handling]]
-== QS-009-pattern-complexity-handling: Pattern Complexity Handling
+== QS-009: Pattern Complexity Handling
 
 
 

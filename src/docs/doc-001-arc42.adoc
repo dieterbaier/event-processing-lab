@@ -87,27 +87,27 @@ This architecture documentation follows the arc42 template structure:
 |===
 | Chapter | Title | Description
 
-| 1 | xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals] | Project purpose, quality goals, stakeholders
+| 1 | xref:introduction-and-goals[Introduction and Goals] | Project purpose, quality goals, stakeholders
 
-| 2 | xref:arc42/doc-02000-architecture-constraints.adoc[Architecture Constraints] | Technical and organizational constraints
+| 2 | xref:architecture-constraints[Architecture Constraints] | Technical and organizational constraints
 
-| 3 | xref:arc42/doc-03000-system-scope-and-context.adoc[System Scope and Context] | Business context, system overview, responsibilities
+| 3 | xref:system-scope-and-context[System Scope and Context] | Business context, system overview, responsibilities
 
-| 4 | xref:arc42/doc-04000-solution-strategy.adoc[Solution Strategy] | Architectural approach, technology stack, quality mapping
+| 4 | xref:solution-strategy[Solution Strategy] | Architectural approach, technology stack, quality mapping
 
-| 5 | xref:arc42/doc-05000-building-block-view.adoc[Building Block View] | Module structure, component details, diagrams
+| 5 | xref:building-block-view[Building Block View] | Module structure, component details, diagrams
 
-| 6 | xref:arc42/doc-06000-runtime-view.adoc[Runtime View] | Runtime scenarios, error handling scenarios
+| 6 | xref:runtime-view[Runtime View] | Runtime scenarios, error handling scenarios
 
-| 7 | xref:arc42/doc-07000-deployment-view.adoc[Deployment View] | Development and production environments
+| 7 | xref:deployment-view[Deployment View] | Development and production environments
 
-| 8 | xref:arc42/doc-08000-crosscutting-concepts.adoc[Cross-Cutting Concepts] | Threat model, security, testing, observability, error handling
+| 8 | xref:crosscutting-concepts[Cross-Cutting Concepts] | Threat model, security, testing, observability, error handling
 
-| 9 | xref:arc42/doc-09000-architecture-decisions.adoc[Architecture Decisions] | ADR index and decision records
+| 9 | xref:architecture-decisions[Architecture Decisions] | ADR index and decision records
 
-| 10 | xref:arc42/doc-10000-quality-requirements.adoc[Quality Requirements] | Quality tree and measurable quality scenarios
+| 10 | xref:quality-requirements[Quality Requirements] | Quality tree and measurable quality scenarios
 
-| 11 | xref:arc42/doc-11000-risks-and-technical-debt.adoc[Risks and Technical Debt] | Risk assessment and technical debt tracking
+| 11 | xref:risks-and-technical-debt[Risks and Technical Debt] | Risk assessment and technical debt tracking
 
 |===
 
@@ -132,12 +132,6 @@ include::arc42/doc-09000-architecture-decisions.adoc[leveloffset=+1]
 include::arc42/doc-10000-quality-requirements.adoc[leveloffset=+1]
 
 include::arc42/doc-11000-risks-and-technical-debt.adoc[leveloffset=+1]
-
-== Additional Documentation
-
-* xref:doc-002-vision-mission.adoc[Vision and Mission]
-* xref:doc-004-roadmap.adoc[Project Roadmap]
-* xref:doc-005-questions-and-answers.adoc[Questions and Answers]
 
 == Documentation Metadata
 

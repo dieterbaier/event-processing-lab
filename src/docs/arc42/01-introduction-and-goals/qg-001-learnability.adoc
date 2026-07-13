@@ -1,0 +1,41 @@
+---
+id: QG-001-learnability
+type: Requirement
+title: Learnability
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Enable quick understanding of each technology's capabilities and concepts.
+tags:
+  - quality-goal
+  - learnability
+relations: []
+---
+[[learnability]]
+== Learnability
+
+Enable quick understanding of each technology's capabilities and concepts.
+
+[cols="1,3", options="header"]
+|===
+| Aspect | Value
+| Priority | 001
+| Description | Enable quick understanding of each technology's capabilities and concepts.
+| Measurement | Time to first successful scenario, user feedback scores
+|===
+
+=== Impact
+
+include::generated/qg-001-learnability-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qg-001-learnability-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qg-001-learnability-traceability.adoc[leveloffset=+2]

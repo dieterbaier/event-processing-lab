@@ -13,6 +13,26 @@ tags:
   - reliability
   - robustness
 relations:
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Error handling gap in the consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Error handling gap in the Flink job.
+    reviewed: false
+  - type: relates_to
+    target: QS-014-issue-identification
+    status: proposed
+    rationale: Better error handling supports issue identification.
+    reviewed: false
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Elaborates the error-handling concept.
+    reviewed: false
   - type: mitigates
     target: RISK-004-event-loss
     status: proposed
@@ -20,73 +40,58 @@ relations:
     reviewed: false
 ---
 [[td-005-comprehensive-error-handling]]
-= TD-005: Comprehensive Error Handling
+== TD-005: Comprehensive Error Handling
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This technical debt item is AI-assisted. It identifies work needed for review and does not decide acceptance.
 
-== Technical Debt Statement
+=== Technical Debt Statement
 
 Because some modules have limited error handling, **the system may fail on edge cases** and not provide adequate information for debugging and recovery.
 
-== Details
+=== Details
 
 * **Module**: kafka-consumer, flink-basic
 * **Impact**: Reliability gap - may fail on edge cases
 * **Priority**: Medium
 * **Type**: Reliability gap
 
-== Resolution
+=== Resolution
 
 Add comprehensive error handling with appropriate recovery mechanisms, graceful degradation, and detailed error logging in all modules.
 
-== Acceptance Criteria
+=== Acceptance Criteria
 
 * All modules handle errors gracefully with appropriate logging
 * Error recovery mechanisms are in place for transient errors
 * Edge cases are handled with appropriate fallback behavior
 * Error messages are informative and actionable
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/td-005-comprehensive-error-handling-impact.adoc[leveloffset=+2]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
-| Kafka consumer needs error handling
+=== Traceability
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
-| Flink basic needs error handling
+include::generated/td-005-comprehensive-error-handling-attributes.adoc[]
 
-| `addresses`
-| xref:../10-quality-requirements/qs-014-issue-identification.adoc[QS-014]
-| Better error handling improves issue identification
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-| `relates_to`
-| xref:risk-004-event-loss.adoc[RISK-004]
-| Better error handling reduces event loss risk
-
-| `relates_to`
-| xref:../doc-08000-crosscutting-concepts.adoc[Error Handling]
-| Error handling is a cross-cutting concept
-|===
-
-== Open Questions
+include::generated/td-005-comprehensive-error-handling-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * What error recovery patterns should we use?
 * Should we implement circuit breakers for external dependencies?
 * What level of error detail is appropriate for production vs. development?
 
-== Review Notes
+=== Review Notes
 
 This technical debt item can be marked reviewed only after the implementation plan and acceptance criteria are confirmed by the accountable owner. The resolution approach should be evaluated for feasibility and effectiveness.

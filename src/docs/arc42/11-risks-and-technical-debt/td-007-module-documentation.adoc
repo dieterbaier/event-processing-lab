@@ -12,88 +12,96 @@ tags:
   - documentation
   - modules
   - readability
-relations: []
+relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Module docs missing for event-model.
+    reviewed: false
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Module docs missing for event-producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Module docs missing for kafka-consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Module docs missing for esper-cep.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Module docs missing for flink-basic.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Module docs missing for flink-cep.
+    reviewed: false
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Documentation is a crosscutting concern.
+    reviewed: false
 ---
 [[td-007-module-documentation]]
-= TD-007: Module Documentation
+== TD-007: Module Documentation
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This technical debt item is AI-assisted. It identifies work needed for review and does not decide acceptance.
 
-== Technical Debt Statement
+=== Technical Debt Statement
 
 Because module documentation is incomplete, **developers may have difficulty understanding how to use and configure each module** effectively.
 
-== Details
+=== Details
 
 * **Module**: all
 * **Impact**: Documentation gap - harder to understand and use individual modules
 * **Priority**: Low
 * **Type**: Documentation gap
 
-== Resolution
+=== Resolution
 
 Add README files for each module that explain the module's purpose, configuration, usage, and examples.
 
-== Acceptance Criteria
+=== Acceptance Criteria
 
 * Each module has a README file
 * README includes: purpose, configuration options, usage examples, and runtime instructions
 * Documentation is consistent across modules
 * All modules have clear examples of how to use them
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/td-007-module-documentation-impact.adoc[leveloffset=+2]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#event-model[event-model]
-| Event model module needs documentation
+=== Traceability
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
-| Event producer module needs documentation
+include::generated/td-007-module-documentation-attributes.adoc[]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
-| Kafka consumer module needs documentation
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#esper-cep[esper-cep]
-| Esper CEP module needs documentation
-
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
-| Flink basic module needs documentation
-
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-cep[flink-cep]
-| Flink CEP module needs documentation
-
-| `addresses`
-|
-| Module documentation improves understandability
-
-| `relates_to`
-| xref:../doc-08000-crosscutting-concepts.adoc[Documentation]
-| Documentation is a cross-cutting concern
-|===
-
-== Open Questions
+include::generated/td-007-module-documentation-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * What structure should module README files follow?
 * Should we use a template for consistency?
 * Should module documentation be in AsciiDoc or Markdown?
 
-== Review Notes
+=== Review Notes
 
 This technical debt item can be marked reviewed only after the implementation plan and acceptance criteria are confirmed by the accountable owner. The resolution approach should be evaluated for feasibility and effectiveness.

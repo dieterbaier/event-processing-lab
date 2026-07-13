@@ -34,54 +34,13 @@ By implementing the same business scenarios across multiple technologies, this p
 
 == 1.2. Quality Goals
 
+The top 5 quality goals that drive architecture decisions are documented as
+quality requirements below. Additional quality characteristics (performance,
+reliability, maintainability, security, compatibility) are elaborated in
+xref:quality-requirements[Chapter 10].
 
+include::generated/doc-01000-introduction-and-goals-includes.adoc[leveloffset=+1]
 
-
-
-
-
-The top 5 quality goals that drive architecture decisions:
-
-[cols="1,2,2,2", options="header"]
-|===
-| Priority
-| Quality Goal
-| Description
-| Measurement
-
-| 1
-| Learnability
-| Enable quick understanding of each technology's capabilities and concepts
-| Time to first successful scenario, user feedback scores
-
-| 2
-| Understandability
-| Keep code and architecture simple, clear, and well-documented
-| Code readability, documentation clarity assessments
-
-| 3
-| Scalability
-| Demonstrate how each technology scales with increasing load
-| Throughput under load, latency percentiles, resource utilization
-
-| 4
-| Modifiability
-| Allow easy experimentation with different configurations and scenarios
-| Time to implement changes, number of files affected
-
-| 5
-| Observability
-| Include logging and metrics for understanding system behavior
-| Time to detect issues, time to diagnose issues
-|===
-
-Additional quality characteristics addressed in Chapter 10:
-
-* Performance
-* Reliability
-* Maintainability
-* Security
-* Compatibility
 
 == 1.3. Stakeholders
 
@@ -141,12 +100,6 @@ Additional quality characteristics addressed in Chapter 10:
 * Performance optimization for production
 * Binary serialization formats (Avro, Protobuf) in first iteration
 * Spring Boot integration (optional, not required)
-
-== Traceability
-
-* Part of: xref:arc42.adoc[arc42 Architecture Documentation]
-* Refines: xref:doc-002-vision-mission.adoc[Vision and Mission]
-* Addressed by: xref:doc-004-roadmap.adoc[Project Roadmap]
 
 == Review Notes
 

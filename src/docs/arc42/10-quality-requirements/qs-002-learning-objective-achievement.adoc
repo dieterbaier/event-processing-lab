@@ -12,13 +12,13 @@ tags:
   - learnability
 relations:
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-001-learnability
     status: proposed
     rationale: Concretizes the learnability quality goal.
     reviewed: false
 ---
 [[qs-002-learning-objective-achievement]]
-== QS-002-learning-objective-achievement: Learning Objective Achievement
+== QS-002: Learning Objective Achievement
 
 
 

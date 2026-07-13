@@ -12,13 +12,13 @@ tags:
   - understandability
 relations:
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-002-understandability
     status: proposed
     rationale: Concretizes the understandability quality goal.
     reviewed: false
 ---
 [[qs-006-architecture-review]]
-== QS-006-architecture-review: Architecture Review Effectiveness
+== QS-006: Architecture Review Effectiveness
 
 
 

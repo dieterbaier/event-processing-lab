@@ -1,0 +1,59 @@
+---
+id: CMP-005-flink-basic
+type: Component
+title: Flink Basic
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Stream processing with the Flink DataStream API.
+tags:
+  - building-block
+  - component
+  - flink-basic
+relations:
+  - type: depends_on
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Uses the shared event model and serialization.
+    reviewed: false
+---
+[[flink-basic]]
+== Flink Basic Module
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Stream processing with Flink DataStream API
+
+| Responsibilities
+| Event consumption, stream operations, windowing, state management
+
+| Technology
+| Apache Flink 1.17.1, Kafka Connector
+
+| Operations
+| Filtering, mapping, keying, windowing, pattern detection
+
+| Quality
+| Stateful, scalable, distributed
+
+|===
+
+=== Impact
+
+include::generated/cmp-005-flink-basic-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/cmp-005-flink-basic-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/cmp-005-flink-basic-traceability.adoc[leveloffset=+2]

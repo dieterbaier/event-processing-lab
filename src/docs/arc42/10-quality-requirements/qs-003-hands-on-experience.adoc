@@ -12,13 +12,13 @@ tags:
   - learnability
 relations:
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-001-learnability
     status: proposed
     rationale: Concretizes the learnability quality goal.
     reviewed: false
 ---
 [[qs-003-hands-on-experience]]
-== QS-003-hands-on-experience: Hands-on Experience Effectiveness
+== QS-003: Hands-on Experience Effectiveness
 
 
 

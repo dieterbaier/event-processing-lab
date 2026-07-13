@@ -12,13 +12,13 @@ tags:
   - modifiability
 relations:
   - type: addresses
-    target: DOC-01000-introduction-and-goals
+    target: QG-004-modifiability
     status: proposed
     rationale: Concretizes the modifiability quality goal.
     reviewed: false
 ---
 [[qs-010-new-event-type-addition]]
-== QS-010-new-event-type-addition: New Event Type Addition
+== QS-010: New Event Type Addition
 
 
 

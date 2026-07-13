@@ -2,16 +2,66 @@
 id: ADR-003-keep-spring-boot-optional
 type: ADR
 title: Keep Spring Boot Optional, Use Plain Java
-decision: Prefer plain Java implementations where simpler, keep Spring Boot optional
-status: accepted
+summary: Prefer plain Java implementations where simpler, keep Spring Boot optional
+status: proposed
 created: 2026-07-02
-author: Integration Architecture Team
+owner: Integration Architecture Team
 tags:
   - spring-boot
   - plain-java
   - simplicity
   - learning
 relations:
+  - type: relates_to
+    target: ADR-004-separate-implementations
+    status: proposed
+    rationale: Plain Java keeps the separate implementations focused.
+    reviewed: false
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Plain Java model without framework coupling.
+    reviewed: false
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Plain Java producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Plain Java consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Plain Java Esper integration.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Plain Java Flink job.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Plain Java Flink CEP job.
+    reviewed: false
+  - type: addresses
+    target: QG-001-learnability
+    status: proposed
+    rationale: Framework-free code aids learnability.
+    reviewed: false
+  - type: addresses
+    target: QG-002-understandability
+    status: proposed
+    rationale: Less magic aids understandability.
+    reviewed: false
+  - type: addresses
+    target: QG-004-modifiability
+    status: proposed
+    rationale: Minimal coupling aids modifiability.
+    reviewed: false
   - type: refines
     target: ADR-001-use-kafka-as-event-backbone
     status: proposed
@@ -20,16 +70,16 @@ relations:
 reviewed: false
 ---
 [[adr-003-keep-spring-boot-optional]]
-= ADR-003: Keep Spring Boot Optional, Use Plain Java
+== ADR-003: Keep Spring Boot Optional, Use Plain Java
 
 
 
-== Status
+=== Status
 
-[.status-accepted]
-Accepted
+[.status-proposed]
+Proposed
 
-== Context
+=== Context
 
 The Event Processing Lab needs to choose between using Spring Boot (with its dependency injection, auto-configuration, and ecosystem) and plain Java for implementing the various modules. This decision affects:
 
@@ -39,11 +89,11 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 * Development speed vs. conceptual clarity
 * Production readiness
 
-== Decision
+=== Decision
 
 *Prefer plain Java implementations where simpler, keep Spring Boot optional.*
 
-== Decision Drivers
+=== Decision Drivers
 
 [cols="1,1,2", options="header"]
 |===
@@ -77,9 +127,9 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 
 |===
 
-== Alternatives Considered
+=== Alternatives Considered
 
-=== 1. Plain Java [.selected]#✅ Selected#
+==== 1. Plain Java [.selected]#✅ Selected#
 
 *Pros:*
 - Focus on core concepts without framework complexity
@@ -95,7 +145,7 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 
 *Implementation:* Use plain Java with direct library dependencies
 
-=== 2. Spring Boot Primary
+==== 2. Spring Boot Primary
 
 *Pros:*
 - Rapid development with auto-configuration
@@ -111,7 +161,7 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 
 *Implementation:* Use Spring Boot as primary framework
 
-=== 3. Hybrid Approach
+==== 3. Hybrid Approach
 
 *Pros:*
 - Use Spring Boot where it adds value
@@ -125,9 +175,9 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 
 *Implementation:* Spring Boot for complex modules, plain Java for simple ones
 
-== Consequences
+=== Consequences
 
-=== Positive Consequences
+==== Positive Consequences
 
 . *Conceptual Clarity*: The event processing logic is explicit and not hidden behind framework abstractions.
 . *Minimal Dependencies*: Only the essential libraries are included, making the codebase easier to understand.
@@ -135,35 +185,29 @@ The Event Processing Lab needs to choose between using Spring Boot (with its dep
 . *Technology Comparison*: Makes it easier to see the differences between the underlying technologies.
 . *Simplicity*: Plain Java implementations are simpler and more direct.
 
-=== Negative Consequences
+==== Negative Consequences
 
 . *More Manual Work*: Requires more explicit configuration and dependency management.
 . *Less Production-Ready*: Lacks features like auto-configuration, health checks, and metrics.
 . *Limited Ecosystem*: Don't get the benefits of Spring Boot's extensive ecosystem.
 . *Boilerplate Code*: May require more boilerplate code for common tasks.
 
-== Related Decisions
+=== Impact
 
-* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
-* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations]
+include::generated/adr-003-keep-spring-boot-optional-impact.adoc[leveloffset=+2]
 
-== Related Components
+=== Traceability
 
-* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
-* xref:../doc-05000-building-block-view.adoc#event-producer[Event Producer]
-* xref:../doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
-* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
-* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
-* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
+include::generated/adr-003-keep-spring-boot-optional-attributes.adoc[]
 
-== Related Technologies
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-* https://spring.io/projects/spring-boot[Spring Boot]
-* https://www.java.com/[Java]
+// Generated traceability fragment. Relations are maintained only in YAML front matter.
+include::generated/adr-003-keep-spring-boot-optional-traceability.adoc[leveloffset=+2]
 
-== Related Quality Goals
+=== Review Notes
 
-* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
-* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
-* xref:../doc-01000-introduction-and-goals.adoc#modifiability[Modifiability]
+State what must be confirmed before this ADR can be marked reviewed or accepted.

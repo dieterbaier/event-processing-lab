@@ -328,8 +328,8 @@ The Event Processing Lab is developed in phases, with each phase delivering spec
 
 == Traceability
 
-* Informs: xref:arc42/doc-01000-introduction-and-goals.adoc[Introduction and Goals]
-* Related to: xref:doc-002-vision-mission.adoc[Vision and Mission]
+* Informs: xref:introduction-and-goals[Introduction and Goals]
+* Related to: Vision and Mission
 
 == Review Notes
 

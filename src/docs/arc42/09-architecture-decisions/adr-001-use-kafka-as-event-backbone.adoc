@@ -2,16 +2,61 @@
 id: ADR-001-use-kafka-as-event-backbone
 type: ADR
 title: Use Kafka as Event Backbone
-decision: Use Apache Kafka as the event backbone for the Event Processing Lab
-status: accepted
+summary: Use Apache Kafka as the event backbone for the Event Processing Lab
+status: proposed
 created: 2026-07-02
-author: Integration Architecture Team
+owner: Integration Architecture Team
 tags:
   - kafka
   - event-backbone
   - infrastructure
   - core
 relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Kafka transport shapes the shared event model.
+    reviewed: false
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: The producer publishes to the Kafka backbone.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: The consumer reads from the Kafka backbone.
+    reviewed: false
+  - type: addresses
+    target: QG-001-learnability
+    status: proposed
+    rationale: Hands-on Kafka comparison supports learnability.
+    reviewed: false
+  - type: addresses
+    target: QG-002-understandability
+    status: proposed
+    rationale: A single clear backbone aids understandability.
+    reviewed: false
+  - type: addresses
+    target: QG-003-scalability
+    status: proposed
+    rationale: Kafka underpins the scalability comparison.
+    reviewed: false
+  - type: relates_to
+    target: SCN-001-order-creation-flow
+    status: proposed
+    rationale: Backs the order-creation flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-002-payment-processing-flow
+    status: proposed
+    rationale: Backs the payment-processing flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-003-payment-timeout-detection
+    status: proposed
+    rationale: Backs the payment-timeout detection flow.
+    reviewed: false
   - type: refines
     target: ADR-002-use-json-serialization
     status: proposed
@@ -25,16 +70,16 @@ relations:
 reviewed: false
 ---
 [[adr-001-use-kafka-as-event-backbone]]
-= ADR-001: Use Kafka as Event Backbone
+== ADR-001: Use Kafka as Event Backbone
 
 
 
-== Status
+=== Status
 
-[.status-accepted]
-Accepted
+[.status-proposed]
+Proposed
 
-== Context
+=== Context
 
 The Event Processing Lab needs a central event transport mechanism to connect event producers with various event processing engines (Kafka Consumer, Esper CEP, Flink, Flink CEP). This event backbone must:
 
@@ -44,11 +89,11 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 * Support multiple concurrent consumers
 * Maintain event ordering within logical partitions
 
-== Decision
+=== Decision
 
 *Use Apache Kafka as the event backbone for the Event Processing Lab.*
 
-== Decision Drivers
+=== Decision Drivers
 
 [cols="1,1,2", options="header"]
 |===
@@ -86,9 +131,9 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 |===
 
-== Alternatives Considered
+=== Alternatives Considered
 
-=== 1. Apache Kafka [.selected]#✅ Selected#
+==== 1. Apache Kafka [.selected]#✅ Selected#
 
 *Pros:*
 - High throughput, fault tolerant, horizontally scalable, built-in partitioning, excellent ecosystem, strong community
@@ -98,7 +143,7 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 *Integration:* Native support in Flink, good Java client, widely supported
 
-=== 2. RabbitMQ
+==== 2. RabbitMQ
 
 *Pros:* Simple to set up and operate, lightweight, good Java support
 
@@ -106,7 +151,7 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 *Integration:* Would require custom integration with Flink
 
-=== 3. Apache Pulsar
+==== 3. Apache Pulsar
 
 *Pros:* High throughput, multi-tenancy, built-in functions, good ecosystem
 
@@ -114,7 +159,7 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 *Integration:* Good Java client, Flink connector available
 
-=== 4. NATS / NATS Streaming
+==== 4. NATS / NATS Streaming
 
 *Pros:* Extremely lightweight, high performance, simple protocol
 
@@ -122,7 +167,7 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 *Integration:* Limited Flink integration
 
-== Pugh Matrix Analysis
+=== Pugh Matrix Analysis
 
 [cols="1,1,1,1,1,1", options="header"]
 |===
@@ -198,9 +243,9 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 |===
 
-== Consequences
+=== Consequences
 
-=== Positive Consequences
+==== Positive Consequences
 
 . *High Throughput*: Kafka can handle hundreds of thousands of events per second, enabling realistic performance testing of CEP engines.
 . *Fault Tolerance*: Kafka's replication ensures events are not lost even if nodes fail, providing reliable event transport for learning scenarios.
@@ -210,14 +255,14 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 . *Ecosystem Integration*: Kafka has excellent integration with Flink (native connector) and good Java client support for Esper and custom consumers.
 . *Industry Relevance*: Kafka is widely adopted in industry, making the learning experience directly applicable to real-world scenarios.
 
-=== Negative Consequences
+==== Negative Consequences
 
 . *Operational Complexity*: Running Kafka requires understanding of brokers, topics, partitions, consumer groups, and configuration options.
 . *Resource Usage*: Kafka requires more resources (memory, disk) than lighter alternatives like RabbitMQ.
 . *Setup Overhead*: Requires additional setup (ZooKeeper or KRaft mode) compared to simpler message brokers.
 . *Learning Curve*: Users need to understand Kafka concepts before effectively using the event backbone.
 
-== Risk Mitigations
+=== Risk Mitigations
 
 [cols="1,2,1", options="header"]
 |===
@@ -239,30 +284,22 @@ The Event Processing Lab needs a central event transport mechanism to connect ev
 
 |===
 
-== Related Decisions
+=== Impact
 
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
-* xref:adr-004-separate-implementations.adoc[ADR-004: Separate Esper and Flink Implementations]
+include::generated/adr-001-use-kafka-as-event-backbone-impact.adoc[leveloffset=+2]
 
-== Related Components
+=== Traceability
 
-* xref:doc-05000-building-block-view.adoc#event-model[Event Model]
-* xref:doc-05000-building-block-view.adoc#event-producer[Event Producer]
-* xref:doc-05000-building-block-view.adoc#kafka-consumer[Kafka Consumer]
+include::generated/adr-001-use-kafka-as-event-backbone-attributes.adoc[]
 
-== Related Technologies
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-* https://kafka.apache.org/[Apache Kafka]
-* https://docs.confluent.io/platform/current/connect/index.html[Kafka Connect]
+// Generated traceability fragment. Relations are maintained only in YAML front matter.
+include::generated/adr-001-use-kafka-as-event-backbone-traceability.adoc[leveloffset=+2]
 
-== Related Quality Goals
+=== Review Notes
 
-* xref:doc-01000-introduction-and-goals.adoc#learnability[Learnability]
-* xref:doc-01000-introduction-and-goals.adoc#understandability[Understandability]
-* xref:doc-01000-introduction-and-goals.adoc#scalability[Scalability]
-
-== Related Scenarios
-
-* xref:doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow]
-* xref:doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow]
-* xref:doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection]
+State what must be confirmed before this ADR can be marked reviewed or accepted.

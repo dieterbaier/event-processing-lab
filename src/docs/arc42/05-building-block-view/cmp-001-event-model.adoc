@@ -1,0 +1,97 @@
+---
+id: CMP-001-event-model
+type: Component
+title: Event Model
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Common event DTOs and JSON serialization shared by all modules.
+tags:
+  - building-block
+  - component
+  - event-model
+relations: []
+---
+[[event-model]]
+== Event Model Module
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Common event DTOs and serialization
+
+| Responsibilities
+| Define event types, provide serialization/deserialization
+
+| Interfaces
+| Event, EventType, EventSerializer, EventFactory
+
+| Data
+| OrderCreated, PaymentReceived, PaymentFailed, OrderCancelled, ShipmentStarted
+
+| Quality
+| Reusable, type-safe, JSON-serializable
+
+|===
+
+[plantuml,event-model,png]
+----
+@startuml
+skinparam monochrome true
+
+class Event {
+    +String eventId
+    +String eventType
+    +Instant timestamp
+    +String version
+    +getEventTypeEnum()
+}
+
+class EventType {
+    ORDER_CREATED
+    PAYMENT_RECEIVED
+    PAYMENT_FAILED
+    ORDER_CANCELLED
+    SHIPMENT_STARTED
+}
+
+class EventSerializer {
+    +serialize(Event)
+    +deserialize(String)
+}
+
+class EventFactory {
+    +createRandomOrderCreated()
+    +createRandomPaymentReceived()
+    +createRandomPaymentFailed()
+    +createRandomOrderCancelled()
+    +createRandomShipmentStarted()
+}
+
+Event <|-- OrderCreated
+Event <|-- PaymentReceived
+Event <|-- PaymentFailed
+Event <|-- OrderCancelled
+Event <|-- ShipmentStarted
+
+@enduml
+----
+
+=== Impact
+
+include::generated/cmp-001-event-model-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/cmp-001-event-model-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/cmp-001-event-model-traceability.adoc[leveloffset=+2]

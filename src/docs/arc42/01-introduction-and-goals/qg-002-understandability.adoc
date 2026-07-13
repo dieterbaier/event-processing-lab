@@ -1,0 +1,41 @@
+---
+id: QG-002-understandability
+type: Requirement
+title: Understandability
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Keep code and architecture simple, clear, and well-documented.
+tags:
+  - quality-goal
+  - understandability
+relations: []
+---
+[[understandability]]
+== Understandability
+
+Keep code and architecture simple, clear, and well-documented.
+
+[cols="1,3", options="header"]
+|===
+| Aspect | Value
+| Priority | 002
+| Description | Keep code and architecture simple, clear, and well-documented.
+| Measurement | Code readability, documentation clarity assessments
+|===
+
+=== Impact
+
+include::generated/qg-002-understandability-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/qg-002-understandability-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/qg-002-understandability-traceability.adoc[leveloffset=+2]

@@ -1,0 +1,67 @@
+---
+id: SCN-001-order-creation-flow
+type: Concept
+title: Order Creation Flow
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Runtime scenario for producing and processing an OrderCreated event across all technologies.
+tags:
+  - runtime-scenario
+  - order-creation
+relations: []
+---
+[[order-creation-flow]]
+== Order Creation Flow
+
+[plantuml,scenario-order-creation,png]
+----
+@startuml
+skinparam monochrome true
+
+actor Customer
+participant Producer as "Event Producer"
+participant Kafka as "Kafka"
+participant Consumer as "Kafka Consumer"
+participant Esper as "Esper CEP"
+participant Flink as "Flink Basic"
+participant FlinkCep as "Flink CEP"
+
+Customer -> Producer : Create Order
+Producer -> Kafka : Publish OrderCreated event
+Kafka -> Consumer : Deliver OrderCreated event
+Kafka -> Esper : Deliver OrderCreated event
+Kafka -> Flink : Deliver OrderCreated event
+Kafka -> FlinkCep : Deliver OrderCreated event
+
+Consumer -> Consumer : Log OrderCreated
+Esper -> Esper : Detect OrderCreated pattern
+Flink -> Flink : Process OrderCreated stream
+FlinkCep -> FlinkCep : Detect OrderCreated pattern
+
+@enduml
+----
+
+*Steps:*
+
+. Customer places an order
+. Event Producer creates OrderCreated event with unique order ID, customer ID, items, and total
+. Producer serializes event to JSON and publishes to Kafka topic
+. All consumers receive the event and process it according to their logic
+. Each technology demonstrates different approaches to handling the same event
+
+=== Impact
+
+include::generated/scn-001-order-creation-flow-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/scn-001-order-creation-flow-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/scn-001-order-creation-flow-traceability.adoc[leveloffset=+2]

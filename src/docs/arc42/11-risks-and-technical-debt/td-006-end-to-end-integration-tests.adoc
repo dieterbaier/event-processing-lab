@@ -12,84 +12,116 @@ tags:
   - testing
   - integration
   - end-to-end
-relations: []
+relations:
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: End-to-end tests exercise the producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: End-to-end tests exercise the consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: End-to-end tests exercise Esper.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: End-to-end tests exercise Flink.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: End-to-end tests exercise Flink CEP.
+    reviewed: false
+  - type: relates_to
+    target: QS-001-technology-comparison-effectiveness
+    status: proposed
+    rationale: Tests underpin a fair comparison.
+    reviewed: false
+  - type: relates_to
+    target: SCN-001-order-creation-flow
+    status: proposed
+    rationale: E2E tests validate order creation.
+    reviewed: false
+  - type: relates_to
+    target: SCN-002-payment-processing-flow
+    status: proposed
+    rationale: E2E tests validate payment processing.
+    reviewed: false
+  - type: relates_to
+    target: SCN-003-payment-timeout-detection
+    status: proposed
+    rationale: E2E tests validate payment timeout.
+    reviewed: false
+  - type: relates_to
+    target: SCN-004-order-cancellation-flow
+    status: proposed
+    rationale: E2E tests validate order cancellation.
+    reviewed: false
+  - type: relates_to
+    target: SCN-005-shipment-start-flow
+    status: proposed
+    rationale: E2E tests validate shipment start.
+    reviewed: false
 ---
 [[td-006-end-to-end-integration-tests]]
-= TD-006: End-to-End Integration Tests
+== TD-006: End-to-End Integration Tests
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This technical debt item is AI-assisted. It identifies work needed for review and does not decide acceptance.
 
-== Technical Debt Statement
+=== Technical Debt Statement
 
 Because there are no end-to-end integration tests, **we cannot verify that the complete event processing flow works correctly** across all modules and technologies.
 
-== Details
+=== Details
 
 * **Module**: root
 * **Impact**: Testing gap - cannot verify complete event processing flow
 * **Priority**: Medium
 * **Type**: Testing gap
 
-== Resolution
+=== Resolution
 
 Add end-to-end test scenarios that verify the complete event processing flow from event production to final processing across all technology implementations.
 
-== Acceptance Criteria
+=== Acceptance Criteria
 
 * End-to-end tests cover all major scenarios
 * Tests verify event flow through Kafka
 * Tests validate processing in all consumer modules
 * Tests work across all technology implementations
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/td-006-end-to-end-integration-tests-impact.adoc[leveloffset=+2]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
-| Event producer is part of end-to-end flow
+=== Traceability
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
-| Kafka consumer is part of end-to-end flow
+include::generated/td-006-end-to-end-integration-tests-attributes.adoc[]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#esper-cep[esper-cep]
-| Esper CEP is part of end-to-end flow
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
-| Flink basic is part of end-to-end flow
-
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-cep[flink-cep]
-| Flink CEP is part of end-to-end flow
-
-| `addresses`
-| xref:../10-quality-requirements/qs-001-technology-comparison-effectiveness.adoc[QS-001]
-| End-to-end tests needed for technology comparison
-
-| `relates_to`
-| xref:../doc-06000-runtime-view.adoc[Runtime View]
-| Runtime scenarios should be testable end-to-end
-|===
-
-== Open Questions
+include::generated/td-006-end-to-end-integration-tests-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * How do we set up test infrastructure for end-to-end testing?
 * Should end-to-end tests run in CI/CD pipeline?
 * What scenarios are most important for end-to-end testing?
 
-== Review Notes
+=== Review Notes
 
 This technical debt item can be marked reviewed only after the implementation plan and acceptance criteria are confirmed by the accountable owner. The resolution approach should be evaluated for feasibility and effectiveness.

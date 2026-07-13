@@ -12,88 +12,96 @@ tags:
   - monitoring
   - observability
   - metrics
-relations: []
+relations:
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Monitoring hooks missing in the producer.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Monitoring hooks missing in the consumer.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Monitoring hooks missing in Esper.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Monitoring hooks missing in Flink.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Monitoring hooks missing in Flink CEP.
+    reviewed: false
+  - type: relates_to
+    target: QS-013-monitoring-effectiveness
+    status: proposed
+    rationale: Monitoring underpins the monitoring-effectiveness scenario.
+    reviewed: false
+  - type: relates_to
+    target: DOC-08000-crosscutting-concepts
+    status: proposed
+    rationale: Elaborates the observability concept.
+    reviewed: false
 ---
 [[td-009-monitoring-integration]]
-= TD-009: Monitoring Integration
+== TD-009: Monitoring Integration
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This technical debt item is AI-assisted. It identifies work needed for review and does not decide acceptance.
 
-== Technical Debt Statement
+=== Technical Debt Statement
 
 Because there is no monitoring integration, **we cannot observe the runtime behavior** of the modules, making it difficult to understand performance, detect issues, and troubleshoot problems.
 
-== Details
+=== Details
 
 * **Module**: all
 * **Impact**: Observability gap - cannot observe runtime behavior
 * **Priority**: Low
 * **Type**: Observability gap
 
-== Resolution
+=== Resolution
 
 Add metrics collection and monitoring integration using a standard metrics library (e.g., Micrometer, Prometheus client) with configurable exporters.
 
-== Acceptance Criteria
+=== Acceptance Criteria
 
 * All modules collect relevant metrics (throughput, latency, errors, etc.)
 * Metrics are exportable to monitoring systems
 * Monitoring integration is configurable
 * Documentation describes available metrics
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/td-009-monitoring-integration-impact.adoc[leveloffset=+2]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
-| Event producer needs monitoring
+=== Traceability
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
-| Kafka consumer needs monitoring
+include::generated/td-009-monitoring-integration-attributes.adoc[]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#esper-cep[esper-cep]
-| Esper CEP needs monitoring
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-basic[flink-basic]
-| Flink basic needs monitoring
-
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#flink-cep[flink-cep]
-| Flink CEP needs monitoring
-
-| `addresses`
-|
-| Monitoring integration is essential for observability
-
-| `relates_to`
-| xref:../10-quality-requirements/qs-013-monitoring-effectiveness.adoc[QS-013]
-| Monitoring integration addresses monitoring effectiveness
-
-| `relates_to`
-| xref:../doc-08000-crosscutting-concepts.adoc[Observability]
-| Observability is a cross-cutting concept
-|===
-
-== Open Questions
+include::generated/td-009-monitoring-integration-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * Which metrics library should we use?
 * Should we include dashboards or just metrics collection?
 * What metrics are most important for each module?
 
-== Review Notes
+=== Review Notes
 
 This technical debt item can be marked reviewed only after the implementation plan and acceptance criteria are confirmed by the accountable owner. The resolution approach should be evaluated for feasibility and effectiveness.

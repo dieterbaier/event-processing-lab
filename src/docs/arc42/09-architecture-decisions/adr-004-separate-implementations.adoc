@@ -2,16 +2,66 @@
 id: ADR-004-separate-implementations
 type: ADR
 title: Separate Esper and Flink Implementations
-decision: Maintain separate implementations for Esper and Flink to enable direct comparison
-status: accepted
+summary: Maintain separate implementations for Esper and Flink to enable direct comparison
+status: proposed
 created: 2026-07-02
-author: Integration Architecture Team
+owner: Integration Architecture Team
 tags:
   - esper
   - flink
   - comparison
   - architecture
 relations:
+  - type: affects
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Shared model reused by each separate implementation.
+    reviewed: false
+  - type: affects
+    target: CMP-004-esper-cep
+    status: proposed
+    rationale: Esper is a separate implementation.
+    reviewed: false
+  - type: affects
+    target: CMP-005-flink-basic
+    status: proposed
+    rationale: Flink basic is a separate implementation.
+    reviewed: false
+  - type: affects
+    target: CMP-006-flink-cep
+    status: proposed
+    rationale: Flink CEP is a separate implementation.
+    reviewed: false
+  - type: addresses
+    target: QG-001-learnability
+    status: proposed
+    rationale: Side-by-side implementations aid learnability.
+    reviewed: false
+  - type: addresses
+    target: QG-002-understandability
+    status: proposed
+    rationale: Focused modules aid understandability.
+    reviewed: false
+  - type: addresses
+    target: QG-003-scalability
+    status: proposed
+    rationale: Independent scaling aids the scalability comparison.
+    reviewed: false
+  - type: relates_to
+    target: SCN-001-order-creation-flow
+    status: proposed
+    rationale: Backs the order-creation flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-002-payment-processing-flow
+    status: proposed
+    rationale: Backs the payment-processing flow.
+    reviewed: false
+  - type: relates_to
+    target: SCN-003-payment-timeout-detection
+    status: proposed
+    rationale: Backs the payment-timeout detection flow.
+    reviewed: false
   - type: refines
     target: ADR-002-use-json-serialization
     status: proposed
@@ -20,16 +70,16 @@ relations:
 reviewed: false
 ---
 [[adr-004-separate-implementations]]
-= ADR-004: Separate Esper and Flink Implementations
+== ADR-004: Separate Esper and Flink Implementations
 
 
 
-== Status
+=== Status
 
-[.status-accepted]
-Accepted
+[.status-proposed]
+Proposed
 
-== Context
+=== Context
 
 The Event Processing Lab needs to decide how to structure the implementations of the different event processing technologies (Esper CEP, Flink Basic, Flink CEP). The main approaches are:
 
@@ -45,11 +95,11 @@ This decision impacts:
 * Learning clarity
 * Architectural consistency
 
-== Decision
+=== Decision
 
 *Maintain separate implementations for Esper and Flink to enable direct comparison.*
 
-== Decision Drivers
+=== Decision Drivers
 
 [cols="1,1,2", options="header"]
 |===
@@ -83,9 +133,9 @@ This decision impacts:
 
 |===
 
-== Alternatives Considered
+=== Alternatives Considered
 
-=== 1. Separate Implementations [.selected]#✅ Selected#
+==== 1. Separate Implementations [.selected]#✅ Selected#
 
 *Pros:*
 - Direct comparison of technologies without abstraction interference
@@ -101,7 +151,7 @@ This decision impacts:
 
 *Implementation:* Each technology in its own module with minimal shared code
 
-=== 2. Shared Abstraction Layer
+==== 2. Shared Abstraction Layer
 
 *Pros:*
 - Maximum code reuse
@@ -117,7 +167,7 @@ This decision impacts:
 
 *Implementation:* Common interface with technology-specific implementations
 
-=== 3. Hybrid Approach
+==== 3. Hybrid Approach
 
 *Pros:*
 - Some reuse for common functionality
@@ -131,9 +181,9 @@ This decision impacts:
 
 *Implementation:* Shared utilities, separate processing logic
 
-== Consequences
+=== Consequences
 
-=== Positive Consequences
+==== Positive Consequences
 
 . *Direct Comparison*: Each technology can be evaluated on its own merits without abstraction interference.
 . *Technology Authenticity*: Each implementation uses the technology's native patterns and best practices.
@@ -141,40 +191,29 @@ This decision impacts:
 . *Learning Effectiveness*: Students can understand each technology's true approach and philosophy.
 . *Architecture Clarity*: No hidden abstractions or conceptual gaps.
 
-=== Negative Consequences
+==== Negative Consequences
 
 . *Code Duplication*: Common functionality (Kafka consumption, logging) may be duplicated.
 . *Maintenance Overhead*: More modules to maintain and keep consistent.
 . *Potential Inconsistency*: Different patterns and approaches across modules.
 . *Larger Codebase*: More total code to understand and navigate.
 
-== Related Decisions
+=== Impact
 
-* xref:adr-001-use-kafka-as-event-backbone.adoc[ADR-001: Use Kafka as Event Backbone]
-* xref:adr-002-use-json-serialization.adoc[ADR-002: Use JSON Serialization for First Iteration]
-* xref:adr-003-keep-spring-boot-optional.adoc[ADR-003: Keep Spring Boot Optional, Use Plain Java]
+include::generated/adr-004-separate-implementations-impact.adoc[leveloffset=+2]
 
-== Related Components
+=== Traceability
 
-* xref:../doc-05000-building-block-view.adoc#event-model[Event Model]
-* xref:../doc-05000-building-block-view.adoc#esper-cep[Esper CEP]
-* xref:../doc-05000-building-block-view.adoc#flink-basic[Flink Basic]
-* xref:../doc-05000-building-block-view.adoc#flink-cep[Flink CEP]
+include::generated/adr-004-separate-implementations-attributes.adoc[]
 
-== Related Technologies
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-* https://www.espertech.com/esper/[Esper CEP Engine]
-* https://flink.apache.org/[Apache Flink]
-* https://nightlies.apache.org/flink/flink-docs-stable/docs/libs/cep/[Flink CEP Documentation]
+// Generated traceability fragment. Relations are maintained only in YAML front matter.
+include::generated/adr-004-separate-implementations-traceability.adoc[leveloffset=+2]
 
-== Related Quality Goals
+=== Review Notes
 
-* xref:../doc-01000-introduction-and-goals.adoc#learnability[Learnability]
-* xref:../doc-01000-introduction-and-goals.adoc#understandability[Understandability]
-* xref:../doc-01000-introduction-and-goals.adoc#scalability[Scalability]
-
-== Related Scenarios
-
-* xref:../doc-06000-runtime-view.adoc#order-creation-flow[Order Creation Flow]
-* xref:../doc-06000-runtime-view.adoc#payment-processing-flow[Payment Processing Flow]
-* xref:../doc-06000-runtime-view.adoc#payment-timeout-detection[Payment Timeout Detection]
+State what must be confirmed before this ADR can be marked reviewed or accepted.

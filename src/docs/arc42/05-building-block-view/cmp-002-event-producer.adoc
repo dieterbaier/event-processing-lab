@@ -1,0 +1,89 @@
+---
+id: CMP-002-event-producer
+type: Component
+title: Event Producer
+status: draft
+owner: architecture
+created: 2026-07-02
+reviewed: false
+summary: Generates and publishes order-lifecycle events to Kafka.
+tags:
+  - building-block
+  - component
+  - event-producer
+relations:
+  - type: depends_on
+    target: CMP-001-event-model
+    status: proposed
+    rationale: Uses the shared event model and serialization.
+    reviewed: false
+---
+[[event-producer]]
+== Event Producer Module
+
+[cols="1,2", options="header"]
+|===
+| Aspect
+| Description
+
+| Purpose
+| Generate and publish events to Kafka
+
+| Responsibilities
+| Event generation, Kafka production, rate control
+
+| Technology
+| Kafka Producer API
+
+| Configuration
+| Bootstrap servers, topic, rate
+
+| Quality
+| Reliable, configurable, observable
+
+|===
+
+[plantuml,event-producer,png]
+----
+@startuml
+skinparam monochrome true
+
+class OrderEventProducer {
+    +KafkaProducer producer
+    +String topic
+    +int eventsPerSecond
+    +start()
+    +stop()
+    +sendEvent(Event)
+    +produceEvent()
+}
+
+class ProducerConfig {
+    +String bootstrapServers
+    +String topic
+    +String clientId
+    +int eventsPerSecond
+    +fromEnvironment()
+}
+
+OrderEventProducer --> Kafka : "publishes to"
+OrderEventProducer --> EventSerializer : "uses"
+OrderEventProducer --> EventFactory : "uses"
+
+@enduml
+----
+
+=== Impact
+
+include::generated/cmp-002-event-producer-impact.adoc[leveloffset=+2]
+
+=== Traceability
+
+include::generated/cmp-002-event-producer-attributes.adoc[]
+
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
+
+include::generated/cmp-002-event-producer-traceability.adoc[leveloffset=+2]

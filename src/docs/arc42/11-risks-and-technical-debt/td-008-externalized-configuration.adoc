@@ -12,76 +12,81 @@ tags:
   - configuration
   - maintainability
   - flexibility
-relations: []
+relations:
+  - type: affects
+    target: CMP-002-event-producer
+    status: proposed
+    rationale: Producer configuration should be externalized.
+    reviewed: false
+  - type: affects
+    target: CMP-003-kafka-consumer
+    status: proposed
+    rationale: Consumer configuration should be externalized.
+    reviewed: false
+  - type: mitigates
+    target: RISK-002-operational-complexity
+    status: proposed
+    rationale: Externalized config reduces operational complexity.
+    reviewed: false
+  - type: relates_to
+    target: DOC-07000-deployment-view
+    status: proposed
+    rationale: Configuration is a deployment concern.
+    reviewed: false
 ---
 [[td-008-externalized-configuration]]
-= TD-008: Externalized Configuration
+== TD-008: Externalized Configuration
 
 
 
-== Status
+=== Status
 
 Proposed.
 
 This technical debt item is AI-assisted. It identifies work needed for review and does not decide acceptance.
 
-== Technical Debt Statement
+=== Technical Debt Statement
 
 Because configuration is hardcoded in some places, **the modules are less flexible and harder to configure** for different environments and use cases.
 
-== Details
+=== Details
 
 * **Module**: event-producer, kafka-consumer
 * **Impact**: Maintainability gap - configuration cannot be changed without code changes
 * **Priority**: Medium
 * **Type**: Maintainability gap
 
-== Resolution
+=== Resolution
 
 Externalize all configuration to configuration files or environment variables, following 12-factor app principles.
 
-== Acceptance Criteria
+=== Acceptance Criteria
 
 * All configuration is externalized (no hardcoded values)
 * Configuration can be set via environment variables
 * Configuration files use a standard format (YAML, properties, etc.)
 * Default values are provided for development
 
-== Traceability
+=== Impact
 
-[cols="1,1,3", options="header"]
-|===
-| Relation
-| Target
-| Rationale
+include::generated/td-008-externalized-configuration-impact.adoc[leveloffset=+2]
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#event-producer[event-producer]
-| Event producer needs externalized configuration
+=== Traceability
 
-| `affects`
-| xref:../doc-05000-building-block-view.adoc#kafka-consumer[kafka-consumer]
-| Kafka consumer needs externalized configuration
+include::generated/td-008-externalized-configuration-attributes.adoc[]
 
-| `addresses`
-|
-| Externalized configuration improves modifiability
+ifdef::derived_from_description[]
+==== Derived from
+{derived_from_description}
+endif::[]
 
-| `relates_to`
-| xref:risk-002-operational-complexity.adoc[RISK-002]
-| Externalized configuration can reduce operational complexity
-
-| `relates_to`
-| xref:../doc-07000-deployment-view.adoc[Deployment View]
-| Deployment requires flexible configuration
-|===
-
-== Open Questions
+include::generated/td-008-externalized-configuration-traceability.adoc[leveloffset=+2]
+=== Open Questions
 
 * What configuration format should we use (YAML, properties, JSON)?
 * Should we use a configuration library like Apache Commons Configuration?
 * How do we handle environment-specific configuration (dev, test, prod)?
 
-== Review Notes
+=== Review Notes
 
 This technical debt item can be marked reviewed only after the implementation plan and acceptance criteria are confirmed by the accountable owner. The resolution approach should be evaluated for feasibility and effectiveness.

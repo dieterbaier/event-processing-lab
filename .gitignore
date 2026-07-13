@@ -69,3 +69,6 @@ temp/
 
 # Test output
 test-results/
+
+# PlantUML/JVM font cache (asciidoctor-diagram)
+.java/
