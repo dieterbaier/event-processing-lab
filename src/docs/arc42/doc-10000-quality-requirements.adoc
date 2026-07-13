@@ -29,6 +29,6 @@ measure), each concretizing a quality goal from
 xref:introduction-and-goals[Chapter 1]. The scenario index and the scenario
 details below are generated from the quality-scenario source artifacts.
 
-include::10-quality-requirements/generated/quality-scenarios.adoc[]
+include::10-quality-requirements/generated/doc-10001-quality-scenarios.adoc[]
 
 include::generated/doc-10000-quality-requirements-includes.adoc[]

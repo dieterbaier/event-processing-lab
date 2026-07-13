@@ -21,7 +21,7 @@ Architecture decisions are recorded as ADRs in the Nygard format with a Pugh
 matrix. The index, open questions, and decision records below are generated from
 the ADR source artifacts — do not maintain them by hand here.
 
-include::09-architecture-decisions/generated/adr-index.adoc[]
+include::09-architecture-decisions/generated/doc-09001-adr-index.adoc[]
 
 include::09-architecture-decisions/generated/open-questions.adoc[]
 
