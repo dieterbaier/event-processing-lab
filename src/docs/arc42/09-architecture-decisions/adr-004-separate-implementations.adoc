@@ -3,7 +3,7 @@ id: ADR-004-separate-implementations
 type: ADR
 title: Separate Esper and Flink Implementations
 summary: Maintain separate implementations for Esper and Flink to enable direct comparison
-status: accepted
+status: proposed
 created: 2026-07-02
 owner: Integration Architecture Team
 tags:
@@ -76,8 +76,8 @@ reviewed: false
 
 === Status
 
-[.status-accepted]
-Accepted
+[.status-proposed]
+Proposed
 
 === Context
 

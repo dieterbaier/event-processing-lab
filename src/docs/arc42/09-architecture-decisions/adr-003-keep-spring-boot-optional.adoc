@@ -3,7 +3,7 @@ id: ADR-003-keep-spring-boot-optional
 type: ADR
 title: Keep Spring Boot Optional, Use Plain Java
 summary: Prefer plain Java implementations where simpler, keep Spring Boot optional
-status: accepted
+status: proposed
 created: 2026-07-02
 owner: Integration Architecture Team
 tags:
@@ -76,8 +76,8 @@ reviewed: false
 
 === Status
 
-[.status-accepted]
-Accepted
+[.status-proposed]
+Proposed
 
 === Context
 

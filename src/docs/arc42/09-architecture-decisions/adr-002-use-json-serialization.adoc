@@ -3,7 +3,7 @@ id: ADR-002-use-json-serialization
 type: ADR
 title: Use JSON Serialization for First Iteration
 summary: Use JSON format for event serialization in the initial implementation
-status: accepted
+status: proposed
 created: 2026-07-02
 owner: Integration Architecture Team
 tags:
@@ -71,8 +71,8 @@ reviewed: false
 
 === Status
 
-[.status-accepted]
-Accepted
+[.status-proposed]
+Proposed
 
 === Context
 
